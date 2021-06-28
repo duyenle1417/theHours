@@ -19,7 +19,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role_id'] !== 3) {
 
 <?php
 include(ROOT_PATH . '/admin/include/head.php'); ?>
-    <title>Thêm bài viết | Admin TheHours</title>
+    <title>Chỉnh sửa bài viết | Admin TheHours</title>
 </head>
 
 <body>

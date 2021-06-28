@@ -9,7 +9,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role_id'] === 1) {
 
 <?php
 include(ROOT_PATH . '/admin/include/head.php'); ?>
-    <title>Thêm topic | Admin TheHours</title>
+    <title>Thêm danh mục | Admin TheHours</title>
 </head>
 
 <body>
