@@ -1,422 +1,198 @@
 <?php
-require('./include/config.php');
+include("path.php");
+require_once(ROOT_PATH . '/include/db-functions.php');
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - TheHours</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link rel="stylesheet" href="./assets/css/main.css">
-    <link rel="stylesheet" href="./assets/css/base.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="./assets/fonts/fontawesome-free-5.15.3-web/fontawesome-free-5.15.3-web/css/all.min.css">
+<?php
+include(ROOT_PATH . '/include/head.php');
+?>
+<title>Trang chủ | TheHours</title>
+
 </head>
+
 <body>
     <div class="app">
-        <!-- BEGIN header.php -->
-        <header class="header">
-            <div class="grid">
-                <div class="header__home">
-                    <a href="" class="header__home-left header__home-left--separate">TheHours</a>
-                    <a href="" class="header__home-right">Tin tức nhanh nhất</a>
-                </div>
-    
-                <nav class="header__navbar">
-                    <ul class="header__navbar-list">
-                        <li class="header__navbar-item">
-                            <a href="" class="header__navbar-item-link">Thời sự</a>
-                        </li>
-                        <li class="header__navbar-item">
-                            <a href="" class="header__navbar-item-link">Thế giới</a>
-                        </li>
-                        <li class="header__navbar-item">
-                            <a href="" class="header__navbar-item-link">Kinh doanh</a>
-                        </li>
-                        <li class="header__navbar-item">
-                            <a href="" class="header__navbar-item-link">Đời sống</a>
-                        </li>
-                        <li class="header__navbar-item">
-                            <a href="" class="header__navbar-item-link">Văn hóa</a>
-                        </li>
-                        <li class="header__navbar-item">
-                            <a href="" class="header__navbar-item-link">Giải trí</a>
-                        </li>
-                        <li class="header__navbar-item">
-                            <a href="" class="header__navbar-item-link">Giáo dục</a>
-                        </li>
-                        <li class="header__navbar-item">
-                            <a href="" class="header__navbar-item-link">Thể thao</a>
-                        </li>
-                        <li class="header__navbar-item">
-                            <a href="" class="header__navbar-item-link">Sức khỏe</a>
-                        </li>
-                        <li class="header__navbar-item">
-                            <a href="" class="header__navbar-item-link">Du lịch</a>
-                        </li>
-                        <a href="" class="header__navbar-icon">
-                            <i class="fas fa-search"></i>
-                        </a>
-                    </ul>
-                </nav>
-            </div>
-        </header>
-        <!-- END header.php -->
+        <!-- BEGIN header -->
+        <div class="header">
+            <a href="<?php echo BASE_URL ?>" class="thehours-logo">
+                <span class="main-title">TheHours</span>
+                <span class="sub-title">Tin tức nhanh nhất</span>
+            </a>
+        </div>
+        <!-- END header -->
+
+        <!-- Begin MENU -->
+        <?php include(ROOT_PATH . '/include/menu.php'); ?>
+        <!-- End MENU -->
+        
 
         <div class="app__container">
-            <div class="grid">
-                <div class="grid__row">
-                    <div class="grid__column-8">
-                        <div class="main-news">
-                            <div class="main-news__picture">
-                                <img src="./assets/img/Huyện Chương Mỹ.jpg" alt="" class="main-news__picture--img">
-                                <a href="" class="main-news__picture--link"></a>
-                            </div>
-                            <h3 class="main-news__label">Huyện Chương Mỹ dùng đá dăm lấp hố "tử thần"</h3>
-                            <div class="main-news__action">
-                                <div class="main-news__view">
-                                    <i class="far fa-eye"></i>
-                                    <span class="main-news__view-label">100</span>
-                                </div>
-                                <div class="main-news__comment">
-                                    <i class="far fa-comment"></i>
-                                    <span class="main-news__comment-label">100</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <?php include(ROOT_PATH . '/include/message.php'); ?>
 
-                    <div class="grid__column-4">
-                        <div class="tabs">
-                            <button class="nav-tabs">Tin mới</button>
-                            <button class="nav-tabs">Đọc nhiều</button>
-                            <div class="tab-content">
-                                <div class="tab-content__item">
-                                    <span class="tab-content__time">13:15</span>
-                                    <a href="" class="tab-content__link">Fan phấn khích khi nghe tin BTS rục rịch trở lại</a>
-                                </div>
-                                <div class="tab-content__item">
-                                    <span class="tab-content__time">13:20</span>
-                                    <a href="" class="tab-content__link">Thí sinh không nên mất nhiều thời gian vào việc đăng kí nguyện vọng lần đầu?</a>
-                                </div>
-                                <div class="tab-content__item">
-                                    <span class="tab-content__time">13:15</span>
-                                    <a href="" class="tab-content__link">Fan phấn khích khi nghe tin BTS rục rịch trở lại</a>
-                                </div>
-                                <div class="tab-content__item">
-                                    <span class="tab-content__time">13:20</span>
-                                    <a href="" class="tab-content__link">Thí sinh không nên mất nhiều thời gian vào việc đăng kí nguyện vọng lần đầu?</a>
-                                </div>
-                                <div class="tab-content__item">
-                                    <span class="tab-content__time">13:15</span>
-                                    <a href="" class="tab-content__link">Fan phấn khích khi nghe tin BTS rục rịch trở lại</a>
-                                </div>
-                                <div class="tab-content__item">
-                                    <span class="tab-content__time">13:20</span>
-                                    <a href="" class="tab-content__link">Thí sinh không nên mất nhiều thời gian vào việc đăng kí nguyện vọng lần đầu?</a>
-                                </div>
-                                <div class="tab-content__item">
-                                    <span class="tab-content__time">13:15</span>
-                                    <a href="" class="tab-content__link">Fan phấn khích khi nghe tin BTS rục rịch trở lại</a>
-                                </div>
-                                <div class="tab-content__item">
-                                    <span class="tab-content__time">13:20</span>
-                                    <a href="" class="tab-content__link">Thí sinh không nên mất nhiều thời gian vào việc đăng kí nguyện vọng lần đầu?</a>
-                                </div>
-                            </div>
+            <div class="headlines-section">
+                <!-- HEADLINE BEGIN -->
+                <div class="main-news">
+                    <?php $post = $tab_recent = getPostHeadline(); ?>
+                    <div class="main-news__picture">
+                        <a href="#">
+                            <img src="<?php echo $post['image_path'] ?>" alt="" class="main-news__picture--img">
+                        </a>
+                    </div>
+                    <div class="main-news__label">
+                        <a href="#"><?php echo $post['title'] ?></a>
+                    </div>
+                    <div class="main-news__action">
+                        <div class="main-news__view">
+                            <i class="far fa-eye"></i>
+                            <span class="main-news__view-label"><?php echo $post['views'] ?></span>
+                        </div>
+                        <div class="main-news__comment">
+                            <i class="far fa-comment"></i>
+                            <span class="main-news__comment-label"><?php echo getCommentsNumberOfPost($post['id']); ?></span>
                         </div>
                     </div>
                 </div>
-
-                <div class="category">
-                    <h2 class="category__heading">THỜI SỰ</h2>
-                    <div class="grid__row">
-                        <div class="grid__column-6 main-category">
-                            <div class="main-news__picture">
-                                <img src="./assets/img/Huyện Chương Mỹ.jpg" alt="" class="main-news__picture--img">
-                                <a href="" class="main-news__picture--link"></a>
-                            </div>
-                            <h3 class="main-news__label">Huyện Chương Mỹ dùng đá dăm lấp hố "tử thần"</h3>
-                            <div class="main-news__action">
-                                <div class="main-news__view">
-                                    <i class="far fa-eye"></i>
-                                    <span class="main-news__view-label">100</span>
-                                </div>
-                                <div class="main-news__comment">
-                                    <i class="far fa-comment"></i>
-                                    <span class="main-news__comment-label">100</span>
-                                </div>
-                            </div>           
+                <!-- HEADLINE END -->
+                <!-- BEGIN TAB -->
+                <?php
+                $tab_recent = GetPostsTab(15, 'id');
+                $tab_most_view = GetPostsTab(15, 'views');
+                ?>
+                <div class="tabs">
+                    <div class="tab-btn">
+                        <button class="nav-tabs active" onclick="openTab(event, 'tin-moi')">Tin mới</button>
+                        <button class="nav-tabs" onclick="openTab(event, 'doc-nhieu')">Đọc nhiều</button>
+                    </div>
+                    <div class="tab-content" id="tin-moi">
+                    <?php foreach ($tab_recent as $post) { ?>
+                        <div class="tab-content__item">
+                            <span class="tab-content__time"><?php echo $mysqldate = date('H:i d/m/y', strtotime($post['create_date'])); ?></span>
+                            <a href="<?php echo BASE_URL . "article.php?id=" . $post['id']; ?>" class="tab-content__link"><?php echo $post['title'] ?></a>
                         </div>
-    
-                        <div class="grid__column-6 sub-category__list">
-                            <div class="sub-category__item">
-                                <div class="sub-news__picture">
-                                    <img src="./assets/img/đề xuất quy hoạch.jpg" alt="" class="sub-news__picture--img">
-                                    <a href="" class="sub-news__picture--link"></a>
-                                </div>
-                                <div class="sub-news__info">
-                                    <h3 class="sub-news__label">Đề xuất quy hoạch 42 tuyến cao tốc"</h3>
-                                    <div class="sub-news__action">
-                                        <div class="sub-news__view">
-                                            <i class="far fa-eye"></i>
-                                            <span class="sub-news__view-label">100</span>
-                                        </div>
-                                        <div class="sub-news__comment">
-                                            <i class="far fa-comment"></i>
-                                            <span class="sub-news__comment-label">100</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-    
-                            <div class="sub-category__item">
-                                <div class="sub-news__picture">
-                                    <img src="./assets/img/6 ô tô tông liên hoàn.jpg" alt="" class="sub-news__picture--img">
-                                    <a href="" class="sub-news__picture--link"></a>
-                                </div>
-                                <div class="sub-news__info">
-                                    <h3 class="sub-news__label">6 ô tô tông liên hoàn trên quốc lộ 1"</h3>
-                                    <div class="sub-news__action">
-                                        <div class="sub-news__view">
-                                            <i class="far fa-eye"></i>
-                                            <span class="sub-news__view-label">100</span>
-                                        </div>
-                                        <div class="sub-news__comment">
-                                            <i class="far fa-comment"></i>
-                                            <span class="sub-news__comment-label">100</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-    
-                            <div class="sub-category__item">
-                                <div class="sub-news__picture">
-                                    <img src="./assets/img/trở về từ Lào.png" alt="" class="sub-news__picture--img">
-                                    <a href="" class="sub-news__picture--link"></a>
-                                </div>
-                                <div class="sub-news__info">
-                                    <h3 class="sub-news__label">Trở về từ Lào sau lễ bốc mả, 11 người Pa Ko bị cách ly</h3>
-                                    <div class="sub-news__action">
-                                        <div class="sub-news__view">
-                                            <i class="far fa-eye"></i>
-                                            <span class="sub-news__view-label">100</span>
-                                        </div>
-                                        <div class="sub-news__comment">
-                                            <i class="far fa-comment"></i>
-                                            <span class="sub-news__comment-label">100</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <?php } ?>
+                    </div>
+                    <div class="tab-content" id="doc-nhieu" style="display: none;">
+                        <?php foreach ($tab_most_view as $post) { ?>
+                        <div class="tab-content__item">
+                            <span class="tab-content__time"><?php echo $mysqldate = date('H:i d/m/y', strtotime($post['create_date'])); ?></span>
+                            <a href="<?php echo BASE_URL . "article.php?id=" . $post['id']; ?>" class="tab-content__link"><?php echo $post['title'] ?></a>
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
+                <!-- END TAB -->
+            </div>
 
-                <div class="category">
-                    <h2 class="category__heading">THẾ GIỚI</h2>
-                    <div class="grid__row">
-                        <div class="grid__column-6 main-category">
-                            <div class="main-news__picture">
+            <!-- BEGIN TOPIC -->
+            <div class="category">
+                <h2 class="category__heading">THỜI SỰ</h2>
+                <div class="category__content">
+                    <!-- main new -->
+                    <div class="grid__column-6 main-category">
+                        <div class="main-news__picture">
+                            <a href="#">
                                 <img src="./assets/img/Huyện Chương Mỹ.jpg" alt="" class="main-news__picture--img">
-                                <a href="" class="main-news__picture--link"></a>
-                            </div>
-                            <h3 class="main-news__label">Huyện Chương Mỹ dùng đá dăm lấp hố "tử thần"</h3>
-                            <div class="main-news__action">
-                                <div class="main-news__view">
-                                    <i class="far fa-eye"></i>
-                                    <span class="main-news__view-label">100</span>
-                                </div>
-                                <div class="main-news__comment">
-                                    <i class="far fa-comment"></i>
-                                    <span class="main-news__comment-label">100</span>
-                                </div>
-                            </div>           
+                            </a>
                         </div>
-    
-                        <div class="grid__column-6 sub-category__list">
-                            <div class="sub-category__item">
-                                <div class="sub-news__picture">
+                        <div class="main-news__label">
+                            <a href="#">
+                                Huyện Chương Mỹ dùng đá dăm lấp hố "tử thần"
+                            </a>
+                        </div>
+                        <div class="main-news__action">
+                            <div class="main-news__view">
+                                <i class="far fa-eye"></i>
+                                <span class="main-news__view-label">100</span>
+                            </div>
+                            <div class="main-news__comment">
+                                <i class="far fa-comment"></i>
+                                <span class="main-news__comment-label">100</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- main new end -->
+
+                    <!-- SUB NEW LIST -->
+                    <div class="grid__column-6 sub-category__list">
+                        <div class="sub-category__item" href="#">
+                            <div class="sub-news__picture">
+                                <a href="#">
                                     <img src="./assets/img/đề xuất quy hoạch.jpg" alt="" class="sub-news__picture--img">
-                                    <a href="" class="sub-news__picture--link"></a>
+                                </a>
+                            </div>
+                            <div class="sub-news__info">
+                                <div class="sub-news__label">
+                                    <a href="#">Đề xuất quy hoạch 42 tuyến cao tốc</a>
                                 </div>
-                                <div class="sub-news__info">
-                                    <h3 class="sub-news__label">Đề xuất quy hoạch 42 tuyến cao tốc"</h3>
-                                    <div class="sub-news__action">
-                                        <div class="sub-news__view">
-                                            <i class="far fa-eye"></i>
-                                            <span class="sub-news__view-label">100</span>
-                                        </div>
-                                        <div class="sub-news__comment">
-                                            <i class="far fa-comment"></i>
-                                            <span class="sub-news__comment-label">100</span>
-                                        </div>
+                                <div class="sub-news__action">
+                                    <div class="sub-news__view">
+                                        <i class="far fa-eye"></i>
+                                        <span class="sub-news__view-label">100</span>
+                                    </div>
+                                    <div class="sub-news__comment">
+                                        <i class="far fa-comment"></i>
+                                        <span class="sub-news__comment-label">100</span>
                                     </div>
                                 </div>
                             </div>
-    
-                            <div class="sub-category__item">
-                                <div class="sub-news__picture">
-                                    <img src="./assets/img/6 ô tô tông liên hoàn.jpg" alt="" class="sub-news__picture--img">
-                                    <a href="" class="sub-news__picture--link"></a>
+                        </div>
+
+                        <div class="sub-category__item" href="#">
+                            <div class="sub-news__picture">
+                                <a href="#">
+                                    <img src="./assets/img/đề xuất quy hoạch.jpg" alt="" class="sub-news__picture--img">
+                                </a>
+                            </div>
+                            <div class="sub-news__info">
+                                <div class="sub-news__label">
+                                    <a href="#">Đề xuất quy hoạch 42 tuyến cao tốc</a>
                                 </div>
-                                <div class="sub-news__info">
-                                    <h3 class="sub-news__label">6 ô tô tông liên hoàn trên quốc lộ 1"</h3>
-                                    <div class="sub-news__action">
-                                        <div class="sub-news__view">
-                                            <i class="far fa-eye"></i>
-                                            <span class="sub-news__view-label">100</span>
-                                        </div>
-                                        <div class="sub-news__comment">
-                                            <i class="far fa-comment"></i>
-                                            <span class="sub-news__comment-label">100</span>
-                                        </div>
+                                <div class="sub-news__action">
+                                    <div class="sub-news__view">
+                                        <i class="far fa-eye"></i>
+                                        <span class="sub-news__view-label">100</span>
+                                    </div>
+                                    <div class="sub-news__comment">
+                                        <i class="far fa-comment"></i>
+                                        <span class="sub-news__comment-label">100</span>
                                     </div>
                                 </div>
                             </div>
-    
-                            <div class="sub-category__item">
-                                <div class="sub-news__picture">
-                                    <img src="./assets/img/trở về từ Lào.png" alt="" class="sub-news__picture--img">
-                                    <a href="" class="sub-news__picture--link"></a>
+                        </div>
+
+                        <div class="sub-category__item" href="#">
+                            <div class="sub-news__picture">
+                                <a href="#">
+                                    <img src="./assets/img/đề xuất quy hoạch.jpg" alt="" class="sub-news__picture--img">
+                                </a>
+                            </div>
+                            <div class="sub-news__info">
+                                <div class="sub-news__label">
+                                    <a href="#">Đề xuất quy hoạch 42 tuyến cao tốc</a>
                                 </div>
-                                <div class="sub-news__info">
-                                    <h3 class="sub-news__label">Trở về từ Lào sau lễ bốc mả, 11 người Pa Ko bị cách ly</h3>
-                                    <div class="sub-news__action">
-                                        <div class="sub-news__view">
-                                            <i class="far fa-eye"></i>
-                                            <span class="sub-news__view-label">100</span>
-                                        </div>
-                                        <div class="sub-news__comment">
-                                            <i class="far fa-comment"></i>
-                                            <span class="sub-news__comment-label">100</span>
-                                        </div>
+                                <div class="sub-news__action">
+                                    <div class="sub-news__view">
+                                        <i class="far fa-eye"></i>
+                                        <span class="sub-news__view-label">100</span>
+                                    </div>
+                                    <div class="sub-news__comment">
+                                        <i class="far fa-comment"></i>
+                                        <span class="sub-news__comment-label">100</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="category">
-                    <h2 class="category__heading">KINH DOANH</h2>
-                    <div class="grid__row">
-                        <div class="grid__column-6 main-category">
-                            <div class="main-news__picture">
-                                <img src="./assets/img/Huyện Chương Mỹ.jpg" alt="" class="main-news__picture--img">
-                                <a href="" class="main-news__picture--link"></a>
-                            </div>
-                            <h3 class="main-news__label">Huyện Chương Mỹ dùng đá dăm lấp hố "tử thần"</h3>
-                            <div class="main-news__action">
-                                <div class="main-news__view">
-                                    <i class="far fa-eye"></i>
-                                    <span class="main-news__view-label">100</span>
-                                </div>
-                                <div class="main-news__comment">
-                                    <i class="far fa-comment"></i>
-                                    <span class="main-news__comment-label">100</span>
-                                </div>
-                            </div>           
-                        </div>
-    
-                        <div class="grid__column-6 sub-category__list">
-                            <div class="sub-category__item">
-                                <div class="sub-news__picture">
-                                    <img src="./assets/img/đề xuất quy hoạch.jpg" alt="" class="sub-news__picture--img">
-                                    <a href="" class="sub-news__picture--link"></a>
-                                </div>
-                                <div class="sub-news__info">
-                                    <h3 class="sub-news__label">Đề xuất quy hoạch 42 tuyến cao tốc"</h3>
-                                    <div class="sub-news__action">
-                                        <div class="sub-news__view">
-                                            <i class="far fa-eye"></i>
-                                            <span class="sub-news__view-label">100</span>
-                                        </div>
-                                        <div class="sub-news__comment">
-                                            <i class="far fa-comment"></i>
-                                            <span class="sub-news__comment-label">100</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-    
-                            <div class="sub-category__item">
-                                <div class="sub-news__picture">
-                                    <img src="./assets/img/6 ô tô tông liên hoàn.jpg" alt="" class="sub-news__picture--img">
-                                    <a href="" class="sub-news__picture--link"></a>
-                                </div>
-                                <div class="sub-news__info">
-                                    <h3 class="sub-news__label">6 ô tô tông liên hoàn trên quốc lộ 1"</h3>
-                                    <div class="sub-news__action">
-                                        <div class="sub-news__view">
-                                            <i class="far fa-eye"></i>
-                                            <span class="sub-news__view-label">100</span>
-                                        </div>
-                                        <div class="sub-news__comment">
-                                            <i class="far fa-comment"></i>
-                                            <span class="sub-news__comment-label">100</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-    
-                            <div class="sub-category__item">
-                                <div class="sub-news__picture">
-                                    <img src="./assets/img/trở về từ Lào.png" alt="" class="sub-news__picture--img">
-                                    <a href="" class="sub-news__picture--link"></a>
-                                </div>
-                                <div class="sub-news__info">
-                                    <h3 class="sub-news__label">Trở về từ Lào sau lễ bốc mả, 11 người Pa Ko bị cách ly</h3>
-                                    <div class="sub-news__action">
-                                        <div class="sub-news__view">
-                                            <i class="far fa-eye"></i>
-                                            <span class="sub-news__view-label">100</span>
-                                        </div>
-                                        <div class="sub-news__comment">
-                                            <i class="far fa-comment"></i>
-                                            <span class="sub-news__comment-label">100</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- SUBNEW LIST END -->
                 </div>
             </div>
+            <!-- END TOPIC -->
         </div>
 
         <!-- BEGIN footer.php -->
-        <footer class="footer">
-            <div class="grid">
-                <div class="grid__row">
-                    <div class="grid__column-8">
-                        <button class="log-in">
-                            Đăng nhập
-                        </button>
-                        <div class="footer-social">
-                            <i class="footer-social__icon fab fa-facebook"></i>
-                            <i class="footer-social__icon fab fa-twitter"></i>
-                            <i class="footer-social__icon fab fa-youtube"></i>
-                        </div>
-                    </div>
-
-                    <div class="grid__column-4">
-                        <ul class="footer-list">
-                            <li class="footer-item">Trang chủ</li>
-                            <li class="footer-item">Mới nhất</li>
-                            <li class="footer-item">Xem nhiều</li>
-                            <li class="footer-item">Tin nóng</li>
-                            <li class="footer-item">Liên hệ</li>
-                            <li class="footer-item">Quảng cáo</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <?php include(ROOT_PATH . '/include/footer.php') ?>
         <!-- END footer.php -->
     </div>
 </body>
+
 </html>
