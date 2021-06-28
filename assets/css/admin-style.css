@@ -145,7 +145,8 @@ div.admin{
 }
 
 /* TABLE */
-div .topic-table{
+div.topic-table,
+div.post-table{
     padding: 30px;
     overflow: auto;
     margin: 0 auto;
@@ -155,6 +156,10 @@ table{
     width: 80%;
 }
 
+.post-table table{
+    width: 100%;
+}
+
 table::after{
     content: "";
     display: block;
@@ -162,20 +167,26 @@ table::after{
 }
 
 table, th, td{
-    border: 1px solid grey;
+    border-bottom: 1px solid #eeeeee;
     border-collapse: collapse;
 }
 
 th, td{
-    padding: 5px;
-}
-
-th{
-    border-top:  1px solid grey;
+    padding: 5px 10px;
 }
 
 td{
-    text-align: center;
+    border-right: 1px solid #eeeeee;
+}
+
+td:last-child{
+    border-right: none;
+}
+
+th{
+    border-top:  1px solid #eeeeee;
+    font-size: 1.2rem;
+    font-weight: 500;
 }
 
 .table td a{
@@ -192,9 +203,13 @@ td{
     padding: 10px;
     margin: 0 5px 5px 0;
     border-radius: 5px;
-    font-weight: bold;
+    font-weight: 600;
     display: inline-block;
     text-decoration: none;
+}
+
+.btn-group a:hover{
+    background-color: #eeeeee;
 }
 
 .btn-group a:last-child{
@@ -207,32 +222,35 @@ div.btn{
 
 .add-btn{
     border: 2px solid #4380cf;
-    background-color: #3e89ec;
+    background-color: #2B54C1;
     color: white;
     margin: 10px 0 0 30px;
-    padding: 15px 25px;
+    padding: 10px 25px;
     border-radius: 5px;
     display: inline-block;
     font-weight: bold;
     text-decoration: none;
 }
 
-.edit-btn{
-    border: 2px solid #cf4343;
-    background-color: #ff5050;
-    color: white;
+.add-btn:hover{
+    background-color: #3d66d6;
+    transition: 0.5s;
 }
 
-.detail-btn{
-    border: 2px solid #5f99e4;
-    background-color: #ffffff;
-    color: #5f99e4;
+.edit-btn{
+    /* border: 2px solid #cf4343; */
+    color: #ff5050;
+    /* color: white; */
 }
 
 .delete-btn{
-    border: 2px solid #0faa6a;
-    background-color: #20c580;
-    color: white;
+    /* border: 2px solid #0faa6a; */
+    color: #20c580;
+    /* color: white; */
+}
+
+.publish-btn{
+    color: #ff7c40;
 }
 
 /* Menu */
@@ -309,4 +327,30 @@ div.btn{
     text-decoration: underline;
     text-transform: none;
     transition: 0.5s;
+}
+
+/* MSG */
+.msg{
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 2px;
+    list-style-type: none;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.closebtn {
+    margin-left: 15px;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+.error{
+    border: 1px solid #ff5b5b;
+    background-color: #fda8a8;
+    color: #d81616;
 }

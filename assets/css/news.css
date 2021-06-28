@@ -56,6 +56,11 @@
     margin-bottom: 15px;
 }
 
+.content__main img{
+    width: 70% !important;
+    height: auto !important;
+}
+
 /* recent */
 .recent {
     background-color: var(--white-color);

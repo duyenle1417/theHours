@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="../../assets/css/admin-style.css">
+    <link rel="stylesheet" href="../../assets/css/form.css">
     <!-- FONT AWSOME CDN -->
     <script src="https://kit.fontawesome.com/0f79449357.js" crossorigin="anonymous"></script>
 

@@ -11,6 +11,17 @@
     box-shadow: 2px 3px 9px 1px #cbcfcc;
 }
 
+.add-post-form{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.add-topic-form,
+.edit-topic-form{
+    width: 60%;
+    margin: 0 auto;
+}
+
 /* FORM */
 .form-title{
     font-weight: 700;
@@ -20,7 +31,8 @@
     border-radius: 10px 10px 0 0;
 }
 
-form{
+.login-form form,
+.signup-form form{
     padding: 30px;
 }
 

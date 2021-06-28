@@ -3,19 +3,18 @@
 include("path.php");
 require_once(ROOT_PATH . '/include/db-functions.php');
 
-// kiểm tra url hợp lệ
+// kiểm tra url id hợp lệ
 if (isset($_GET['id'])) {
     // get post info
-    $post = getPostById($_GET['id']);
+    $post = getPublishedPostById($_GET['id']);
     if (count($post) >0) {
         // get post's topic info
         $topic = getTopicById($post['topic_id']);
         // get user info
-        $user = getUserById($post['user_id']); 
+        $user = getUserById($post['user_id']);
         //update views
         $views = $post['views'] + 1;
-        UpdateView($post['id'], $views);
-        ?>
+        UpdateView($post['id'], $views); ?>
 
 <?php
 include(ROOT_PATH . '/include/head.php'); ?>
@@ -88,9 +87,9 @@ include(ROOT_PATH . '/include/head.php'); ?>
                 </div>
 
                 <!-- image_path -->
-                <div class="content__illustration">
+                <!-- <div class="content__illustration">
                     <img src="<?php echo $post['image_path'] ?>" alt="">
-                </div>
+                </div> -->
 
                 <!-- content -->
                 <div class="content__main">
@@ -99,7 +98,7 @@ include(ROOT_PATH . '/include/head.php'); ?>
             </div>
 
 
-            <div class="recent">
+            <!-- <div class="recent">
                 <div class="recent__title">Gần đây</div>
                 <div class="grid__row">
                     <div class="grid__column-4">
@@ -160,7 +159,7 @@ include(ROOT_PATH . '/include/head.php'); ?>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
         </div>
 
@@ -173,14 +172,12 @@ include(ROOT_PATH . '/include/head.php'); ?>
 </html>
 
 <?php
-    }
-    else{
+    } else {
         //redirect về home nếu id không có thực
         header("Location: ". BASE_URL);
     }
 }//END IF
-else
-{
+else {
     //redirect về home nếu không có id
     header("Location: ". BASE_URL);
 }?> 

@@ -68,7 +68,7 @@ function GetAllPosts()
 function GetPostsByTopic($topic_id)
 {
     global $conn;
-    $sql = "SELECT * FROM `posts` WHERE `topic_id` IN 
+    $sql = "SELECT * FROM `posts` WHERE IsPublished = 1 AND `topic_id` IN 
     (SELECT `id` FROM `topics` WHERE `id` = " . $topic_id . " OR `topics`.`parent_topic_id` = " . $topic_id . ")";
     $result = mysqli_query($conn, $sql);
 
@@ -84,7 +84,7 @@ function GetPostsByTopic($topic_id)
 function GetPostsByTopicLimit($topic_id, $page_first_result, $results_per_page)
 {
     global $conn;
-    $sql = "SELECT * FROM `posts` WHERE `topic_id` IN 
+    $sql = "SELECT * FROM `posts` WHERE IsPublished = 1 AND `topic_id` IN 
     (SELECT `id` FROM `topics` WHERE `id` = " . $topic_id . " OR `topics`.`parent_topic_id` = " . $topic_id . ") ORDER BY `id` DESC LIMIT " . $page_first_result . ',' . $results_per_page;
     $result = mysqli_query($conn, $sql);
 
@@ -100,7 +100,7 @@ function GetPostsByTopicLimit($topic_id, $page_first_result, $results_per_page)
 function GetPostsByTopicTabRecent($topic_id, $results_number)
 {
     global $conn;
-    $sql = "SELECT * FROM `posts` WHERE `topic_id` IN 
+    $sql = "SELECT * FROM `posts` WHERE IsPublished = 1 AND `topic_id` IN 
     (SELECT `id` FROM `topics` WHERE `id` = " . $topic_id . " OR `topics`.`parent_topic_id` = " . $topic_id . ") ORDER BY `id` DESC LIMIT " . $results_number;
     $result = mysqli_query($conn, $sql);
 
@@ -116,7 +116,7 @@ function GetPostsByTopicTabRecent($topic_id, $results_number)
 function GetPostsByTopicTabMostView($topic_id, $results_number)
 {
     global $conn;
-    $sql = "SELECT * FROM `posts` WHERE `topic_id` IN 
+    $sql = "SELECT * FROM `posts` WHERE IsPublished = 1 AND `topic_id` IN 
     (SELECT `id` FROM `topics` WHERE `id` = " . $topic_id . " OR `topics`.`parent_topic_id` = " . $topic_id . ") ORDER BY `views` DESC LIMIT " . $results_number;
     $result = mysqli_query($conn, $sql);
 
@@ -132,7 +132,7 @@ function GetPostsByTopicTabMostView($topic_id, $results_number)
 function GetPostsTab($results_number, $orderby)
 {
     global $conn;
-    $sql = "SELECT * FROM `posts` ORDER BY `" . $orderby . "` DESC LIMIT " . $results_number;
+    $sql = "SELECT * FROM `posts` WHERE IsPublished = 1 ORDER BY `" . $orderby . "` DESC LIMIT " . $results_number;
     $result = mysqli_query($conn, $sql);
 
     $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -149,7 +149,7 @@ function getPostHeadline()
 {
     // use global $conn object in function
     global $conn;
-    $sql = "SELECT * FROM `posts` ORDER BY `id` DESC LIMIT 1";
+    $sql = "SELECT * FROM `posts` WHERE IsPublished = 1 ORDER BY `id` DESC LIMIT 1";
     $result = mysqli_query($conn, $sql);
     
     $final = mysqli_fetch_array($result);
@@ -157,6 +157,19 @@ function getPostHeadline()
 }
 
 // get a post by id for article.php
+// SELECT * FROM posts WHERE IsPublished = 1 AND id = $id
+function getPublishedPostById($id)
+{
+    // use global $conn object in function
+    global $conn;
+    $sql = "SELECT * FROM posts WHERE IsPublished = 1 AND id = $id";
+    $result = mysqli_query($conn, $sql);
+    
+    $final = mysqli_fetch_array($result);
+    return $final;
+}
+
+// get a post by id for edit post
 // SELECT * FROM posts WHERE id = $id
 function getPostById($id)
 {
@@ -169,6 +182,22 @@ function getPostById($id)
     return $final;
 }
 
+function getPostsOfAuthor($user_id)
+{
+    // use global $conn object in function
+    global $conn;
+    $sql = "SELECT * FROM posts WHERE user_id = $user_id";
+    $result = mysqli_query($conn, $sql);
+    
+    $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    $final = array();
+    foreach ($posts as $post) {
+        array_push($final, $post);
+    }
+    return $final;
+}
+
 
 // *************
 // TOPIC'S functions
@@ -177,12 +206,18 @@ function validateTopic($topic)
 {
     $errors = array();
     if (empty($topic['name'])) {
-        array_push($errors, 'Không được để trống topic');
+        array_push($errors, 'Không được để trống tên topic');
     }
 
-    $existingTopic = selectOne('topics', ['name' => $post['name']]);
+    if (empty($topic['parent_topic_id'])) {
+        if (isset($topic['add-topic'])) {
+            array_push($errors, 'Hãy chọn danh mục cha');
+        }
+    }
+
+    $existingTopic = selectOne('topics', ['name' => $topic['name']]);
     if ($existingTopic) {
-        if (isset($post['update-topic']) && $existingTopic['id'] != $post['id']) {
+        if (isset($post['update-topic']) && $existingTopic['id'] != $topic['id']) {
             array_push($errors, 'Tên topic này đã có sẵn, vui lòng chọn tên khác');
         }
 
@@ -236,7 +271,7 @@ function getParentTopics()
     $sql = "SELECT * FROM topics WHERE parent_topic_id IS NULL";
     $result = mysqli_query($conn, $sql);
 
-    $topics = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $topics = mysqli_fetch_all($result, MYSQLI_ASSOC) or die(mysqli_error($conn));
 
     $final = array();
     foreach ($topics as $topic) {
@@ -279,7 +314,7 @@ function getSubTopics($id)
 // USER'S functions
 // ************
 
-// get a topic by id
+// get a user by id
 function getUserById($id)
 {
     // use global $conn object in function

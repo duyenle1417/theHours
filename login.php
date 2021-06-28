@@ -46,7 +46,7 @@ include(ROOT_PATH . '/include/head.php');
 
             <input type="submit" value="LOGIN" name="login-btn">
 
-            <?php include('./include/message.php') ?>
+            <?php include(ROOT_PATH . './include/message.php'); ?>
         </form>
         <p style="text-align: center; margin-top: 80px; font-size: 14px;">Hoặc <a href="<?php echo BASE_URL . 'signup.php' ?>">đăng ký ngay</a></p>
     </div>

@@ -57,58 +57,13 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
         <!-- Admin Content -->
         <div class="admin-content">
 
-            <h2 class="page-title">Topic's Dashboard</h2>
+            <h2 class="page-title">Dashboard</h2>
 
-            <div class="btn"><a href="#" class="add-btn">Add</a></div>
-
-            <div class="content">
-                <div class="topic-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>STT</th>
-                                <th>Topic</th>
-                                <th>Topic cha</th>
-                                <th>Thao Tác</th>
-                            </tr>
-                        </thead>
-
-                        <!-- lấy topic cha -->
-                        <!-- tìm xem có topic con nào với topic cha trên -->
-
-                        <tbody>
-                            <?php
-                        $topics = getAllTopics();
-                        $STT = 1;
-                        foreach ($topics as $topic) {?>
-
-                            <tr>
-                                <td><?php echo $STT; ?></td>
-                                <td>
-                                    <?php echo $topic['name']; ?>
-                                </td>
-                                <td class="parent_topic_id"><?php echo getTopicNameByID($topic['parent_topic_id']); ?></td>
-                                <td class="thaotac">
-                                    <div class="btn-group">
-                                        <a href="edit.php?id=<?php echo $topic['id']; ?>" class="edit-btn">Edit</a>
-                                        <a href="index.php?delete_id=<?php echo $topic['id']?>" class="delete-btn">Delete</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <?php
-                        $STT++;
-                        }; ?>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
+            
             <!-- // Admin Content -->
         </div>
         <!-- // Page Wrapper -->
-        <div class="admin">
-            hello
-        </div>
+</div>
 </body>
 
 </html>

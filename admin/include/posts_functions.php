@@ -7,25 +7,24 @@ if (isset($_GET['delete_id'])) {
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
-        header('Location: ' . BASE_URL . '/admin/article/index.php');
+        header('Location: ' . BASE_URL . 'admin/article');
         exit(0);
     }
 }
 
 //add post
 if (isset($_POST['add-post'])) {
-    // adminOnly();
     global $conn;
     $errors = validatePost($_POST);
 
-    if (!empty($_FILES['image_path']['name'])) {
+    if (isset($_FILES['image_path'])) {
         $image_name = time() . '_' . $_FILES['image_path']['name'];
-        $destination = ROOT_PATH . "/uploads/cover/" . $image_name;
+        $destination = ROOT_PATH ."./uploads/images/" . $image_name;
 
-        $result = move_uploaded_file($_FILES['image']['tmp_name'], $destination);
+        $result = move_uploaded_file($_FILES['image_path']['tmp_name'], $destination);
 
         if ($result) {
-            $_POST['image_path'] = $destination;//update path mới
+            $_POST['image_path'] = "./uploads/images/" . $image_name;//update path mới
         } else {
             array_push($errors, "Không thể tải ảnh lên máy chủ");
         }
@@ -33,9 +32,10 @@ if (isset($_POST['add-post'])) {
         array_push($errors, "Cần phải thêm ảnh cover cho bài viết");
     }
 
+    //no errors => add to db
     if (count($errors) == 0) {
         unset($_POST['add-post']);
-        $_POST['user_id'] = $_SESSION['id'];
+        $_POST['user_id'] = $_SESSION['user_id'];
         $_POST['IsPublished'] = 1;
         $_POST['content'] = htmlentities($_POST['content']);
         $_POST['slug'] = createSlug($_POST['title']);
@@ -45,8 +45,12 @@ if (isset($_POST['add-post'])) {
         VALUES ('".$_POST['user_id']."', '".$_POST['topic_id']."', '".$_POST['title']."', '".$_POST['content']."', '".$_POST['slug']."', '".$_POST['image_path']."', '".$_POST['IsPublished']."', '".$_POST['views']. "')";
         
         $result = mysqli_query($conn, $sql);
-        header("location: " . BASE_URL . "/admin/article/index.php");
-        exit();
+        if ($result) {
+            header("location: " . BASE_URL . "admin/article/");
+            exit(0);
+        }
+        // echo $sql;
+        // exit(0);
     }
 }
 
@@ -59,12 +63,12 @@ if (isset($_POST['update-post'])) {
 
     if (!empty($_FILES['image_path']['name'])) {
         $image_name = time() . '_' . $_FILES['image_path']['name'];
-        $destination = ROOT_PATH . "/uploads/cover/" . $image_name;
+        $destination = ROOT_PATH . "./uploads/images/" . $image_name;
 
-        $result = move_uploaded_file($_FILES['image']['tmp_name'], $destination);
+        $result = move_uploaded_file($_FILES['image_path']['tmp_name'], $destination);
 
         if ($result) {
-            $_POST['image_path'] = $destination;//update path mới
+            $_POST['image_path'] = "./uploads/images/" . $image_name;//update path mới
             $hasPicture = true;
         } else {
             array_push($errors, "Không thể tải ảnh lên máy chủ");
@@ -73,19 +77,36 @@ if (isset($_POST['update-post'])) {
 
     if (count($errors) == 0) {
         unset($_POST['update-post']);
-        $_POST['user_id'] = $_SESSION['id'];
-        $_POST['IsPublished'] = isset($_POST['IsPublished']) ? 1 : 0;//cho nút publish thêm ?IsPublished=
+        $_POST['user_id'] = $_SESSION['user_id'];
+        $_POST['IsPublished'] = 1;
         $_POST['content'] = htmlentities($_POST['content']);
         $_POST['slug'] = createSlug($_POST['title']);
 
         if ($hasPicture) {
-            $sql = "UPDATE topics SET `topic_id`"."='".$_POST['topic_id']."', `title`"."='".$_POST['title']."', `content`"."='".$_POST['content']."', `slug`"."='".$_POST['slug']."', `image_path`"."='".$_POST['image_path']."', `IsPublished`"."='".$_POST['IsPublished']."'  WHERE id='".$_POST['id']. "'";
+            $sql = "UPDATE posts SET `topic_id`"."='".$_POST['topic_id']."', `title`"."='".$_POST['title']."', `content`"."='".$_POST['content']."', `slug`"."='".$_POST['slug']."', `image_path`"."='".$_POST['image_path']."', `IsPublished`"."='".$_POST['IsPublished']."'  WHERE id='".$_POST['id']. "'";
         } else {
-            $sql = "UPDATE topics SET `topic_id`"."='".$_POST['topic_id']."', `title`"."='".$_POST['title']."', `content`"."='".$_POST['content']."', `slug`"."='".$_POST['slug']."', `IsPublished`"."='".$_POST['IsPublished']."'  WHERE id='".$_POST['id']. "'";
+            $sql = "UPDATE posts SET `topic_id`"."='".$_POST['topic_id']."', `title`"."='".$_POST['title']."', `content`"."='".$_POST['content']."', `slug`"."='".$_POST['slug']."', `IsPublished`"."='".$_POST['IsPublished']."'  WHERE id='".$_POST['id']. "'";
         }
         
         $result = mysqli_query($conn, $sql);
-        header("location: " . BASE_URL . "/admin/article/index.php");
-        exit();
+        if ($result) {
+            header("location: " . BASE_URL . "admin/article/");
+            exit(0);
+        }
+        // echo $sql;
+        // exit(0);
+    }
+}
+
+// published / unpublished
+if (isset($_GET['PublishToggleId'])) {
+    global $conn;
+    $sql = "UPDATE posts SET `IsPublished`"."='".$_GET['IsPublished']."'  WHERE id='".$_GET['PublishToggleId']. "'";
+    unset($_GET['IsPublished'], $_GET['PublishToggleId']);
+    $result = mysqli_query($conn, $sql);
+    echo $sql;
+    if ($result) {
+        header("location: " . BASE_URL . "admin/article/index.php");
+        exit(0);
     }
 }

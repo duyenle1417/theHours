@@ -12,7 +12,7 @@ if (isset($_GET['id'])) {
         } else {
             $page = intval($_GET['page']);
         }
-        $results_per_page = 5;
+        $results_per_page = 4;
         $page_first_result = ($page-1) * $results_per_page;
         $posts_temp = GetPostsByTopic($topic['id']);//tất cả post
         $number_of_result = count($posts_temp);

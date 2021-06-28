@@ -1,13 +1,14 @@
 <?php
 include("../../path.php");
 require_once(ROOT_PATH . '/include/db-functions.php');
+require_once(ROOT_PATH . '/admin/include/posts_functions.php');
+
 //check if user's role is ADMIN OR AUTHOR else redirect to unauthorized page
 if (isset($_SESSION['user_id']) && $_SESSION['user_role_id'] !== 3) {
-?>
+    ?>
 
 <?php
-include(ROOT_PATH . '/admin/include/head.php');
-?>
+include(ROOT_PATH . '/admin/include/head.php'); ?>
     <title>Thêm bài viết | Admin TheHours</title>
 </head>
 
@@ -53,8 +54,7 @@ include(ROOT_PATH . '/admin/include/head.php');
 
 <!-- BEGIN SIDEBAR -->
 <?php
-    include(ROOT_PATH . '/admin/include/sidebar.php');
-?>
+    include(ROOT_PATH . '/admin/include/sidebar.php'); ?>
 <!-- END SIDEBAR -->
 
 <!-- BEGIN ADMIN CONTENT -->
@@ -65,6 +65,7 @@ include(ROOT_PATH . '/admin/include/head.php');
 
     <div class="add-post-form">
         <form action="" method="post" name="form" enctype="multipart/form-data">
+        <?php include(ROOT_PATH . '/include/message.php'); ?>
             <!-- title -->
             <div class="row">
                 <div class="col-25">
@@ -82,9 +83,9 @@ include(ROOT_PATH . '/admin/include/head.php');
                     <label for="content">Nội dung:</label>
                 </div>
                 <div class="col-75">
-                    <textarea id="content" name="content"
-                        placeholder=""
-                        style="height: 450px"></textarea>
+                    <textarea id="content" name="content">
+                        <p>Enter text here...</p>
+                    </textarea>
                 </div>
             </div>
 
@@ -108,8 +109,8 @@ include(ROOT_PATH . '/admin/include/head.php');
                     <option value="0" selected disabled>- Hãy chọn danh mục -</option>
                     <?php
                         $parent_topics = getParentTopics();
-                        foreach ($parent_topics as $parent_topic) {
-                            $sub_topics = getSubTopics($parent_topic['id']); ?>
+    foreach ($parent_topics as $parent_topic) {
+        $sub_topics = getSubTopics($parent_topic['id']); ?>
                             <option value="<?php echo $parent_topic['id'] ?>"><?php echo $parent_topic['name'] ?></option>
                             <?php
                             // if the parent topic has subtopic => arrow
@@ -121,7 +122,7 @@ include(ROOT_PATH . '/admin/include/head.php');
                                     </option>
                             <?php }
                             }
-                        }?>
+    } ?>
                 </select>
                 </div>
             </div>
@@ -131,11 +132,11 @@ include(ROOT_PATH . '/admin/include/head.php');
 
 
             <!-- IsPublished -->
-            
+            <!-- defautl 1 = published -->
 
             <!-- Button Submit -->
             <div class="btn-group">
-                <input type="submit" value="Publish" name="addPost">
+                <input type="submit" value="Publish" name="add-post">
             </div>
         </form>
     </div>
@@ -159,6 +160,7 @@ include(ROOT_PATH . '/admin/include/head.php');
 </script>
 </html>
 
-<?php } else {
-    header('location: ' . BASE_URL);
-}?>
+<?php
+} else {
+        header('location: ' . BASE_URL);
+    }?>

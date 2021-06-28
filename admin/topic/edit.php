@@ -1,14 +1,15 @@
 <?php
 include("../../path.php");
 require_once(ROOT_PATH . '/include/db-functions.php');
-//check if user's role is ADMIN OR AUTHOR else redirect to unauthorized page
-if (isset($_SESSION['user_id']) && $_SESSION['user_role_id'] !== 3) {
-?>
+require_once(ROOT_PATH . '/admin/include/topics_functions.php');
+
+//check if user's role is ADMIN else redirect to unauthorized page
+if (isset($_SESSION['user_id']) && $_SESSION['user_role_id'] === 1) {
+    $topic = getTopicById($_GET['id']); ?>
 
 <?php
-include(ROOT_PATH . '/admin/include/head.php');
-?>
-    <title>Thêm bài viết | Admin TheHours</title>
+include(ROOT_PATH . '/admin/include/head.php'); ?>
+    <title>Chỉnh sửa topic | Admin TheHours</title>
 </head>
 
 <body>
@@ -53,92 +54,58 @@ include(ROOT_PATH . '/admin/include/head.php');
 
 <!-- BEGIN SIDEBAR -->
 <?php
-    include(ROOT_PATH . '/admin/include/sidebar.php');
-?>
+    include(ROOT_PATH . '/admin/include/sidebar.php'); ?>
 <!-- END SIDEBAR -->
 
 <!-- BEGIN ADMIN CONTENT -->
 <div class="admin-content">
     <div class="title">
-        <p>Chỉnh sửa bài viết</p>
+        <p>Chỉnh sửa danh mục</p>
     </div>
 
-    <?php include(ROOT_PATH . '/include/message.php'); ?>
-
-    <div class="add-post-form">
+    <div class="edit-topic-form">
         <form action="" method="post" name="form" enctype="multipart/form-data">
-            <!-- title -->
+        <input type="text" id="id" name="id"value="<?php echo $topic['id']; ?>" hidden>
+            <!-- name -->
             <div class="row">
                 <div class="col-25">
-                    <label for="title">Tiêu đề:</label>
+                    <label for="name">Tên topic:</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" id="title" name="title"
-                        placeholder="">
-                </div>
-            </div>
-            
-            <!-- content -->
-            <div class="row">
-                <div class="col-25">
-                    <label for="content">Nội dung:</label>
-                </div>
-                <div class="col-75">
-                    <textarea id="content" name="content"
-                        placeholder=""
-                        style="height: 450px"></textarea>
+                    <input type="text" id="name" name="name"
+                        placeholder="Thời sự..." value="<?php echo $topic['name']; ?>">
                 </div>
             </div>
 
-            <!-- image_path -->
+            <!-- parent_topic_id -->
             <div class="row">
                 <div class="col-25">
-                    <label for="image_path">Ảnh bìa:</label>
+                    <label for="parent_topic_id">Danh mục cha:</label>
                 </div>
                 <div class="col-75">
-                    <input type="file" id="image_path" name="image_path">
-                </div>
-            </div>
-
-            <!-- topic_id -->
-            <div class="row">
-                <div class="col-25">
-                    <label for="topic_id">Danh mục:</label>
-                </div>
-                <div class="col-75">
-                <select name="topic_id" id="topic_id">
-                    <option value="0" selected disabled>- Hãy chọn danh mục -</option>
+                <select name="parent_topic_id" id="parent_topic_id">
+                    <option value="#" disabled>- Hãy chọn danh mục cha -</option>
+                    <option value="NULL">Trống</option>
                     <?php
                         $parent_topics = getParentTopics();
-                        foreach ($parent_topics as $parent_topic) {
-                            $sub_topics = getSubTopics($parent_topic['id']); ?>
-                            <option value="<?php echo $parent_topic['id'] ?>"><?php echo $parent_topic['name'] ?></option>
+    foreach ($parent_topics as $parent_topic) {
+        if ($parent_topic['id'] === $topic['parent_topic_id']) { ?>
+                                <option value="<?php echo $parent_topic['id'] ?>" selected><?php echo $parent_topic['name'] ?></option>
                             <?php
-                            // if the parent topic has subtopic => arrow
-                            // and list all subtopic
-                            if (count($sub_topics)>0) {
-                                foreach ($sub_topics as $sub_topic) { ?>
-                                    <option value="<?php echo $sub_topic['id'] ?>">
-                                        <?php echo $parent_topic['name'] . ' >> ' . $sub_topic['name'] ?>
-                                    </option>
-                            <?php }
-                            }
-                        }?>
+                            } else { ?>
+                                <option value="<?php echo $parent_topic['id'] ?>"><?php echo $parent_topic['name'] ?></option>
+                            <?php } ?>
+                        <?php
+    } ?>
                 </select>
                 </div>
             </div>
 
-            <!-- user_id -->
-            <!-- get from $_SESSION -->
-
-
-            <!-- IsPublished -->
-            
-
             <!-- Button Submit -->
             <div class="btn-group">
-                <input type="submit" value="Publish" name="addPost">
+                <input type="submit" value="Update" name="update-topic">
             </div>
+            <?php include(ROOT_PATH . '/include/message.php'); ?>
         </form>
     </div>
 </div>
@@ -160,6 +127,7 @@ include(ROOT_PATH . '/admin/include/head.php');
     CKFinder.setupCKEditor(editor);
 </script>
 </html>
-<?php } else {
-    header('location: ' . BASE_URL);
-}?>
+<?php
+} else {
+        header('location: ' . BASE_URL);
+    }?>
