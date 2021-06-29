@@ -2,6 +2,7 @@
 include("../../path.php");
 require_once(ROOT_PATH . '/include/db-functions.php');
 require_once(ROOT_PATH . '/admin/include/topics_functions.php');
+
 //check if user's role is ADMIN else redirect to unauthorized page
 if (isset($_SESSION['user_id']) && $_SESSION['user_role_id'] === 1) {
     ?>

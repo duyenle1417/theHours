@@ -11,13 +11,17 @@
     box-shadow: 2px 3px 9px 1px #cbcfcc;
 }
 
-.add-post-form{
+.add-post-form,
+.edit-post-form
+{
     width: 80%;
     margin: 0 auto;
 }
 
 .add-topic-form,
-.edit-topic-form{
+.edit-topic-form,
+.add-user-form,
+.edit-user-form{
     width: 60%;
     margin: 0 auto;
 }

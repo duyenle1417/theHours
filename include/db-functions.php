@@ -326,12 +326,54 @@ function getUserById($id)
     return $final;
 }
 
+// get all users for admin
+function GetAllUsers()
+{
+    global $conn;
+    $sql = "SELECT * FROM users";
+    $result = mysqli_query($conn, $sql);
+
+    $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    $final = array();
+    foreach ($posts as $post) {
+        array_push($final, $post);
+    }
+    return $final;
+}
+
+// get all users for admin
+function GetAllRoles()
+{
+    global $conn;
+    $sql = "SELECT * FROM roles";
+    $result = mysqli_query($conn, $sql);
+
+    $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    $final = array();
+    foreach ($posts as $post) {
+        array_push($final, $post);
+    }
+    return $final;
+}
+
+//get role of user
+function getRoleById($id)
+{
+    // use global $conn object in function
+    global $conn;
+    $sql = "SELECT `role` FROM roles WHERE id = $id";
+    $result = mysqli_query($conn, $sql);
+    
+    $final = mysqli_fetch_array($result);
+    return $final;
+}
+
+//validate dữ liệu nhập
 function validateUser($user)
 {
     $errors = array();
-    if (empty($user['username'])) {
-        array_push($errors, 'Username is required');
-    }
 
     if (empty($user['email'])) {
         array_push($errors, 'Email is required');
@@ -341,13 +383,35 @@ function validateUser($user)
         array_push($errors, 'Fullname is required');
     }
 
-    if (empty($user['password'])) {
-        array_push($errors, 'Password is required');
-    }
+    if(!isset($user['update-user'])){
+        if (empty($user['username'])) {
+            array_push($errors, 'Username is required');
+        }
+        if (empty($user['password'])) {
+            array_push($errors, 'Password is required');
+        }
+        if ($user['passwordConf'] !== $user['password']) {
+            array_push($errors, 'Password do not match');
+        }
+        $existingUser = selectOne('users', ['username' => $user['username']]);
+        if ($existingUser) {
+            if (isset($user['update-user']) && $existingUser['id'] != $user['id']) {
+                array_push($errors, 'Username already exists');
+            }
 
-    if ($user['passwordConf'] !== $user['password']) {
-        array_push($errors, 'Password do not match');
+            if (isset($_POST['register-btn']) || isset($user['create-user'])) {
+                array_push($errors, 'Username already exists');
+            }
+        }
     }
+    // if (isset($user['update-user'])) {
+    //     if (empty($user['password'])) {
+    //         array_push($errors, 'Password is required');
+    //     }
+    //     if ($user['passwordConf'] !== $user['password']) {
+    //         array_push($errors, 'Password do not match');
+    //     }
+    // }
 
     $existingUser = selectOne('users', ['email' => $user['email']]);
     if ($existingUser) {
@@ -360,19 +424,11 @@ function validateUser($user)
         }
     }
 
-    $existingUser = selectOne('users', ['username' => $user['username']]);
-    if ($existingUser) {
-        if (isset($user['update-user']) && $existingUser['id'] != $user['id']) {
-            array_push($errors, 'Username already exists');
-        }
-
-        if (isset($_POST['register-btn']) || isset($user['create-user'])) {
-            array_push($errors, 'Username already exists');
-        }
-    }
+    
     return $errors;
 }
 
+// valdate khi login
 function validateLogin($user)
 {
     $errors = array();
@@ -416,6 +472,7 @@ if (isset($_POST['login-btn'])) {
     }
 }
 
+// register user
 if (isset($_POST['register-btn']) || isset($_POST['create-user'])) {
     $errors = validateUser($_POST);
 
@@ -429,27 +486,30 @@ if (isset($_POST['register-btn']) || isset($_POST['create-user'])) {
             VALUES ('".$_POST['email']."', '".$_POST['username']."', '".$_POST['password']."', '".$_POST['fullname']."', '".$_POST['role_id']."', '".$_POST['verification_hash']."', 1)";
         
             $result = mysqli_query($conn, $sql);
-            header('location: ' . BASE_URL . '/admin/user/index.php');
-            exit();
+            if ($result) {
+                header('location: ' . BASE_URL . '/admin/user/index.php');
+                exit();
+            }
         }
         if (isset($_POST['register-btn'])) {
             $_POST['role_id'] = 3;
             $sql = "INSERT INTO users (`email`, `username`, `password`, `fullname`, `role_id`, `verification_hash`, `IsActivated`) 
             VALUES ('".$_POST['email']."', '".$_POST['username']."', '".$_POST['password']."', '".$_POST['fullname']."', '".$_POST['role_id']."', '".$_POST['verification_hash']."', 1)";
             $result = mysqli_query($conn, $sql);
+            if ($result) {
+                // send mail not working beacause cannot ssetup mail server
+                // SendMailRegister($_POST);
 
-            // send mail not working beacause cannot ssetup mail server
-            SendMailRegister($_POST);
-
-            $user = selectOne('users', ['username' => $_POST['username']]);
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_username'] = $user['username'];
-            $_SESSION['user_role_id'] = $user['role_id'];
-            $_SESSION['user_email'] = $user['email'];
-            $_SESSION['user_fullname'] = $user['fullname'];
+                $user = selectOne('users', ['username' => $_POST['username']]);
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['user_username'] = $user['username'];
+                $_SESSION['user_role_id'] = $user['role_id'];
+                $_SESSION['user_email'] = $user['email'];
+                $_SESSION['user_fullname'] = $user['fullname'];
             
-            header('location: ' . BASE_URL);
-            exit();
+                header('location: ' . BASE_URL);
+                exit();
+            }
         }
     }
 }
@@ -475,31 +535,6 @@ function SendMailRegister($user)
     mail($to, $subject, $message, $headers);
 }
 
-//update user
-if (isset($_POST['update-user'])) {
-    // adminOnly();
-    $errors = validateUser($_POST);
-
-    if (count($errors) === 0) {
-        $id = $_POST['id'];
-        unset($_POST['passwordConf'], $_POST['update-user'], $_POST['id']);
-        $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        
-        $_POST['admin'] = isset($_POST['admin']) ? 1 : 0;
-        $count = update($table, $id, $_POST);
-        $_SESSION['message'] = 'Admin user created';
-        $_SESSION['type'] = 'success';
-        header('location: ' . BASE_URL . '/admin/user/index.php');
-        exit();
-    } else {
-        $username = $_POST['username'];
-        $admin = isset($_POST['admin']) ? 1 : 0;
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $passwordConf = $_POST['passwordConf'];
-    }
-}
-
 function getUserByUsername($username)
 {
     global $conn;
@@ -509,8 +544,6 @@ function getUserByUsername($username)
     $final = mysqli_fetch_array($result);
     return $final;
 }
-
-
 // *************
 // COMMENT'S functions
 // ************

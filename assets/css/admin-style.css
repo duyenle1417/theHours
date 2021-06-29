@@ -146,7 +146,8 @@ div.admin{
 
 /* TABLE */
 div.topic-table,
-div.post-table{
+div.post-table,
+div.user-table{
     padding: 30px;
     overflow: auto;
     margin: 0 auto;
