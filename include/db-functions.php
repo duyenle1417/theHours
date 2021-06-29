@@ -383,7 +383,7 @@ function validateUser($user)
         array_push($errors, 'Fullname is required');
     }
 
-    if(!isset($user['update-user'])){
+    if (!isset($user['update-user'])) {
         if (empty($user['username'])) {
             array_push($errors, 'Username is required');
         }
@@ -498,7 +498,7 @@ if (isset($_POST['register-btn']) || isset($_POST['create-user'])) {
             $result = mysqli_query($conn, $sql);
             if ($result) {
                 // send mail not working beacause cannot ssetup mail server
-                // SendMailRegister($_POST);
+                SendMailRegister($_POST);
 
                 $user = selectOne('users', ['username' => $_POST['username']]);
                 $_SESSION['user_id'] = $user['id'];
@@ -528,11 +528,11 @@ function SendMailRegister($user)
     Fullname: '.$user['fullname'].'
     ------------------------
     
-    Link:'. BASE_URL. 'verify.php?username=' .$user['username'].'&verification_hash='.$user['verification_hash'].'
-  
+    
 ';
-    $headers = 'From:noreply@thehours.com' . "\r\n";
+    $headers = 'From: noreply@thehours.com';
     mail($to, $subject, $message, $headers);
+    // Link:'. BASE_URL. 'verify.php?username=' .$user['username'].'&verification_hash='.$user['verification_hash'].'
 }
 
 function getUserByUsername($username)

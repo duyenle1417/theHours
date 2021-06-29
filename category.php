@@ -129,46 +129,6 @@ if (isset($_GET['id'])) {
                     <!-- sub new end -->
                     <?php }?>
 
-                    <!-- page pagination -->
-                    <div class="nav-pagination">
-                        <!-- Prev btn -->
-                        <?php if ($page >= 2) { ?>
-                        <a
-                            href="<?php echo BASE_URL . "category.php?id=" . $topic['id'] . "&page=" . ($page-1);?>">Prev</a>
-                        <?php } ?>
-
-                        <!-- Number btn & Next btn -->
-                        <?php if ($page < $number_of_page) {
-                $temp = $page + 1;
-                for ($i=(($page-1)===0 ? $page : $page-1); $i <= $temp; $i++) {
-                    if ($i === $page) {?>
-                        <a class="active"
-                            href="<?php echo BASE_URL . "category.php?id=" . $topic['id'] . "&page=" . ($i);?>"><?php echo $i; ?></a>
-                        <?php } else { ?>
-                        <a
-                            href="<?php echo BASE_URL . "category.php?id=" . $topic['id'] . "&page=" . ($i);?>"><?php echo $i; ?></a>
-                        <?php } ?>
-                        <?php
-                } ?>
-                        <a
-                            href="<?php echo BASE_URL . "category.php?id=" . $topic['id'] . "&page=" . ($page+1); ?>">Next</a>
-                        <?php
-            } else {
-                $temp = $page;
-                for ($i=(($page-1)===0 ? $page : $page-1); $i <= $temp; $i++) {
-                    if ($i === $page) {?>
-                        <a class="active"
-                            href="<?php echo BASE_URL . "category.php?id=" . $topic['id'] . "&page=" . ($i);?>"><?php echo $i; ?></a>
-                        <?php } else { ?>
-                        <a
-                            href="<?php echo BASE_URL . "category.php?id=" . $topic['id'] . "&page=" . ($i);?>"><?php echo $i; ?></a>
-                        <?php } ?>
-                        <?php
-                } ?>
-                        <?php
-            } ?>
-                    </div>
-                    <!-- page pagination end -->
                 </div>
 
                 <!-- TABS -->
@@ -200,6 +160,47 @@ if (isset($_GET['id'])) {
                 </div>
                 <!-- TABS END -->
             </div>
+
+            <!-- page pagination -->
+            <div class="nav-pagination">
+                <!-- Prev btn -->
+                <?php if ($page >= 2) { ?>
+                <a
+                    href="<?php echo BASE_URL . "category.php?id=" . $topic['id'] . "&page=" . ($page-1);?>">Prev</a>
+                <?php } ?>
+
+                <!-- Number btn & Next btn -->
+                <?php if ($page < $number_of_page) {
+                $temp = $page + 1;
+                for ($i=(($page-1)===0 ? $page : $page-1); $i <= $temp; $i++) {
+                    if ($i === $page) {?>
+                        <a class="active"
+                            href="<?php echo BASE_URL . "category.php?id=" . $topic['id'] . "&page=" . ($i);?>"><?php echo $i; ?></a>
+                        <?php } else { ?>
+                        <a
+                            href="<?php echo BASE_URL . "category.php?id=" . $topic['id'] . "&page=" . ($i);?>"><?php echo $i; ?></a>
+                        <?php } ?>
+                        <?php
+                } ?>
+                        <a
+                            href="<?php echo BASE_URL . "category.php?id=" . $topic['id'] . "&page=" . ($page+1); ?>">Next</a>
+                        <?php
+            } else {
+                $temp = $page;
+                for ($i=(($page-1)===0 ? $page : $page-1); $i <= $temp; $i++) {
+                    if ($i === $page) {?>
+                        <a class="active"
+                            href="<?php echo BASE_URL . "category.php?id=" . $topic['id'] . "&page=" . ($i);?>"><?php echo $i; ?></a>
+                        <?php } else { ?>
+                        <a
+                            href="<?php echo BASE_URL . "category.php?id=" . $topic['id'] . "&page=" . ($i);?>"><?php echo $i; ?></a>
+                        <?php } ?>
+                        <?php
+                } ?>
+                        <?php
+            } ?>
+                    </div>
+                    <!-- page pagination end -->
 
 
             <?php } else {

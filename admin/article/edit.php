@@ -11,11 +11,13 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role_id'] !== 3) {
     // condition if the user role is author
     if ($_SESSION['user_role_id'] === 2) {
         // check if the user is the author of this post else redirect
-        if ($_SESSION['user_id'] !== $post['user_id']) {
+        if ($_SESSION['user_id'] === $post['user_id']) {
             header('location: ' . BASE_URL . 'admin/article/');
             exit(0);
         }
-    } ?>
+        
+    } 
+    ?>
 
 <?php
 include(ROOT_PATH . '/admin/include/head.php'); ?>
@@ -72,7 +74,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
     <div class="title">
         <p>Chỉnh sửa bài viết</p>
     </div>
-
+    
     <div class="edit-post-form">
         <form action="" method="post" name="form" enctype="multipart/form-data">
         <?php include(ROOT_PATH . '/include/message.php'); ?>

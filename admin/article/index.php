@@ -55,7 +55,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
     <div class="admin-wrap">
 
         <?php include(ROOT_PATH . '/admin/include/sidebar.php'); ?>
-
+    
         <!-- Admin Content -->
         <div class="admin-content">
 
@@ -65,6 +65,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
 
             <div class="content">
                 <div class="post-table">
+                
                     <table>
                         <thead>
                             <tr>
