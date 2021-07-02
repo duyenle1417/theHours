@@ -1,10 +1,10 @@
 <?php
     include('path.php');
     require_once(ROOT_PATH . '/include/db-functions.php');
-?>
+    if (!isset($_SESSION['user_id'])) {
+        ?>
 <?php
-include(ROOT_PATH . '/include/head.php');
-?>
+include(ROOT_PATH . '/include/head.php'); ?>
     <title>Login -TheHours</title>
 </head>
 
@@ -59,3 +59,8 @@ include(ROOT_PATH . '/include/head.php');
 </body>
 
 </html>
+<?php
+    } else {
+    header('location: ' . BASE_URL);
+    exit(0);
+}?>

@@ -8,9 +8,9 @@ if (isset($_SESSION['user_id'])) {
 ?>
 
 <?php
-include(ROOT_PATH . '/include/head.php');
-?>
+include(ROOT_PATH . '/include/head.php'); ?>
 <title>Profile | TheHours</title>
+
 
 </head>
 
@@ -29,99 +29,82 @@ include(ROOT_PATH . '/include/head.php');
         <?php include(ROOT_PATH . '/include/menu.php'); ?>
         <!-- End MENU -->
 
-        <div class="app__container">
-        <div class="edit-user-form">
-        <form action="" method="post" name="form" enctype="multipart/form-data">
-        <?php include(ROOT_PATH . '/include/message.php'); ?>
-        <!-- id -->
-        <input type="text" id="id" name="id" value="<?php echo $user['id']; ?>" hidden>
+        <div class="admin-content">
+            <div class="edit-user-form">
+                <form action="" method="post" name="form" enctype="multipart/form-data">
+                    <?php include(ROOT_PATH . '/include/message.php'); ?>
+                    <!-- id -->
+                    <input type="text" id="id" name="id" value="<?php echo $user['id']; ?>" hidden>
 
-            <!-- fullname -->
-            <div class="row">
-                <div class="col-25">
-                    <label for="fullname">Fullname:</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="fullname" name="fullname"
-                        placeholder="Nguyễn Văn A..." value="<?php echo $user['fullname'] ?>">
-                </div>
-            </div>
+                    <!-- fullname -->
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="fullname">Fullname:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="fullname" name="fullname" placeholder="Nguyễn Văn A..."
+                                value="<?php echo $user['fullname'] ?>">
+                        </div>
+                    </div>
 
-            <!-- username -->
-            <div class="row">
-                <div class="col-25">
-                    <label for="username">Username:</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="username" name="username"
-                        placeholder="Type username here..." disabled value="<?php echo $user['username'] ?>">
-                </div>
-            </div>
+                    <!-- username -->
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="username">Username:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="username" name="username" placeholder="Type username here..."
+                                disabled value="<?php echo $user['username'] ?>">
+                        </div>
+                    </div>
 
-            <!-- email -->
-            <div class="row">
-                <div class="col-25">
-                    <label for="email">Email:</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="email" name="email"
-                        placeholder="Type your email here..." value="<?php echo $user['email'] ?>">
-                </div>
-            </div>
+                    <!-- email -->
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="email">Email:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="email" name="email" placeholder="Type your email here..."
+                                value="<?php echo $user['email'] ?>">
+                        </div>
+                    </div>
 
-            <!-- password -->
-            <!-- <div class="row">
-                <div class="col-25">
-                    <label for="password">Password:</label>
-                </div>
-                <div class="col-75">
-                    <input type="password" id="password" name="password" placeholder="Type your password">
-                </div>
-            </div> -->
+                    <!-- role_id -->
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="role_id">Quyền:</label>
+                        </div>
+                        <div class="col-75">
+                            <select name="role_id" id="role_id">
+                                <option value="0" selected disabled>- Hãy chọn quyền tài khoản -</option>
 
-            <!-- password retype -->
-            <!-- <div class="row">
-                <div class="col-25">
-                    <label for="passwordConf">Retype Password:</label>
-                </div>
-                <div class="col-75">
-                    <input type="password" id="passwordConf" name="passwordConf" placeholder="Retype your password" >
-                </div>
-            </div> -->
-
-            <!-- role_id -->
-            <div class="row">
-                <div class="col-25">
-                    <label for="role_id">Quyền:</label>
-                </div>
-                <div class="col-75">
-                <select name="role_id" id="role_id">
-                    <option value="0" selected disabled>- Hãy chọn quyền tài khoản -</option>
-                    
-                    <?php
+                                <?php
                     $roles = GetAllRoles();
-                    foreach ($roles as $role) {
-                        if ($role['id'] === $user['role_id']) {
-                            ?>
-                            <option value="<?php echo $role['id'] ?>" selected><?php echo $role['role'] ?></option>
-                        <?php
-                        } else {?>
-                            <option value="<?php echo $role['id'] ?>"><?php echo $role['role'] ?></option>
-                        <?php
+    foreach ($roles as $role) {
+        if ($role['id'] === $user['role_id']) {
+            ?>
+                                <option value="<?php echo $role['id'] ?>" selected><?php echo $role['role'] ?></option>
+                                <?php
+        } else {?>
+                                <option value="<?php echo $role['id'] ?>"><?php echo $role['role'] ?></option>
+                                <?php
                     }
-                    } ?>
-                </select>
-                </div>
+    } ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Button Submit -->
+                    <div class="btn-group">
+                        <input type="submit" value="Update" name="update-user-profile">
+                    </div>
+                </form>
+                <div>
+                <a href="change-password.php?id=<?php echo $_SESSION['user_id'] ?>" style="font-size: 16px; margin-top: 5px;">Đổi mật khẩu?</a>
             </div>
-
-            <!-- Button Submit -->
-            <div class="btn-group">
-                <input type="submit" value="Update" name="update-user">
             </div>
-        </form>
-    </div>
-
-
+            
+            
         </div>
     </div>
 </body>
@@ -131,3 +114,4 @@ include(ROOT_PATH . '/include/head.php');
 } else {
         header('location: ' . BASE_URL);
     }?>
+

@@ -37,6 +37,7 @@
                     <?php
                 };
 
+                // if LOGGED IN
                 //login btn OR profile menu
                 if (isset($_SESSION['user_id'])) {?>
                     <li><a href="<?php echo BASE_URL . "profile.php?id=" . $_SESSION['user_id'] ?>" style="text-transform: none;"><span><i class="fas fa-portrait"></i></span> <?php echo $_SESSION['user_username'] ?> <span><i class="fas fa-sort-down"></i></span></a>
@@ -51,7 +52,17 @@
                                 </a>
                             </li>
                         <?php }?>
-                        <li>
+                            <li>
+                                <a href="<?php echo BASE_URL . "profile.php?id=" . $_SESSION['user_id'] ?>">
+                                My Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo BASE_URL . "change-password.php?id=" . $_SESSION['user_id'] ?>">
+                                Change password
+                                </a>
+                            </li>
+                            <li>
                                 <a href="<?php echo BASE_URL . "logout.php" ?>">
                                 <span><i class="fas fa-sign-out-alt"></i></span>Logout
                                 </a>

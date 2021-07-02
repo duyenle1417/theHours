@@ -24,20 +24,21 @@ function validatePost($post)
         array_push($errors, 'Hãy chọn topic cho bài viết');
     }
 
-    //trùng title
-    // $existingPost = selectOne('posts', ['title' => $post['title']]);
-    // if ($existingPost) {
-    //     if (isset($post['update-post']) && $existingPost['id'] != $post['id']) {
-    //         array_push($errors, 'Post with that title already exists');
-    //     }
+    // trùng title
+    $existingPost = selectOne('posts', ['title' => $post['title']]);
+    if ($existingPost) {
+        if (isset($post['update-post']) && $existingPost['id'] != $post['id']) {
+            array_push($errors, 'Post with that title already exists');
+        }
 
-    //     if (isset($post['add-post'])) {
-    //         array_push($errors, 'Post with that title already exists');
-    //     }
-    // }
+        if (isset($post['add-post'])) {
+            array_push($errors, 'Post with that title already exists');
+        }
+    }
     return $errors;
 }
 
+// when user click a post/open link => add view
 function UpdateView($id, $views)
 {
     global $conn;
@@ -81,6 +82,7 @@ function GetPostsByTopic($topic_id)
     return $final;
 }
 
+// pagination post of each topic
 function GetPostsByTopicLimit($topic_id, $page_first_result, $results_per_page)
 {
     global $conn;
@@ -97,11 +99,13 @@ function GetPostsByTopicLimit($topic_id, $page_first_result, $results_per_page)
     return $final;
 }
 
-function GetPostsByTopicTabRecent($topic_id, $results_number)
+
+// get post for each category tab
+function GetPostsByTopicTab($topic_id, $results_number, $orderby)
 {
     global $conn;
     $sql = "SELECT * FROM `posts` WHERE IsPublished = 1 AND `topic_id` IN 
-    (SELECT `id` FROM `topics` WHERE `id` = " . $topic_id . " OR `topics`.`parent_topic_id` = " . $topic_id . ") ORDER BY `id` DESC LIMIT " . $results_number;
+    (SELECT `id` FROM `topics` WHERE `id` = " . $topic_id . " OR `topics`.`parent_topic_id` = " . $topic_id . ") ORDER BY `" . $orderby . "` DESC LIMIT " . $results_number;
     $result = mysqli_query($conn, $sql);
 
     $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -113,22 +117,7 @@ function GetPostsByTopicTabRecent($topic_id, $results_number)
     return $final;
 }
 
-function GetPostsByTopicTabMostView($topic_id, $results_number)
-{
-    global $conn;
-    $sql = "SELECT * FROM `posts` WHERE IsPublished = 1 AND `topic_id` IN 
-    (SELECT `id` FROM `topics` WHERE `id` = " . $topic_id . " OR `topics`.`parent_topic_id` = " . $topic_id . ") ORDER BY `views` DESC LIMIT " . $results_number;
-    $result = mysqli_query($conn, $sql);
-
-    $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-    $final = array();
-    foreach ($posts as $post) {
-        array_push($final, $post);
-    }
-    return $final;
-}
-
+// get post for tab in index.php
 function GetPostsTab($results_number, $orderby)
 {
     global $conn;
@@ -182,6 +171,7 @@ function getPostById($id)
     return $final;
 }
 
+// get post by that author
 function getPostsOfAuthor($user_id)
 {
     // use global $conn object in function
@@ -246,6 +236,7 @@ function getTopicNameByID($id)
     // }
 }
 
+// get all topics
 function getAllTopics()
 {
     // use global $conn object in function
@@ -370,7 +361,7 @@ function getRoleById($id)
     return $final;
 }
 
-//validate dữ liệu nhập
+//validate dữ liệu nhập khi tạo user
 function validateUser($user)
 {
     $errors = array();
@@ -383,7 +374,7 @@ function validateUser($user)
         array_push($errors, 'Fullname is required');
     }
 
-    if (!isset($user['update-user'])) {
+    if (isset($_POST['register-btn']) || isset($user['create-user'])) {
         if (empty($user['username'])) {
             array_push($errors, 'Username is required');
         }
@@ -393,25 +384,12 @@ function validateUser($user)
         if ($user['passwordConf'] !== $user['password']) {
             array_push($errors, 'Password do not match');
         }
+
         $existingUser = selectOne('users', ['username' => $user['username']]);
         if ($existingUser) {
-            if (isset($user['update-user']) && $existingUser['id'] != $user['id']) {
-                array_push($errors, 'Username already exists');
-            }
-
-            if (isset($_POST['register-btn']) || isset($user['create-user'])) {
-                array_push($errors, 'Username already exists');
-            }
+            array_push($errors, 'Username already exists');
         }
     }
-    // if (isset($user['update-user'])) {
-    //     if (empty($user['password'])) {
-    //         array_push($errors, 'Password is required');
-    //     }
-    //     if ($user['passwordConf'] !== $user['password']) {
-    //         array_push($errors, 'Password do not match');
-    //     }
-    // }
 
     $existingUser = selectOne('users', ['email' => $user['email']]);
     if ($existingUser) {
@@ -444,30 +422,26 @@ function validateLogin($user)
     return $errors;
 }
 
+// nhấn nút login
 if (isset($_POST['login-btn'])) {
     $errors = validateLogin($_POST);
     if (count($errors) === 0) {
         $user = selectOne('users', ['username' => $_POST['username'], 'IsActivated' => 1]);
 
+        // tài khoản có thực và mật khẩu trùng
         if ($user && md5($_POST['password']) === $user['password']) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_username'] = $user['username'];
             $_SESSION['user_role_id'] = $user['role_id'];
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_fullname'] = $user['fullname'];
-
-            // if ($_SESSION['user_role_id'] !==3 && isset($_SESSION['user_role_id'])) {
-            //     header('location: ' . BASE_URL . 'admin/dashboard.php');
-            // } else {
-            //     header('location: ' . BASE_URL);
-            // }
             
             header('location: ' . BASE_URL);
             exit();
         } elseif ($user) {
             array_push($errors, 'Sai thông tin đăng nhập');
         } else {
-            array_push($errors, 'Tài khoản không tồn tại hoặc chưa được xác thực');
+            array_push($errors, 'Tài khoản không tồn tại');
         }
     }
 }
@@ -481,24 +455,30 @@ if (isset($_POST['register-btn']) || isset($_POST['create-user'])) {
         $_POST['password'] = md5($_POST['password']);
         $_POST['verification_hash'] = md5(time());
         
+        // nếu là admin thêm user
         if (isset($_POST['create-user'])) {
             $sql = "INSERT INTO users (`email`, `username`, `password`, `fullname`, `role_id`, `verification_hash`, `IsActivated`) 
             VALUES ('".$_POST['email']."', '".$_POST['username']."', '".$_POST['password']."', '".$_POST['fullname']."', '".$_POST['role_id']."', '".$_POST['verification_hash']."', 1)";
         
             $result = mysqli_query($conn, $sql);
             if ($result) {
-                header('location: ' . BASE_URL . '/admin/user/index.php');
+                header('location: ' . BASE_URL . 'admin/user/index.php');
                 exit();
             }
         }
+
+        // nếu là đăng ký mới ở trang signup
         if (isset($_POST['register-btn'])) {
             $_POST['role_id'] = 3;
             $sql = "INSERT INTO users (`email`, `username`, `password`, `fullname`, `role_id`, `verification_hash`, `IsActivated`) 
             VALUES ('".$_POST['email']."', '".$_POST['username']."', '".$_POST['password']."', '".$_POST['fullname']."', '".$_POST['role_id']."', '".$_POST['verification_hash']."', 1)";
+            
             $result = mysqli_query($conn, $sql);
+            
+            // nếu thêm dữ liệu thành công
             if ($result) {
-                // send mail not working beacause cannot ssetup mail server
-                SendMailRegister($_POST);
+                
+                // SendMailRegister($_POST);
 
                 $user = selectOne('users', ['username' => $_POST['username']]);
                 $_SESSION['user_id'] = $user['id'];
@@ -507,6 +487,7 @@ if (isset($_POST['register-btn']) || isset($_POST['create-user'])) {
                 $_SESSION['user_email'] = $user['email'];
                 $_SESSION['user_fullname'] = $user['fullname'];
             
+                // quay về home
                 header('location: ' . BASE_URL);
                 exit();
             }
@@ -514,6 +495,7 @@ if (isset($_POST['register-btn']) || isset($_POST['create-user'])) {
     }
 }
 
+// gửi mail thông báo
 function SendMailRegister($user)
 {
     $to = $_POST['email'];
@@ -535,6 +517,7 @@ function SendMailRegister($user)
     // Link:'. BASE_URL. 'verify.php?username=' .$user['username'].'&verification_hash='.$user['verification_hash'].'
 }
 
+// lấy thông tin user = username
 function getUserByUsername($username)
 {
     global $conn;
@@ -544,6 +527,7 @@ function getUserByUsername($username)
     $final = mysqli_fetch_array($result);
     return $final;
 }
+
 // *************
 // COMMENT'S functions
 // ************

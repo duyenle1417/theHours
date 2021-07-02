@@ -32,7 +32,8 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
         <!-- Admin Content -->
         <div class="admin-content">
 
-            <h2 class="page-title">Dashboard</h2>
+            <h2 class="page-title">User's dashboard</h2>
+            
 
             <div class="btn"><a href="add.php" class="add-btn">Add</a></div>
 
@@ -100,5 +101,5 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
 </html>
 <?php
 } else {
-    header('location: ' . BASE_URL);
-}?>
+                            header('location: ' . BASE_URL);
+                        }?>

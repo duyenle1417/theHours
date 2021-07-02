@@ -35,6 +35,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
         <div class="admin-content">
 
             <h2 class="page-title">Topic's Dashboard</h2>
+            
 
             <div class="btn"><a href="add.php" class="add-btn">Add</a></div>
 

@@ -106,16 +106,16 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                     
                     <?php
                     $roles = GetAllRoles();
-                    foreach ($roles as $role) {  
-                    if ($role['id'] === $user['role_id']) {
-                        ?>
+    foreach ($roles as $role) {
+        if ($role['id'] === $user['role_id']) {
+            ?>
                             <option value="<?php echo $role['id'] ?>" selected><?php echo $role['role'] ?></option>
                         <?php
-                    } else{?>
+        } else {?>
                             <option value="<?php echo $role['id'] ?>"><?php echo $role['role'] ?></option>
                         <?php
                     }
-                    } ?>
+    } ?>
                 </select>
                 </div>
             </div>
@@ -126,6 +126,50 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
             </div>
         </form>
     </div>
+
+    <div class="change-pass-form" style="margin-top: 50px">
+            <h2>Đổi mật khẩu</h2>
+                <form action="" method="post" name="form" enctype="multipart/form-data">
+                    <?php include(ROOT_PATH . '/include/message.php'); ?>
+                    <!-- id -->
+                    <input type="text" id="id" name="id" value="<?php echo $user['id']; ?>" hidden>
+
+                    <!-- old password -->
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="Oldpassword">Current password:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="password" id="Oldpassword" name="Oldpassword" placeholder="Type your curent password">
+                        </div>
+                    </div>
+
+                    <!-- password -->
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="password">New password:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="password" id="password" name="password" placeholder="Type your new password">
+                        </div>
+                    </div>
+
+                    <!-- password retype -->
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="passwordConf">Retype new password:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="password" id="passwordConf" name="passwordConf" placeholder="Retype your new password" >
+                        </div>
+                    </div>
+
+                    <!-- Button Submit -->
+                    <div class="btn-group">
+                        <input type="submit" value="Change password" name="change-password">
+                    </div>
+                </form>
+            </div>
 </div>
 <!-- END ADMIN CONTENT -->
 

@@ -46,4 +46,5 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
 </html>
 <?php } else {
     header('location: ' . BASE_URL);
+    exit(0);
 }?>

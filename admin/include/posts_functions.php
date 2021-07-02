@@ -49,8 +49,6 @@ if (isset($_POST['add-post'])) {
             header("location: " . BASE_URL . "admin/article/");
             exit(0);
         }
-        // echo $sql;
-        // exit(0);
     }
 }
 
@@ -93,8 +91,6 @@ if (isset($_POST['update-post'])) {
             header("location: " . BASE_URL . "admin/article/");
             exit(0);
         }
-        // echo $sql;
-        // exit(0);
     }
 }
 

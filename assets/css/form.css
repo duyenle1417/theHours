@@ -26,6 +26,11 @@
     margin: 0 auto;
 }
 
+.change-pass-form{
+    width: 60%;
+    margin: 0 auto;
+}
+
 /* FORM */
 .form-title{
     font-weight: 700;
@@ -40,7 +45,8 @@
     padding: 30px;
 }
 
-form input, form textarea {
+.login-form form input, form textarea,
+.signup-form form input, form textarea {
     width: 100%;
     padding: 10px 35px 5px;
     font-size: 16px;
@@ -51,28 +57,95 @@ form input, form textarea {
     resize: none;
     outline: none;
 }
-.form-input i{
+
+.login-form form .form-input i,
+.signup-form form .form-input i{
     position: absolute;
     padding: 15px 10px 0;
     color: #dbd3d3;
 }
 
-form input:not([type="submit"]):focus, form textarea:focus {
+.login-form form input:not([type="submit"]):focus, .login-form form textarea:focus,
+.signup-form form input:not([type="submit"]):focus, .signup-form form textarea:focus {
     border-bottom: 2px solid #858080;
     transition: 0.25s;
 }
 
-
- form label{
+.login-form form label,
+.signup-form form label{
     font-size: 14px;
     margin: 10px 0;
 }
 
-form .row{
+.login-form form .row,
+.signup-form form .row{
     margin: 20px 10px;
 }
 
-form .row:after {
+.login-form form .row:after,
+.signup-form form .row:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.admin-content form .row{
+    margin: 20px 0;
+}
+
+.admin-content form .row:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.admin-content form label{
+    font-size: 24px;
+    font-weight: 400;
+    margin: 20px 0 10px;
+}
+
+.admin-content form input:not([type="submit"]):focus, .admin-content form textarea:focus {
+    border: 1px solid #858080;
+    transition: 0.25s;
+}
+
+.admin-content form input[type="submit"]{
+    width: auto;
+    padding: 10px 40px;
+    float: right;
+    font-size: 20px;
+    font-weight: 500;
+    background-color: #2B54C1;
+    color: white;
+    border-radius: 5px;
+}
+
+.admin-content form input[type="checkbox"]{
+    padding: 10px 20px;
+}
+
+.admin-content form select{
+    width: 350px;
+    padding: 10px 20px;
+    margin: 10px 0;
+    font-size: 16px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.admin-content form input, .admin-content form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    resize: none;
+    outline: none;
+    border: 1px solid #dbd3d3;
+    border-radius: 5px;
+}
+
+form:after {
     content: "";
     display: block;
     clear: both;

@@ -23,8 +23,8 @@ if (isset($_GET['id'])) {
         //check number of post
         $number_of_result_this_page = count($posts);
         //tab post
-        $tab_most_view = GetPostsByTopicTabMostView($topic['id'], 10);
-        $tab_recent = GetPostsByTopicTabRecent($topic['id'], 10); ?>
+        $tab_most_view = GetPostsByTopicTab($topic['id'], 10, 'views');
+        $tab_recent = GetPostsByTopicTab($topic['id'], 10, 'id'); ?>
 
 <?php include(ROOT_PATH . '/include/head.php'); ?>
 <title><?php echo $topic['name'] ?> | TheHours</title>

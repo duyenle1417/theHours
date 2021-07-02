@@ -5,6 +5,12 @@
                 <div class="sub-menu">
                     <ul> 
                         <li>
+                            <a href="<?php echo BASE_URL . "profile.php?id=" . $_SESSION['user_id'] ?>">
+                            My Profile
+                            </a>
+                        </li>
+
+                        <li>
                             <a href="<?php echo BASE_URL; ?>">
                             <span><i class="fas fa-home"></i></span> Home
                             </a>
