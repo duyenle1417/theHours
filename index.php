@@ -34,13 +34,13 @@ include(ROOT_PATH . '/include/head.php');
                 <div class="main-news">
                     <?php $post = $tab_recent = getPostHeadline(); ?>
                     <div class="main-news__picture">
-                        <a href="<?php echo BASE_URL . 'article.php?id=' . $post['id']?>">
+                        <a href="<?php echo BASE_URL . 'article.php?id=' . $post['id'] . "&slug=" . $post['slug'] ?>">
                             <img src="<?php echo $post['image_path'] ?>" alt="" class="main-news__picture--img">
                         </a>
                     </div>
                     <div class="main-news__label">
                         <a
-                            href="<?php echo BASE_URL . 'article.php?id=' . $post['id']?>"><?php echo $post['title'] ?></a>
+                            href="<?php echo BASE_URL . 'article.php?id=' . $post['id'] . "&slug=" . $post['slug']?>"><?php echo $post['title'] ?></a>
                     </div>
                     <div class="main-news__action">
                         <div class="main-news__view">
@@ -71,7 +71,7 @@ include(ROOT_PATH . '/include/head.php');
                         <div class="tab-content__item">
                             <span
                                 class="tab-content__time"><?php echo $mysqldate = date('H:i d/m/y', strtotime($post['create_date'])); ?></span>
-                            <a href="<?php echo BASE_URL . "article.php?id=" . $post['id']; ?>"
+                            <a href="<?php echo BASE_URL . "article.php?id=" . $post['id'] . "&slug=" . $post['slug']; ?>"
                                 class="tab-content__link"><?php echo $post['title'] ?></a>
                         </div>
                         <?php } ?>
@@ -81,7 +81,7 @@ include(ROOT_PATH . '/include/head.php');
                         <div class="tab-content__item">
                             <span
                                 class="tab-content__time"><?php echo $mysqldate = date('H:i d/m/y', strtotime($post['create_date'])); ?></span>
-                            <a href="<?php echo BASE_URL . "article.php?id=" . $post['id']; ?>"
+                            <a href="<?php echo BASE_URL . "article.php?id=" . $post['id'] . "&slug=" . $post['slug']; ?>"
                                 class="tab-content__link"><?php echo $post['title'] ?></a>
                         </div>
                         <?php } ?>
@@ -108,13 +108,13 @@ include(ROOT_PATH . '/include/head.php');
                     <!-- main new -->
                     <div class="grid__column-6 main-category">
                         <div class="main-news__picture">
-                            <a href="<?php echo BASE_URL . 'article.php?id=' . $post_main[0]['id']?>">
+                            <a href="<?php echo BASE_URL . 'article.php?id=' . $post_main[0]['id'] . "&slug=" . $post_main[0]['slug']?>">
                                 <img src="<?php echo $post_main[0]['image_path']; ?>" alt=""
                                     class="main-news__picture--img">
                             </a>
                         </div>
                         <div class="main-news__label">
-                            <a href="<?php echo BASE_URL . 'article.php?id=' . $post_main[0]['id']?>">
+                            <a href="<?php echo BASE_URL . 'article.php?id=' . $post_main[0]['id'] . "&slug=" . $post_main[0]['slug']?>">
                                 <?php echo $post_main[0]['title'] ?>
                             </a>
                         </div>
@@ -136,15 +136,15 @@ include(ROOT_PATH . '/include/head.php');
                     <div class="grid__column-6 sub-category__list">
                         <?php
                         foreach ($post_sub as $post) { ?>
-                        <div class="sub-category__item" href="#">
+                        <div class="sub-category__item">
                             <div class="sub-news__picture">
-                                <a href="<?php echo BASE_URL . 'article.php?id=' . $post['id']?>">
+                                <a href="<?php echo BASE_URL . 'article.php?id=' . $post['id'] . "&slug=" . $post['slug']?>">
                                     <img src="<?php echo $post['image_path'] ?>" alt="" class="sub-news__picture--img">
                                 </a>
                             </div>
                             <div class="sub-news__info">
                                 <div class="sub-news__label">
-                                    <a href="<?php echo BASE_URL . 'article.php?id=' . $post['id']?>">
+                                    <a href="<?php echo BASE_URL . 'article.php?id=' . $post['id'] . "&slug=" . $post['slug']?>">
                                         <?php echo $post['title'] ?>
                                     </a>
                                 </div>

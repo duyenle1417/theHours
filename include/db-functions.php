@@ -49,7 +49,7 @@ function UpdateView($id, $views)
 function GetAllPosts()
 {
     global $conn;
-    $sql = "SELECT * FROM posts";
+    $sql = "SELECT * FROM posts ORDER BY id DESC";
     $result = mysqli_query($conn, $sql);
 
     $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -186,7 +186,7 @@ function getPostsOfAuthor($user_id)
 {
     // use global $conn object in function
     global $conn;
-    $sql = "SELECT * FROM posts WHERE user_id = $user_id";
+    $sql = "SELECT * FROM posts WHERE user_id = $user_id ORDER BY id DESC";
     $result = mysqli_query($conn, $sql);
     
     $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);

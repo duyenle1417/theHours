@@ -11,13 +11,11 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role_id'] !== 3) {
     // condition if the user role is author
     if ($_SESSION['user_role_id'] === 2) {
         // check if the user is the author of this post else redirect
-        if ($_SESSION['user_id'] === $post['user_id']) {
+        if (intval($_SESSION['user_id']) !== intval($post['user_id'])) {
             header('location: ' . BASE_URL . 'admin/article/');
             exit(0);
         }
-        
-    } 
-    ?>
+    } ?>
 
 <?php
 include(ROOT_PATH . '/admin/include/head.php'); ?>
@@ -30,35 +28,8 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
     <div class="logo">
         <a href="<?php echo BASE_URL . "admin/dashboard.php"; ?>">ADMIN DASHBOARD</a>
     </div>
-
-    <div class="menu">
-        <ul id="main-menu">
-            <li>
-                <a href="<?php echo BASE_URL . "profile.php" ?>" style="text-transform: none;"><span><i class="fas fa-portrait"></i></span> <?php echo $_SESSION['user_username'] ?> <span><i class="fas fa-sort-down"></i></span></a>
-                <div class="sub-menu">
-                    <ul> 
-                        <li>
-                            <a href="<?php echo BASE_URL; ?>">
-                            <span><i class="fas fa-home"></i></span> Home
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="<?php echo BASE_URL . "admin/dashboard.php"; ?>">
-                            Dashboard
-                            </a>
-                        </li>
-                    
-                        <li>
-                            <a href="<?php echo BASE_URL . "logout.php" ?>">
-                            <span><i class="fas fa-sign-out-alt"></i></span>Logout
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-    </div>
+<!-- account menu -->
+<?php include(ROOT_PATH . '/admin/include/menu.php'); ?>
     </div>
 
 <!-- END HEADER -->
@@ -78,6 +49,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
     <div class="edit-post-form">
         <form action="" method="post" name="form" enctype="multipart/form-data">
         <?php include(ROOT_PATH . '/include/message.php'); ?>
+        <!-- id of post -->
         <input type="text" id="id" name="id"value="<?php echo $post['id']; ?>" hidden>
             <!-- title -->
             <div class="row">
@@ -123,9 +95,9 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                     <option value="0" disabled>- Hãy chọn danh mục -</option>
                     <?php
                         $parent_topics = getParentTopics();
-                        foreach ($parent_topics as $parent_topic) {
-                            $sub_topics = getSubTopics($parent_topic['id']);
-                            if ($sub_topic['id'] === $post['topic_id']) { ?>
+    foreach ($parent_topics as $parent_topic) {
+        $sub_topics = getSubTopics($parent_topic['id']);
+        if ($sub_topic['id'] === $post['topic_id']) { ?>
                                     <option value="<?php echo $parent_topic['id'] ?>" selected><?php echo $parent_topic['name'] ?></option>
                                 <?php
                                 } else { ?>
@@ -151,7 +123,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                             <?php
                                 }
                             }
-                            } ?>
+    } ?>
                 </select>
                 </div>
             </div>

@@ -23,6 +23,11 @@ include(ROOT_PATH . '/include/head.php');
         <div class="form-title">
             <p>Đăng nhập</p>
         </div>
+        <!-- demo info -->
+        <div style="text-align:center;">
+            <p>Tài khoản demo: admin - 123456</p>
+        </div>
+        
         <form action="login.php" method="POST">
             <div class="row">
                 <div class="form-label">
@@ -41,7 +46,8 @@ include(ROOT_PATH . '/include/head.php');
                     <i class="fas fa-lock"></i>
                     <input type="password" id="login-password" name="password" placeholder="Type your password">
                 </div>
-                <a href="#" style="float: right; font-size: 12px; margin-top: 5px;">Quên mật khẩu?</a>
+                <!-- không làm đổi mật khẩu -->
+                <!-- <a href="#" style="float: right; font-size: 12px; margin-top: 5px;">Quên mật khẩu?</a> -->
             </div>
 
             <input type="submit" value="LOGIN" name="login-btn">

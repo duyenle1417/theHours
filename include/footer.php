@@ -2,9 +2,6 @@
     <div class="grid">
         <div class="grid__row">
             <div class="grid__column-8">
-                <button class="log-in">
-                    Đăng nhập
-                </button>
                 <div class="footer-social">
                     <i class="footer-social__icon fab fa-facebook"></i>
                     <i class="footer-social__icon fab fa-twitter"></i>

@@ -69,12 +69,12 @@ if (isset($_GET['id'])) {
                     <!-- main new -->
                     <div class="main-category">
                         <div class="main-news__picture">
-                            <a href="<?php echo BASE_URL . 'article.php?id=' . $posts[0]['id']?>">
+                            <a href="<?php echo BASE_URL . 'article.php?id=' . $posts[0]['id'] . "&slug=" . $posts[0]['slug']?>">
                                 <img src="<?php echo $posts[0]['image_path'] ?>" alt="" class="main-news__picture--img">
                             </a>
                         </div>
                         <div class="main-news__label">
-                            <a href="<?php echo BASE_URL . 'article.php?id=' . $posts[0]['id']?>">
+                            <a href="<?php echo BASE_URL . 'article.php?id=' . $posts[0]['id'] . "&slug=" . $posts[0]['slug']?>">
                                 <?php echo $posts[0]['title'] ?>
                             </a>
                         </div>
@@ -99,14 +99,14 @@ if (isset($_GET['id'])) {
                 ?>
                         <div class="sub-category__item">
                             <div class="sub-news__picture">
-                                <a href="<?php echo BASE_URL . 'article.php?id=' . $posts[$i]['id']; ?>">
+                                <a href="<?php echo BASE_URL . 'article.php?id=' . $posts[$i]['id'] . "&slug=" . $posts[$i]['slug']; ?>">
                                     <img src="<?php echo $posts[$i]['image_path'] ?>" alt="" class="sub-news__picture--img">
                                 </a>
                                 
                             </div>
                             <div class="sub-news__info">
                                 <div class="sub-news__label">
-                                    <a href="<?php echo BASE_URL . 'article.php?id=' . $posts[$i]['id']; ?>">
+                                    <a href="<?php echo BASE_URL . 'article.php?id=' . $posts[$i]['id'] . "&slug=" . $posts[$i]['slug']; ?>">
                                         <?php echo $posts[$i]['title']; ?>
                                     </a>
                                 </div>
@@ -142,7 +142,7 @@ if (isset($_GET['id'])) {
                         <div class="tab-content__item">
                             <span
                                 class="tab-content__time"><?php echo $mysqldate = date('H:i d/m/y', strtotime($post['create_date'])); ?></span>
-                            <a href="<?php echo BASE_URL . "article.php?id=" . $post['id']; ?>"
+                            <a href="<?php echo BASE_URL . "article.php?id=" . $post['id'] . "&slug=" . $post['slug']; ?>"
                                 class="tab-content__link"><?php echo $post['title'] ?></a>
                         </div>
                         <?php } ?>
@@ -152,7 +152,7 @@ if (isset($_GET['id'])) {
                         <div class="tab-content__item">
                             <span
                                 class="tab-content__time"><?php echo $mysqldate = date('H:i d/m/y', strtotime($post['create_date'])); ?></span>
-                            <a href="<?php echo BASE_URL . "article.php?id=" . $post['id']; ?>"
+                            <a href="<?php echo BASE_URL . "article.php?id=" . $post['id'] . "&slug=" . $post['slug']; ?>"
                                 class="tab-content__link"><?php echo $post['title'] ?></a>
                         </div>
                         <?php } ?>

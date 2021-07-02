@@ -39,7 +39,7 @@
 
                 //login btn OR profile menu
                 if (isset($_SESSION['user_id'])) {?>
-                    <li><a href="<?php echo BASE_URL . "profile.php" ?>" style="text-transform: none;"><span><i class="fas fa-portrait"></i></span> <?php echo $_SESSION['user_username'] ?> <span><i class="fas fa-sort-down"></i></span></a>
+                    <li><a href="<?php echo BASE_URL . "profile.php?id=" . $_SESSION['user_id'] ?>" style="text-transform: none;"><span><i class="fas fa-portrait"></i></span> <?php echo $_SESSION['user_username'] ?> <span><i class="fas fa-sort-down"></i></span></a>
                     <div class="sub-menu">
                         <ul> 
                         <?php

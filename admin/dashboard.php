@@ -17,34 +17,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
         <a href="<?php echo BASE_URL . "admin/dashboard.php"; ?>">ADMIN DASHBOARD</a>
     </div>
 
-    <div class="menu">
-        <ul id="main-menu">
-            <li>
-                <a href="<?php echo BASE_URL . "profile.php" ?>" style="text-transform: none;"><span><i class="fas fa-portrait"></i></span> <?php echo $_SESSION['user_username'] ?> <span><i class="fas fa-sort-down"></i></span></a>
-                <div class="sub-menu">
-                    <ul> 
-                        <li>
-                            <a href="<?php echo BASE_URL; ?>">
-                            <span><i class="fas fa-home"></i></span> Home
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="<?php echo BASE_URL . "admin/dashboard.php"; ?>">
-                            Dashboard
-                            </a>
-                        </li>
-                    
-                        <li>
-                            <a href="<?php echo BASE_URL . "logout.php" ?>">
-                            <span><i class="fas fa-sign-out-alt"></i></span>Logout
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-    </div>
+    <?php include(ROOT_PATH . '/admin/include/menu.php'); ?>
     </div>
 
 <!-- END HEADER -->
@@ -58,6 +31,10 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
         <div class="admin-content">
 
             <h2 class="page-title">Dashboard</h2>
+            </br>
+            <p>Chào mừng <span style="color: red;"><?php echo $_SESSION['user_username'] ?></span> đến trang Dashborad!</p>
+            </br>
+            <p>Ở đây bạn sẽ cập nhật dữ liệu của trang web</p>
 
             
             <!-- // Admin Content -->

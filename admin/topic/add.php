@@ -19,34 +19,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
         <a href="<?php echo BASE_URL . "admin/dashboard.php"; ?>">ADMIN DASHBOARD</a>
     </div>
 
-    <div class="menu">
-        <ul id="main-menu">
-            <li>
-                <a href="<?php echo BASE_URL . "profile.php" ?>" style="text-transform: none;"><span><i class="fas fa-portrait"></i></span> <?php echo $_SESSION['user_username'] ?> <span><i class="fas fa-sort-down"></i></span></a>
-                <div class="sub-menu">
-                    <ul> 
-                        <li>
-                            <a href="<?php echo BASE_URL; ?>">
-                            <span><i class="fas fa-home"></i></span> Home
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="<?php echo BASE_URL . "admin/dashboard.php"; ?>">
-                            Dashboard
-                            </a>
-                        </li>
-                    
-                        <li>
-                            <a href="<?php echo BASE_URL . "logout.php" ?>">
-                            <span><i class="fas fa-sign-out-alt"></i></span>Logout
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-    </div>
+    <?php include(ROOT_PATH . '/admin/include/menu.php'); ?>
     </div>
 
 <!-- END HEADER -->
@@ -108,19 +81,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
 
     
 </body>
-<script>
-    var editor = CKEDITOR.replace('content',
-        {
-            height: 450,
-            filebrowserBrowseUrl: '../../ckfinder/ckfinder.html',
-            filebrowserImageBrowseUrl : '../../ckfinder/ckfinder.html?type=Images',
-            filebrowserUploadUrl : '../../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-            filebrowserImageUploadUrl : '../../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-            filebrowserWindowWidth: '1000',
-            filebrowserWindowHeight: '800'
-        });
-    CKFinder.setupCKEditor(editor);
-</script>
+
 </html>
 <?php
 } else {
