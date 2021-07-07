@@ -100,7 +100,8 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role_id'] !== 3) {
                                         <a href="<?php echo BASE_URL . 'edit-post/' . $post['id']; ?>" class="edit-btn">Edit</a>
                                         <a href="<?php echo BASE_URL . 'delete-post/'. $post['id']; ?>"
                                             class="delete-btn">Delete</a>
-                                        <a href="<?php echo BASE_URL . 'publish-toggle/' . $post['id'] . '/' . ($post['IsPublished'] ? 0 : 1) ?>" class="publish-btn">
+                                        <a href="<?php echo BASE_URL . 'publish-toggle/' . $post['id'] . '/' . ($post['IsPublished'] ? 0 : 1) ?>" class="publish-btn"
+                                        onclick="return confirm('Bạn có chắc chắn muốn xóa bài viết này?')">
                                             <?php echo(!$post['IsPublished'] ? 'Published' : 'Unpublished') ?>
                                         </a>
                                     </div>

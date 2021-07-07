@@ -3,6 +3,7 @@
 //update user
 if (isset($_POST['update-user'])) {
     global $conn;
+    // kiểm tra values
     $errors = validateUser($_POST);
 
     if (count($errors) === 0) {
@@ -32,14 +33,17 @@ if (isset($_POST['change-password'])) {
         }
     }
     
+    // new pass trống?
     if (empty($_POST['password'])) {
         array_push($errors, 'New password is required');
     }
 
+    // nhập lại pass sai?
     if ($_POST['passwordConf'] !== $_POST['password']) {
         array_push($errors, 'Password do not match');
     }
 
+    // nếu không có lỗi sẽ đổi pass
     if (count($errors) === 0) {
         $id = $_POST['id'];
         $password = md5($_POST['password']);
@@ -56,6 +60,7 @@ if (isset($_POST['change-password'])) {
 //update user profile
 if (isset($_POST['update-user-profile'])) {
     global $conn;
+    // kiểm tra values
     $errors = validateUser($_POST);
 
     if (count($errors) === 0) {

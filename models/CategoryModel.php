@@ -4,7 +4,7 @@ require_once(ROOT_PATH . "/include/config.php");
 
 class Category
 {
-    // get all topics
+    // get all topics in db
     function getAllTopics()
     {
         // use global $conn object in function
@@ -58,6 +58,7 @@ class Category
     }
 
     // get a topic by id
+    // SELECT * FROM `topics` WHERE `id` = $id
     public function getTopicById($id)
     {
         // use global $conn object in function
@@ -70,6 +71,7 @@ class Category
     }
 
     // GET TOPIC NAME by ID
+    // SELECT `name` FROM `topics` WHERE `id`=$id
     public function getTopicNameByID($id)
     {
         if ($id !== null) {

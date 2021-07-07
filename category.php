@@ -20,7 +20,7 @@ if (isset($_GET['id'])) {
     <div class="app">
         <!-- BEGIN header -->
         <div class="header">
-            <a href="<?php echo BASE_URL . 'category?id=' . $topic['id']; ?>" class="thehours-logo">
+            <a href="<?php echo BASE_URL . 'category/' . $topic['id']; ?>" class="thehours-logo">
                 <span class="main-title"><?php echo $topic['name'] ?></span>
                 <span class="sub-title">TheHours</span>
             </a>

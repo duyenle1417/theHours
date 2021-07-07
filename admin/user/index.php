@@ -83,7 +83,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                                     <div class="btn-group">
                                         <a href="<?php echo BASE_URL . 'edit-user/' . $user['id']; ?>" class="edit-btn">Edit</a>
                                         <a href="<?php echo BASE_URL . 'delete-user/'. $user['id']; ?>"
-                                            class="delete-btn">Delete</a>
+                                            class="delete-btn" onclick="return confirm('Bạn có chắc chắn muốn tài khoản này?')">Delete</a>
                                     </div>
                                 </td>
 

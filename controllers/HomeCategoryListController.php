@@ -4,6 +4,7 @@
 
 // model post
 require_once('./models/PostModel.php');
+// model topic
 require_once('./models/CategoryModel.php');
 
 // khai báo model

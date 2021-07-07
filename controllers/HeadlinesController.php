@@ -2,11 +2,11 @@
 <?php
 // lấy dữ liệu từ post
 
-// model topic
+// model post
 require_once('./models/PostModel.php');
 
-// khai báo model menu
+// khai báo model post
 $model = new Post();
 
-// view của menu
+// view của main new headlines
 require_once("./views/HeadlinesView.php");

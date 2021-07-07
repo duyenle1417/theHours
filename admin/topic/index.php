@@ -77,7 +77,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                                     <div class="btn-group">
                                         <a href="<?php echo BASE_URL . 'edit-category/' . $topic['id']; ?>" class="edit-btn">Edit</a>
                                         <a href="<?php echo BASE_URL . 'delete-category/'. $topic['id']; ?>"
-                                            class="delete-btn">Delete</a>
+                                            class="delete-btn" onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này này?')">Delete</a>
                                     </div>
                                 </td>
 
@@ -99,5 +99,5 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
 </html>
 <?php
 } else {
-                            header('location: ' . BASE_URL);
-                        }?>
+    header('location: ' . BASE_URL);
+}?>

@@ -38,7 +38,11 @@ if ($number_of_result_this_page >=1) { ?>
                     <i class="far fa-eye"></i>
                     <span class="main-news__view-label"><?php echo $posts[0]['views'] ?></span>
                 </div>
-                
+                <div class="main-news__comment">
+                    <i class="far fa-comment"></i>
+                    <span
+                        class="main-news__comment-label"><?php echo $post_model->getCommentsNumberOfPost($posts[0]['id']); ?></span>
+                </div>
             </div>
         </div>
         <!-- main new end -->
@@ -66,7 +70,11 @@ if ($number_of_result_this_page >=1) { ?>
                             <i class="far fa-eye"></i>
                             <span class="sub-news__view-label"><?php echo $posts[$i]['views']; ?></span>
                         </div>
-                        
+                        <div class="sub-news__comment">
+                            <i class="far fa-comment"></i>
+                            <span
+                                class="sub-news__comment-label"><?php echo $post_model->getCommentsNumberOfPost($posts[$i]['id']); ?></span>
+                        </div>
                     </div>
                 </div>
             </div>

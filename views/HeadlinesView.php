@@ -14,6 +14,10 @@
             <i class="far fa-eye"></i>
             <span class="main-news__view-label"><?php echo $post['views'] ?></span>
         </div>
-        
+        <div class="main-news__comment">
+            <i class="far fa-comment"></i>
+            <span
+                class="main-news__comment-label"><?php echo $model->getCommentsNumberOfPost($post['id']); ?></span>
+        </div>
     </div>
 </div>

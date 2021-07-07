@@ -61,7 +61,7 @@ if (!isset($_SESSION['user_id'])) { ?>
                     <i class="fas fa-lock"></i>
                     <input type="password" id="login-password" name="password" placeholder="Type your password">
                 </div>
-                <!-- không làm đổi mật khẩu -->
+                <!-- chưa làm quên mật khẩu -->
                 <!-- <a href="#" style="float: right; font-size: 12px; margin-top: 5px;">Quên mật khẩu?</a> -->
             </div>
 

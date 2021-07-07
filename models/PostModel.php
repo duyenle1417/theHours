@@ -4,45 +4,17 @@ require_once(ROOT_PATH . "/include/config.php");
 
 class Post
 {
-    // validate dữ liệu của post
-    public function validatePost($post)
-    {
-        $errors = array();
-        if (empty($post['title'])) {
-            array_push($errors, 'Phải nhập tiêu đề');
-        }
-
-        if (empty($post['content'])) {
-            array_push($errors, 'Phải nhập nội dung');
-        }
-
-        if (empty($post['topic_id'])) {
-            array_push($errors, 'Hãy chọn topic cho bài viết');
-        }
-
-        // trùng title
-        $existingPost = selectOne('posts', ['title' => $post['title']]);
-        if ($existingPost) {
-            if (isset($post['update-post']) && $existingPost['id'] != $post['id']) {
-                array_push($errors, 'Post with that title already exists');
-            }
-
-            if (isset($post['add-post'])) {
-                array_push($errors, 'Post with that title already exists');
-            }
-        }
-        return $errors;
-    }
-
-    // when user click a post/open link => add view
+    // when user click a post/open link => views = views +1
+    // UPDATE posts SET `views` = $views WHERE id='$id'
     public function UpdateView($id, $views)
     {
         global $conn;
-        $sql = "UPDATE posts SET `views`"."=".$views."  WHERE id='".$id. "'";
+        $sql = "UPDATE posts SET `views`"."=" . $views . "  WHERE id='" . $id . "'";
         $result = mysqli_query($conn, $sql);
     }
 
     // get all post for admin
+    // SELECT * FROM `posts` ORDER BY `id` DESC
     public function GetAllPosts()
     {
         global $conn;
@@ -59,14 +31,13 @@ class Post
     }
 
     // select post theo topic (nếu có topic con thì show luôn)
-    // cho category.php
     // SELECT * FROM `posts` WHERE `posts`.`topic_id` IN
     // (SELECT `topics`.`id` FROM `topics` WHERE `topics`.`id` = 4 OR `topics`.`parent_topic_id` = 4)
     public function GetPostsByTopic($topic_id)
     {
         global $conn;
         $sql = "SELECT * FROM `posts` WHERE IsPublished = 1 AND `topic_id` IN 
-    (SELECT `id` FROM `topics` WHERE `id` = " . $topic_id . " OR `topics`.`parent_topic_id` = " . $topic_id . ")";
+        (SELECT `id` FROM `topics` WHERE `id` = " . $topic_id . " OR `topics`.`parent_topic_id` = " . $topic_id . ")";
         $result = mysqli_query($conn, $sql);
 
         $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -79,11 +50,14 @@ class Post
     }
 
     // pagination get post of each topic
+    // SELECT * FROM `posts` WHERE IsPublished = 1 AND `topic_id` IN 
+    // (SELECT `id` FROM `topics` WHERE `id` = " . $topic_id . " OR `topics`.`parent_topic_id` = " . $topic_id . ")
+    // ORDER BY `id` DESC LIMIT 0, 4;
     public function GetPostsByTopicLimit($topic_id, $page_first_result, $results_per_page)
     {
         global $conn;
         $sql = "SELECT * FROM `posts` WHERE IsPublished = 1 AND `topic_id` IN 
-    (SELECT `id` FROM `topics` WHERE `id` = " . $topic_id . " OR `topics`.`parent_topic_id` = " . $topic_id . ") ORDER BY `id` DESC LIMIT " . $page_first_result . ',' . $results_per_page;
+        (SELECT `id` FROM `topics` WHERE `id` = " . $topic_id . " OR `topics`.`parent_topic_id` = " . $topic_id . ") ORDER BY `id` DESC LIMIT " . $page_first_result . ',' . $results_per_page;
         $result = mysqli_query($conn, $sql);
 
         $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -95,8 +69,8 @@ class Post
         return $final;
     }
 
-
-    // get post for each category tab
+    // get posts for tab
+    // from specific topic id
     public function GetPostsByTopicTab($topic_id, $results_number, $orderby)
     {
         global $conn;
@@ -113,7 +87,8 @@ class Post
         return $final;
     }
 
-    // get post for tab in index.php
+    // get posts for tab in index.php
+    // from all topics
     public function GetPostsTab($results_number, $orderby)
     {
         global $conn;
@@ -130,6 +105,7 @@ class Post
     }
 
     // lấy 1 post mới nhất
+    // headlines
     public function getPostHeadline()
     {
         // use global $conn object in function
@@ -198,7 +174,7 @@ class Post
     public function createSlug($title)
     {
         date_default_timezone_set('Asia/Ho_Chi_Minh');//set timezone
-        // $pattern
+        // pattern
         $search = array(
             // xét cả hoa/thường
             '/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/i',
@@ -212,7 +188,7 @@ class Post
             "/[^a-zA-Z0-9\-]/",/* các ký tự khác không nằm trong a-z A-Z 0-9, dấu '-' sẽ bị loại bỏ' */
             
         );
-        // $replacement
+        // replacement
         $replace = array(
             'a',
             'e',

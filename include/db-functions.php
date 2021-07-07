@@ -11,27 +11,31 @@ $errors = array();
 function validatePost($post)
 {
     $errors = array();
+
+    // title trống?
     if (empty($post['title'])) {
-        array_push($errors, 'Phải nhập tiêu đề');
+        array_push($errors, 'Phải nhập tiêu đề bài viết');
     }
 
+    // content trống?
     if (empty($post['content'])) {
-        array_push($errors, 'Phải nhập nội dung');
+        array_push($errors, 'Phải nhập nội dung bài viết');
     }
 
+    // danh mục trống?
     if (empty($post['topic_id'])) {
         array_push($errors, 'Hãy chọn topic cho bài viết');
     }
 
-    // trùng title
+    // trùng title?
     $existingPost = selectOne('posts', ['title' => $post['title']]);
     if ($existingPost) {
         if (isset($post['update-post']) && $existingPost['id'] != $post['id']) {
-            array_push($errors, 'Post with that title already exists');
+            array_push($errors, 'Tiêu đề này đã tồn tại, vui lòng nhập tiêu đề khác');
         }
 
         if (isset($post['add-post'])) {
-            array_push($errors, 'Post with that title already exists');
+            array_push($errors, 'Tiêu đề này đã tồn tại, vui lòng nhập tiêu đề khác');
         }
     }
     return $errors;
@@ -43,16 +47,20 @@ function validatePost($post)
 function validateTopic($topic)
 {
     $errors = array();
+
+    // tên trống?
     if (empty($topic['name'])) {
         array_push($errors, 'Không được để trống tên topic');
     }
 
+    // danh mục cha trống?
     if (empty($topic['parent_topic_id'])) {
         if (isset($topic['add-topic'])) {
             array_push($errors, 'Hãy chọn danh mục cha');
         }
     }
-
+    
+    // trùng tên topic?
     $existingTopic = selectOne('topics', ['name' => $topic['name']]);
     if ($existingTopic) {
         if (isset($post['update-topic']) && $existingTopic['id'] != $topic['id']) {
@@ -76,32 +84,41 @@ function validateTopic($topic)
 function validateUser($user)
 {
     $errors = array();
-
+    // email trống?
     if (empty($user['email'])) {
         array_push($errors, 'Email is required');
     }
 
+    // tên trống?
     if (empty($user['fullname'])) {
         array_push($errors, 'Fullname is required');
     }
 
+    // chỉ xét đk bên trong khi đăng ký/tạo user mới
     if (isset($_POST['register-btn']) || isset($user['create-user'])) {
+        // username trống?
         if (empty($user['username'])) {
             array_push($errors, 'Username is required');
         }
+
+        // password trống?
         if (empty($user['password'])) {
             array_push($errors, 'Password is required');
         }
+
+        // nhập lại pass sai?
         if ($user['passwordConf'] !== $user['password']) {
             array_push($errors, 'Password do not match');
         }
 
+        // trùng username trong hệ thống?
         $existingUser = selectOne('users', ['username' => $user['username']]);
         if ($existingUser) {
             array_push($errors, 'Username already exists');
         }
     }
 
+    // kiểm tra có trùng email không?
     $existingUser = selectOne('users', ['email' => $user['email']]);
     if ($existingUser) {
         if (isset($user['update-user']) && $existingUser['id'] != $user['id']) {
@@ -121,11 +138,12 @@ function validateUser($user)
 function validateLogin($user)
 {
     $errors = array();
-
+    // username trống?
     if (empty($user['username'])) {
         array_push($errors, 'Username is required');
     }
 
+    // pass trống?
     if (empty($user['password'])) {
         array_push($errors, 'Password is required');
     }
@@ -135,11 +153,12 @@ function validateLogin($user)
 
 // nhấn nút login
 if (isset($_POST['login-btn'])) {
+    // kiểm tra values
     $errors = validateLogin($_POST);
     if (count($errors) === 0) {
         $user = selectOne('users', ['username' => $_POST['username'], 'IsActivated' => 1]);
 
-        // tài khoản có thực và mật khẩu trùng
+        // tài khoản có thực và mật khẩu trùng thì đăng nhập thành công
         if ($user && md5($_POST['password']) === $user['password']) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_username'] = $user['username'];
@@ -147,7 +166,7 @@ if (isset($_POST['login-btn'])) {
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_fullname'] = $user['fullname'];
             
-            header('location: ' . BASE_URL);
+            header('location: ' . BASE_URL);//direct đến home
             exit(0);
         } elseif ($user) {
             array_push($errors, 'Sai thông tin đăng nhập');
@@ -157,10 +176,11 @@ if (isset($_POST['login-btn'])) {
     }
 }
 
-// register user
+// register user or add new user
 if (isset($_POST['register-btn']) || isset($_POST['create-user'])) {
+    // kiểm tra values
     $errors = validateUser($_POST);
-
+    // nếu không có lỗi values sẽ xử lý tiếp
     if (count($errors) === 0) {
         unset($_POST['passwordConf']);
         $_POST['password'] = md5($_POST['password']);
@@ -178,7 +198,7 @@ if (isset($_POST['register-btn']) || isset($_POST['create-user'])) {
             }
         }
 
-        // nếu là đăng ký mới ở trang signup
+        // nếu là đăng ký mới ở trang signup.php
         if (isset($_POST['register-btn'])) {
             $_POST['role_id'] = 3;
             $sql = "INSERT INTO users (`email`, `username`, `password`, `fullname`, `role_id`, `verification_hash`, `IsActivated`) 
@@ -188,9 +208,7 @@ if (isset($_POST['register-btn']) || isset($_POST['create-user'])) {
             
             // nếu thêm dữ liệu thành công
             if ($result) {
-                
-                // SendMailRegister($_POST);
-
+                // lấy dũ liệu user
                 $user = selectOne('users', ['username' => $_POST['username']]);
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_username'] = $user['username'];
@@ -213,6 +231,7 @@ function selectOne($table, $conditions)
     $sql = "SELECT * FROM $table";
 
     $i = 0;
+    // điều kiện
     foreach ($conditions as $key => $value) {
         if ($i === 0) {
             $sql = $sql . " WHERE $key=?";
@@ -221,13 +240,14 @@ function selectOne($table, $conditions)
         }
         $i++;
     }
-
+    // chỉ lấy 1 kết quả
     $sql = $sql . " LIMIT 1";
     $stmt = executeQuery($sql, $conditions);
     $records = $stmt->get_result()->fetch_assoc();
     return $records;
 }
 
+// thực thi query
 function executeQuery($sql, $data)
 {
     global $conn;

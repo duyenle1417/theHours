@@ -22,7 +22,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role_id'] !== 3) {
     if ($_SESSION['user_role_id'] === 2) {
         // check if the user is the author of this post else redirect
         if (intval($_SESSION['user_id']) !== intval($post['user_id'])) {
-            header('location: ' . BASE_URL . 'admin/article/');
+            header('location: ' . BASE_URL . 'manage-posts/');
             exit(0);
         }
     } ?>

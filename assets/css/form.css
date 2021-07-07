@@ -20,14 +20,15 @@
 
 .add-topic-form,
 .edit-topic-form,
-.add-user-form,
-.edit-user-form{
+.add-user-form
+{
     width: 60%;
     margin: 0 auto;
 }
 
+.edit-user-form,
 .change-pass-form{
-    width: 60%;
+    width: 50%;
     margin: 0 auto;
 }
 
@@ -56,6 +57,7 @@
     border-bottom: 2px solid #dbd3d3;
     resize: none;
     outline: none;
+    line-height: 1.5;
 }
 
 .login-form form input[type="submit"],
@@ -77,7 +79,7 @@
 .login-form form .form-input i,
 .signup-form form .form-input i{
     position: absolute;
-    padding: 15px 10px 0;
+    padding: 20px 10px 0;
     color: #dbd3d3;
 }
 
@@ -105,44 +107,69 @@
     clear: both;
 }
 
-.admin-content form .row{
+form .row{
     margin: 20px 0;
 }
 
-.admin-content form .row:after {
+form .row:after {
     content: "";
     display: block;
     clear: both;
 }
 
-.admin-content form label{
-    font-size: 24px;
+.add-post-form form label,
+.edit-post-form form label,
+.add-topic-form form label,
+.edit-topic-form form label,
+.add-user-form form label,
+.edit-user-form form label,
+.change-pass-form form label{
+    font-size: 20px;
     font-weight: 400;
     margin: 20px 0 10px;
 }
 
-.admin-content form input:not([type="submit"]):focus, .admin-content form textarea:focus {
+.add-post-form form input:not([type="submit"]):focus,
+.edit-post-form form input:not([type="submit"]):focus,
+.add-topic-form form input:not([type="submit"]):focus,
+.edit-topic-form form input:not([type="submit"]):focus,
+.add-user-form form input:not([type="submit"]):focus,
+.edit-user-form form input:not([type="submit"]):focus,
+.change-pass-form form input:not([type="submit"]):focus,
+.add-post-form form textarea:focus,
+.edit-post-form form textarea:focus,
+.add-topic-form form textarea:focus,
+.edit-topic-form form textarea:focus,
+.add-user-form form textarea:focus,
+.edit-user-form form textarea:focus,
+.change-pass-form form textarea:focus{
     border: 1px solid #858080;
     transition: 0.25s;
 }
 
-.admin-content form input[type="submit"]{
+.add-post-form form input[type="submit"],
+.edit-post-form form input[type="submit"],
+.add-topic-form form input[type="submit"],
+.edit-topic-form form input[type="submit"],
+.add-user-form form input[type="submit"],
+.edit-user-form form input[type="submit"],
+.change-pass-form form input[type="submit"]{
     width: auto;
     padding: 10px 40px;
     float: right;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
     background-color: #2B54C1;
     color: white;
     border-radius: 5px;
 }
 
-.admin-content form input[type="checkbox"]{
-    padding: 10px 20px;
-}
-
-.admin-content form select{
-    width: 350px;
+.add-post-form form select,
+.edit-post-form form select,
+.add-topic-form form select,
+.edit-topic-form form select,
+.add-user-form form select{
+    width: 60%;
     padding: 10px 20px;
     margin: 10px 0;
     font-size: 16px;
@@ -150,7 +177,30 @@
     outline: none;
 }
 
-.admin-content form input, .admin-content form textarea {
+.edit-user-form form select,
+.change-pass-form form select{
+    width: 60%;
+    padding: 10px 20px;
+    margin: 10px 0;
+    font-size: 16px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.add-post-form form input,
+.edit-post-form form input,
+.add-topic-form form input,
+.edit-topic-form form input,
+.add-user-form form input,
+.edit-user-form form input,
+.change-pass-form form input,
+.add-post-form form textarea,
+.edit-post-form form textarea,
+.add-topic-form form textarea,
+.edit-topic-form form textarea,
+.add-user-form form textarea,
+.edit-user-form form textarea,
+.change-pass-form form textarea{
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -159,6 +209,7 @@
     outline: none;
     border: 1px solid #dbd3d3;
     border-radius: 5px;
+    line-height: 1.5;
 }
 
 form:after {

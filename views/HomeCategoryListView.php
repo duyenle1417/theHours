@@ -31,7 +31,11 @@
                     <i class="far fa-eye"></i>
                     <span class="main-news__view-label"><?php echo $post_main[0]['views'] ?></span>
                 </div>
-                
+                <div class="main-news__comment">
+                    <i class="far fa-comment"></i>
+                    <span
+                        class="main-news__comment-label"><?php echo $post_model->getCommentsNumberOfPost($post_main[0]['id']); ?></span>
+                </div>
             </div>
         </div>
         <!-- main new end -->
@@ -56,6 +60,11 @@
                         <div class="sub-news__view">
                             <i class="far fa-eye"></i>
                             <span class="sub-news__view-label"><?php echo $post['views'] ?></span>
+                        </div>
+                        <div class="sub-news__comment">
+                            <i class="far fa-comment"></i>
+                            <span
+                                class="sub-news__comment-label"><?php echo $post_model->getCommentsNumberOfPost($post['id']); ?></span>
                         </div>
                     </div>
                 </div>

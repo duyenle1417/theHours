@@ -76,6 +76,10 @@ if (isset($_GET['id'])) {
                             <span><i class="fas fa-user"></i></span>
                             <?php echo $user['fullname']; ?>
                         </div>
+                        <div class="content__comment">
+                            <span><i class="far fa-comment"></i></span>
+                            <?php echo $post_model->getCommentsNumberOfPost($post['id']); ?>
+                        </div>
                     </div>
                     
                     <div class="content__view-date">
@@ -97,14 +101,15 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
 
-
+            <!-- RECENT begin -->
             <div class="recent">
                 <div class="recent__title">Gần đây</div>
-                <div class="grid__row">
+                <div class="recent-content">
                 <?php
+                // get recent 3 posts
                     $recents = $post_model->GetPostsByTopicTab($post['topic_id'], 3, 'id');
         foreach ($recents as $recent) { ?>
-                        <div class="grid__column-4">
+                        <div class="recent-item">
                         <a href="<?php echo BASE_URL . 'article/' . $recent['id'] . "/" . $recent['slug']?>">
                             <img src="<?php echo '../.' . $recent['image_path'] ?>" alt="" class="recent__img">
                         </a>
@@ -118,13 +123,31 @@ if (isset($_GET['id'])) {
                                 <i class="far fa-eye"></i>
                                 <span class="recent__view-label"><?php echo $recent['views'] ?></span>
                             </div>
-                            
+                            <div class="recent__comment">
+                                <i class="far fa-comment"></i>
+                                <span class="recent__comment-label"><?php echo $post_model->getCommentsNumberOfPost($recent['id']); ?></span>
+                            </div>
                         </div>
                     </div>
                     <?php
                     } ?>
                 </div>
             </div>
+            <!-- RECENT end -->
+
+            <!-- COMMENT begin -->
+            <div class="comment">
+                <div class="grid__row">
+                    <div class="grid__column-12">
+                        <div class="comment__title">Bình luận</div>
+                        <div class="comment__area">
+                            <i class="fas fa-user comment__avt"></i>
+                            <input type="text" placeholder="Bình luận của bạn..." class="comment__input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- COMMENT end -->
 
         </div>
 

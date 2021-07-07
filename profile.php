@@ -34,7 +34,8 @@ include(ROOT_PATH . '/include/head.php'); ?>
         <!-- End MENU -->
 
         <div class="admin-content">
-            <div class="edit-user-form">
+            <div class="edit-user-form" style="margin-top: 50px">
+            <h2>PROFILE</h2>
                 <form action="" method="post" name="form" enctype="multipart/form-data">
                     <?php include(ROOT_PATH . '/include/message.php'); ?>
                     <!-- id -->
@@ -104,7 +105,7 @@ include(ROOT_PATH . '/include/head.php'); ?>
                     </div>
                 </form>
                 <div>
-                <a href="change-password?id=<?php echo $_SESSION['user_id'] ?>" style="font-size: 16px; margin-top: 5px;">Đổi mật khẩu?</a>
+                <a href="<?php echo BASE_URL . 'change-password/' . $_SESSION['user_id'] ?>" style="font-size: 16px; margin-top: 5px;">Đổi mật khẩu?</a>
             </div>
             </div>
             
