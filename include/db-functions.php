@@ -1,6 +1,5 @@
 <?php
 require('config.php');
-require('functions.php');
 
 $errors = array();
 
@@ -38,157 +37,6 @@ function validatePost($post)
     return $errors;
 }
 
-// when user click a post/open link => add view
-function UpdateView($id, $views)
-{
-    global $conn;
-    $sql = "UPDATE posts SET `views`"."=".$views."  WHERE id='".$id. "'";
-    $result = mysqli_query($conn, $sql);
-}
-
-// get all post for admin
-function GetAllPosts()
-{
-    global $conn;
-    $sql = "SELECT * FROM posts ORDER BY id DESC";
-    $result = mysqli_query($conn, $sql);
-
-    $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-    $final = array();
-    foreach ($posts as $post) {
-        array_push($final, $post);
-    }
-    return $final;
-}
-
-// select post theo topic (nếu có topic con thì show luôn)
-// cho category.php
-// SELECT * FROM `posts` WHERE `posts`.`topic_id` IN
-// (SELECT `topics`.`id` FROM `topics` WHERE `topics`.`id` = 4 OR `topics`.`parent_topic_id` = 4)
-function GetPostsByTopic($topic_id)
-{
-    global $conn;
-    $sql = "SELECT * FROM `posts` WHERE IsPublished = 1 AND `topic_id` IN 
-    (SELECT `id` FROM `topics` WHERE `id` = " . $topic_id . " OR `topics`.`parent_topic_id` = " . $topic_id . ")";
-    $result = mysqli_query($conn, $sql);
-
-    $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-    $final = array();
-    foreach ($posts as $post) {
-        array_push($final, $post);
-    }
-    return $final;
-}
-
-// pagination post of each topic
-function GetPostsByTopicLimit($topic_id, $page_first_result, $results_per_page)
-{
-    global $conn;
-    $sql = "SELECT * FROM `posts` WHERE IsPublished = 1 AND `topic_id` IN 
-    (SELECT `id` FROM `topics` WHERE `id` = " . $topic_id . " OR `topics`.`parent_topic_id` = " . $topic_id . ") ORDER BY `id` DESC LIMIT " . $page_first_result . ',' . $results_per_page;
-    $result = mysqli_query($conn, $sql);
-
-    $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-    $final = array();
-    foreach ($posts as $post) {
-        array_push($final, $post);
-    }
-    return $final;
-}
-
-
-// get post for each category tab
-function GetPostsByTopicTab($topic_id, $results_number, $orderby)
-{
-    global $conn;
-    $sql = "SELECT * FROM `posts` WHERE IsPublished = 1 AND `topic_id` IN 
-    (SELECT `id` FROM `topics` WHERE `id` = " . $topic_id . " OR `topics`.`parent_topic_id` = " . $topic_id . ") ORDER BY `" . $orderby . "` DESC LIMIT " . $results_number;
-    $result = mysqli_query($conn, $sql);
-
-    $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-    $final = array();
-    foreach ($posts as $post) {
-        array_push($final, $post);
-    }
-    return $final;
-}
-
-// get post for tab in index.php
-function GetPostsTab($results_number, $orderby)
-{
-    global $conn;
-    $sql = "SELECT * FROM `posts` WHERE IsPublished = 1 ORDER BY `" . $orderby . "` DESC LIMIT " . $results_number;
-    $result = mysqli_query($conn, $sql);
-
-    $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-    $final = array();
-    foreach ($posts as $post) {
-        array_push($final, $post);
-    }
-    return $final;
-}
-
-// lấy 1 post mới nhất
-function getPostHeadline()
-{
-    // use global $conn object in function
-    global $conn;
-    $sql = "SELECT * FROM `posts` WHERE IsPublished = 1 ORDER BY `id` DESC LIMIT 1";
-    $result = mysqli_query($conn, $sql);
-    
-    $final = mysqli_fetch_array($result);
-    return $final;
-}
-
-// get a post by id for article.php
-// SELECT * FROM posts WHERE IsPublished = 1 AND id = $id
-function getPublishedPostById($id)
-{
-    // use global $conn object in function
-    global $conn;
-    $sql = "SELECT * FROM posts WHERE IsPublished = 1 AND id = $id";
-    $result = mysqli_query($conn, $sql);
-    
-    $final = mysqli_fetch_array($result);
-    return $final;
-}
-
-// get a post by id for edit post
-// SELECT * FROM posts WHERE id = $id
-function getPostById($id)
-{
-    // use global $conn object in function
-    global $conn;
-    $sql = "SELECT * FROM posts WHERE id = $id";
-    $result = mysqli_query($conn, $sql);
-    
-    $final = mysqli_fetch_array($result);
-    return $final;
-}
-
-// get post by that author
-function getPostsOfAuthor($user_id)
-{
-    // use global $conn object in function
-    global $conn;
-    $sql = "SELECT * FROM posts WHERE user_id = $user_id ORDER BY id DESC";
-    $result = mysqli_query($conn, $sql);
-    
-    $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-    $final = array();
-    foreach ($posts as $post) {
-        array_push($final, $post);
-    }
-    return $final;
-}
-
-
 // *************
 // TOPIC'S functions
 // ************
@@ -218,148 +66,11 @@ function validateTopic($topic)
     return $errors;
 }
 
-// GET TOPIC NAME by ID
-function getTopicNameByID($id)
-{
-    if ($id !== null) {
-        // use global $conn object in function
-        global $conn;
 
-        $sql = "SELECT `name` FROM topics WHERE `id`=$id";
-        $result = mysqli_query($conn, $sql);
-
-        $final = mysqli_fetch_array($result);
-        return $final['name'];
-    }
-    // else{
-    //     return 'NONE';
-    // }
-}
-
-// get all topics
-function getAllTopics()
-{
-    // use global $conn object in function
-    global $conn;
-    $sql = "SELECT * FROM topics";
-    $result = mysqli_query($conn, $sql);
-
-    $topics = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-    $final = array();
-    foreach ($topics as $topic) {
-        array_push($final, $topic);
-    }
-    return $final;
-}
-
-//select parent topic only
-// SELECT * FROM `topics` WHERE `parent_topic_id` IS NULL;
-function getParentTopics()
-{
-    // use global $conn object in function
-    global $conn;
-    $sql = "SELECT * FROM topics WHERE parent_topic_id IS NULL";
-    $result = mysqli_query($conn, $sql);
-
-    $topics = mysqli_fetch_all($result, MYSQLI_ASSOC) or die(mysqli_error($conn));
-
-    $final = array();
-    foreach ($topics as $topic) {
-        array_push($final, $topic);
-    }
-    return $final;
-}
-
-// get a topic by id
-function getTopicById($id)
-{
-    // use global $conn object in function
-    global $conn;
-    $sql = "SELECT * FROM topics WHERE id = $id";
-    $result = mysqli_query($conn, $sql);
-    
-    $final = mysqli_fetch_array($result);
-    return $final;
-}
-
-//select sub topic of a parent topic
-// SELECT * FROM `topics` WHERE `parent_topic_id` = '$id';
-function getSubTopics($id)
-{
-    // use global $conn object in function
-    global $conn;
-    $sql = "SELECT * FROM topics WHERE parent_topic_id = '" .$id. "'";
-    $result = mysqli_query($conn, $sql);
-
-    $topics = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-    $final = array();
-    foreach ($topics as $topic) {
-        array_push($final, $topic);
-    }
-    return $final;
-}
 
 // *************
 // USER'S functions
 // ************
-
-// get a user by id
-function getUserById($id)
-{
-    // use global $conn object in function
-    global $conn;
-    $sql = "SELECT * FROM users WHERE id = $id";
-    $result = mysqli_query($conn, $sql);
-    
-    $final = mysqli_fetch_array($result);
-    return $final;
-}
-
-// get all users for admin
-function GetAllUsers()
-{
-    global $conn;
-    $sql = "SELECT * FROM users";
-    $result = mysqli_query($conn, $sql);
-
-    $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-    $final = array();
-    foreach ($posts as $post) {
-        array_push($final, $post);
-    }
-    return $final;
-}
-
-// get all users for admin
-function GetAllRoles()
-{
-    global $conn;
-    $sql = "SELECT * FROM roles";
-    $result = mysqli_query($conn, $sql);
-
-    $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-    $final = array();
-    foreach ($posts as $post) {
-        array_push($final, $post);
-    }
-    return $final;
-}
-
-//get role of user
-function getRoleById($id)
-{
-    // use global $conn object in function
-    global $conn;
-    $sql = "SELECT `role` FROM roles WHERE id = $id";
-    $result = mysqli_query($conn, $sql);
-    
-    $final = mysqli_fetch_array($result);
-    return $final;
-}
 
 //validate dữ liệu nhập khi tạo user
 function validateUser($user)
@@ -437,7 +148,7 @@ if (isset($_POST['login-btn'])) {
             $_SESSION['user_fullname'] = $user['fullname'];
             
             header('location: ' . BASE_URL);
-            exit();
+            exit(0);
         } elseif ($user) {
             array_push($errors, 'Sai thông tin đăng nhập');
         } else {
@@ -493,39 +204,6 @@ if (isset($_POST['register-btn']) || isset($_POST['create-user'])) {
             }
         }
     }
-}
-
-// gửi mail thông báo
-function SendMailRegister($user)
-{
-    $to = $_POST['email'];
-    $subject = 'Signup Verification - TheHours';
-    $message = '
-  
-    Cảm ơn '.$user['fullname'].' đã đăng ký tài khoản trên TheHours!
-    Tài khoản của bạn đã được tạo, vui lòng truy cập đường link sau để xác thực tài khoản
-    
-    ------------------------
-    Username: '.$user['username'].'
-    Fullname: '.$user['fullname'].'
-    ------------------------
-    
-    
-';
-    $headers = 'From: noreply@thehours.com';
-    mail($to, $subject, $message, $headers);
-    // Link:'. BASE_URL. 'verify.php?username=' .$user['username'].'&verification_hash='.$user['verification_hash'].'
-}
-
-// lấy thông tin user = username
-function getUserByUsername($username)
-{
-    global $conn;
-    $sql = "SELECT * FROM users WHERE username = $username";
-    $result = mysqli_query($conn, $sql);
-    
-    $final = mysqli_fetch_array($result);
-    return $final;
 }
 
 // *************
@@ -608,24 +286,4 @@ function executeQuery($sql, $data)
     $stmt->bind_param($types, ...$values);
     $stmt->execute();
     return $stmt;
-}
-
-function create($table, $data)
-{
-    global $conn;
-    $sql = "INSERT INTO $table SET ";
-
-    $i = 0;
-    foreach ($data as $key => $value) {
-        if ($i === 0) {
-            $sql = $sql . " $key=?";
-        } else {
-            $sql = $sql . ", $key=?";
-        }
-        $i++;
-    }
-    
-    $stmt = executeQuery($sql, $data);
-    $id = $stmt->insert_id;
-    return $id;
 }

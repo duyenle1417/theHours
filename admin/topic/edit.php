@@ -1,11 +1,17 @@
 <?php
+session_start();
 include("../../path.php");
+
+// model category
+require_once(ROOT_PATH . '/models/CategoryModel.php');
+$topic_model = new Category();
+
 require_once(ROOT_PATH . '/include/db-functions.php');
 require_once(ROOT_PATH . '/admin/include/topics_functions.php');
 
 //check if user's role is ADMIN else redirect to unauthorized page
 if (isset($_SESSION['user_id']) && $_SESSION['user_role_id'] === 1) {
-    $topic = getTopicById($_GET['id']); ?>
+    $topic = $topic_model->getTopicById($_GET['id']); ?>
 
 <?php
 include(ROOT_PATH . '/admin/include/head.php'); ?>
@@ -60,7 +66,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                     <option value="#" disabled>- Hãy chọn danh mục cha -</option>
                     <option value="NULL">Trống</option>
                     <?php
-                        $parent_topics = getParentTopics();
+                        $parent_topics = $topic_model->getParentTopics();
     foreach ($parent_topics as $parent_topic) {
         if ($parent_topic['id'] === $topic['parent_topic_id']) { ?>
                                 <option value="<?php echo $parent_topic['id'] ?>" selected><?php echo $parent_topic['name'] ?></option>

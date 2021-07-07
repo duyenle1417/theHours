@@ -1,12 +1,22 @@
 <?php
+session_start();
 include("../../path.php");
+
+// model category
+require_once(ROOT_PATH . '/models/CategoryModel.php');
+$topic_model = new Category();
+
+// model post
+require_once(ROOT_PATH . '/models/PostModel.php');
+$post_model = new Post();
+
 require_once(ROOT_PATH . '/include/db-functions.php');
 require_once(ROOT_PATH . '/admin/include/posts_functions.php');
 
 //check if user's role is ADMIN OR AUTHOR else redirect to unauthorized page
 if (isset($_SESSION['user_id']) && $_SESSION['user_role_id'] !== 3) {
     //get post value
-    $post = getPostById($_GET['id']);
+    $post = $post_model->getPostById($_GET['id']);
 
     // condition if the user role is author
     if ($_SESSION['user_role_id'] === 2) {
@@ -94,9 +104,9 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                 <select name="topic_id" id="topic_id">
                     <option value="0" disabled>- Hãy chọn danh mục -</option>
                     <?php
-                        $parent_topics = getParentTopics();
+                        $parent_topics = $topic_model->getParentTopics();
     foreach ($parent_topics as $parent_topic) {
-        $sub_topics = getSubTopics($parent_topic['id']);
+        $sub_topics = $topic_model->getSubTopics($parent_topic['id']);
         if ($sub_topic['id'] === $post['topic_id']) { ?>
                                     <option value="<?php echo $parent_topic['id'] ?>" selected><?php echo $parent_topic['name'] ?></option>
                                 <?php

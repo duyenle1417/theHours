@@ -1,11 +1,17 @@
 <?php
+session_start();
 include("../../path.php");
+
+// model user
+require_once(ROOT_PATH . '/models/UserModel.php');
+$user_model = new User();
+
 require_once(ROOT_PATH . '/include/db-functions.php');
 require_once(ROOT_PATH . '/admin/include/users_functions.php');
 
 //check if user's role is ADMIN else redirect to unauthorized page
 if (isset($_SESSION['user_id']) && $_SESSION['user_role_id'] === 1) {
-    $user = getUserById($_GET['id']); ?>
+    $user = $user_model->getUserById($_GET['id']); ?>
 
 <?php
 include(ROOT_PATH . '/admin/include/head.php'); ?>
@@ -37,8 +43,9 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
     </div>
 
     <div class="edit-user-form">
-        <form action="" method="post" name="form" enctype="multipart/form-data">
         <?php include(ROOT_PATH . '/include/message.php'); ?>
+
+        <form action="" method="post" name="form" enctype="multipart/form-data">
         <!-- id -->
         <input type="text" id="id" name="id" value="<?php echo $user['id']; ?>" hidden>
 
@@ -75,26 +82,6 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                 </div>
             </div>
 
-            <!-- password -->
-            <!-- <div class="row">
-                <div class="col-25">
-                    <label for="password">Password:</label>
-                </div>
-                <div class="col-75">
-                    <input type="password" id="password" name="password" placeholder="Type your password">
-                </div>
-            </div> -->
-
-            <!-- password retype -->
-            <!-- <div class="row">
-                <div class="col-25">
-                    <label for="passwordConf">Retype Password:</label>
-                </div>
-                <div class="col-75">
-                    <input type="password" id="passwordConf" name="passwordConf" placeholder="Retype your password" >
-                </div>
-            </div> -->
-
             <!-- role_id -->
             <div class="row">
                 <div class="col-25">
@@ -105,7 +92,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                     <option value="0" selected disabled>- Hãy chọn quyền tài khoản -</option>
                     
                     <?php
-                    $roles = GetAllRoles();
+                    $roles = $user_model->GetAllRoles();
     foreach ($roles as $role) {
         if ($role['id'] === $user['role_id']) {
             ?>
@@ -130,7 +117,6 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
     <div class="change-pass-form" style="margin-top: 50px">
             <h2>Đổi mật khẩu</h2>
                 <form action="" method="post" name="form" enctype="multipart/form-data">
-                    <?php include(ROOT_PATH . '/include/message.php'); ?>
                     <!-- id -->
                     <input type="text" id="id" name="id" value="<?php echo $user['id']; ?>" hidden>
 

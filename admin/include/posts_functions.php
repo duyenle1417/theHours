@@ -38,7 +38,7 @@ if (isset($_POST['add-post'])) {
         $_POST['user_id'] = $_SESSION['user_id'];
         $_POST['IsPublished'] = 1;
         $_POST['content'] = htmlentities($_POST['content']);
-        $_POST['slug'] = createSlug($_POST['title']);
+        $_POST['slug'] = $post_model->createSlug($_POST['title']);
         $_POST['views']=0;
         
         $sql = "INSERT INTO posts (`user_id`, `topic_id`, `title`, `content`, `slug`, `image_path`, `IsPublished`, `views`) 
@@ -78,7 +78,7 @@ if (isset($_POST['update-post'])) {
         $_POST['user_id'] = $_SESSION['user_id'];
         $_POST['IsPublished'] = 1;
         $_POST['content'] = htmlentities($_POST['content']);
-        $_POST['slug'] = createSlug($_POST['title']);
+        $_POST['slug'] = $post_model ->createSlug($_POST['title']);
 
         if ($hasPicture) {
             $sql = "UPDATE posts SET `topic_id`"."='".$_POST['topic_id']."', `title`"."='".$_POST['title']."', `content`"."='".$_POST['content']."', `slug`"."='".$_POST['slug']."', `image_path`"."='".$_POST['image_path']."', `IsPublished`"."='".$_POST['IsPublished']."'  WHERE id='".$_POST['id']. "'";

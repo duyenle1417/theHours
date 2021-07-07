@@ -1,5 +1,11 @@
 <?php
+session_start();
 include("../../path.php");
+
+// model category
+require_once(ROOT_PATH . '/models/CategoryModel.php');
+$topic_model = new Category();
+
 require_once(ROOT_PATH . '/include/db-functions.php');
 require_once(ROOT_PATH . '/admin/include/topics_functions.php');
 
@@ -61,7 +67,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                     <option value="#" selected disabled>- Hãy chọn danh mục cha -</option>
                     <option value="NULL">Trống</option>
                     <?php
-                        $parent_topics = getParentTopics();
+                        $parent_topics = $topic_model->getParentTopics();
     foreach ($parent_topics as $parent_topic) {  ?>
                             <option value="<?php echo $parent_topic['id'] ?>"><?php echo $parent_topic['name'] ?></option>
                         <?php

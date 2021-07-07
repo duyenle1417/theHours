@@ -1,10 +1,16 @@
 <?php
+session_start();
 include("../../path.php");
-require_once(ROOT_PATH . '/include/db-functions.php');
+
+// model user
+require_once(ROOT_PATH . '/models/UserModel.php');
+$user_model = new User();
+
 require_once(ROOT_PATH . '/admin/include/users_functions.php');
+
 //check if user's role is ADMIN else redirect to unauthorized page
 if (isset($_SESSION['user_id']) && $_SESSION['user_role_id'] === 1) {
-    $users = GetAllUsers(); ?>
+    $users = $user_model->GetAllUsers(); ?>
 
 <?php
 include(ROOT_PATH . '/admin/include/head.php'); ?>
@@ -71,7 +77,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                                     <?php echo  $user['fullname'] ; ?>
                                 </td>
                                 <td class="role">
-                                    <?php $role = getRoleById($user['role_id']); echo $role['role'] ?>
+                                    <?php $role = $user_model->getRoleById($user['role_id']); echo $role['role'] ?>
                                 </td>
                                 <td class="thaotac">
                                     <div class="btn-group">

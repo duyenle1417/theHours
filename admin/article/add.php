@@ -1,5 +1,15 @@
 <?php
+session_start();
 include("../../path.php");
+
+// model category
+require_once(ROOT_PATH . '/models/CategoryModel.php');
+$topic_model = new Category();
+
+// model post
+require_once(ROOT_PATH . '/models/PostModel.php');
+$post_model = new Post();
+
 require_once(ROOT_PATH . '/include/db-functions.php');
 require_once(ROOT_PATH . '/admin/include/posts_functions.php');
 
@@ -81,9 +91,9 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                 <select name="topic_id" id="topic_id">
                     <option value="0" selected disabled>- Hãy chọn danh mục -</option>
                     <?php
-                        $parent_topics = getParentTopics();
+                        $parent_topics = $topic_model->getParentTopics();
     foreach ($parent_topics as $parent_topic) {
-        $sub_topics = getSubTopics($parent_topic['id']); ?>
+        $sub_topics = $topic_model->getSubTopics($parent_topic['id']); ?>
                             <option value="<?php echo $parent_topic['id'] ?>"><?php echo $parent_topic['name'] ?></option>
                             <?php
                             // if the parent topic has subtopic => arrow

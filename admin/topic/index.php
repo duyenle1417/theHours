@@ -1,6 +1,11 @@
 <?php
+session_start();
 include("../../path.php");
-require_once(ROOT_PATH . '/include/db-functions.php');
+
+// model category
+require_once(ROOT_PATH . '/models/CategoryModel.php');
+$topic_model = new Category();
+
 require_once(ROOT_PATH . '/admin/include/topics_functions.php');
 
 //check if user's role is ADMIN else redirect to unauthorized page
@@ -56,9 +61,9 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
 
                         <tbody>
                             <?php
-                        $topics = getAllTopics();
-                        $STT = 1;
-                        foreach ($topics as $topic) {?>
+                        $topics = $topic_model->getAllTopics();
+    $STT = 1;
+    foreach ($topics as $topic) {?>
 
                             <tr>
                                 <td><?php echo $STT; ?></td>
@@ -66,7 +71,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                                     <span style="font-weight: 500;"><?php echo $topic['name']; ?></span>
                                 </td>
                                 <td class="parent_topic_id">
-                                    <?php echo(getTopicNameByID($topic['parent_topic_id']) === null ? '<span style="color: red;">null</span>' : '<span style="color: #2B54C1;">'.getTopicNameByID($topic['parent_topic_id']).'</span>'); ?>
+                                    <?php echo($topic_model->getTopicNameByID($topic['parent_topic_id']) === null ? '<span style="color: red;">null</span>' : '<span style="color: #2B54C1;">'. $topic_model->getTopicNameByID($topic['parent_topic_id']).'</span>'); ?>
                                 </td>
                                 <td class="thaotac">
                                     <div class="btn-group">

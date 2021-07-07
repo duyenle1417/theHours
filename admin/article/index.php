@@ -1,6 +1,19 @@
 <?php
+session_start();
 include("../../path.php");
-require_once(ROOT_PATH . '/include/db-functions.php');
+
+// model post
+require_once(ROOT_PATH . '/models/PostModel.php');
+$post_model = new Post();
+
+// model category
+require_once(ROOT_PATH . '/models/CategoryModel.php');
+$topic_model = new Category();
+
+// model user
+require_once(ROOT_PATH . '/models/UserModel.php');
+$user_model = new User();
+
 require_once(ROOT_PATH . '/admin/include/posts_functions.php');
 
 //check if user's role is ADMIN OR AUTHOR else redirect to unauthorized page
@@ -56,9 +69,9 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                         <tbody>
                             <?php
                             if ($_SESSION['user_role_id'] ===1) {
-                                $posts = GetAllPosts();
+                                $posts = $post_model->GetAllPosts();
                             } else {
-                                $posts = getPostsOfAuthor($_SESSION['user_id']);
+                                $posts = $post_model->getPostsOfAuthor($_SESSION['user_id']);
                             }
     $STT = 1;
     foreach ($posts as $post) {?>
@@ -71,11 +84,11 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                                 </td>
                                 <!-- topic -->
                                 <td class="topic_name">
-                                    <?php echo getTopicNameByID($post['topic_id']); ?>
+                                    <?php echo $topic_model->getTopicNameByID($post['topic_id']); ?>
                                 </td>
                                 <!-- author -->
                                 <?php if ($_SESSION['user_role_id'] === 1) {
-        $user = getUserById($post['user_id']); ?>
+        $user = $user_model->getUserById($post['user_id']); ?>
                                     <td class="author">
                                     <?php echo $user['username']. ' - ' . $user['fullname']; ?>
                                     </td>
@@ -88,7 +101,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                                         <a href="index.php?delete_id=<?php echo $post['id']; ?>"
                                             class="delete-btn">Delete</a>
                                         <a href="index.php?PublishToggleId=<?php echo $post['id']; ?>&IsPublished=<?php echo($post['IsPublished'] ? 0 : 1) ?>" class="publish-btn">
-                                        <?php echo(!$post['IsPublished'] ? 'published' : 'unpublished') ?>
+                                            <?php echo(!$post['IsPublished'] ? 'published' : 'unpublished') ?>
                                         </a>
                                     </div>
                                 </td>

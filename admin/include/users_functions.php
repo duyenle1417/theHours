@@ -25,7 +25,7 @@ if (isset($_POST['change-password'])) {
     if (empty($_POST['Oldpassword'])) {
         array_push($errors, 'Current password is required');
     } else {
-        $user = getUserById($_POST['id']);
+        $user = $user_model->getUserById($_POST['id']);
         $pass = $user['password'];
         if (md5($_POST['Oldpassword']) !== $pass) {
             array_push($errors, 'Current password is wrong');

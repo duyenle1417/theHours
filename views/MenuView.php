@@ -1,11 +1,12 @@
+<!-- MENU VIEW Menu.php -->
 <div class="menu">
         <nav>
             <ul id="main-menu">
                 <li><a href="<?php echo BASE_URL ?>"><i class="fas fa-home"></i> Home</a></li>
             <?php
-                $parent_topics = getParentTopics();
+                $parent_topics = $model->getParentTopics();
                 foreach ($parent_topics as $parent_topic) {
-                    $sub_topics = getSubTopics($parent_topic['id']); ?>
+                    $sub_topics = $model->getSubTopics($parent_topic['id']); ?>
                     <li>
                         <a href="category.php?id=<?php echo $parent_topic['id']; ?>">
                             <?php echo $parent_topic['name'] ?>

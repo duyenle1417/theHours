@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include('path.php');
     require_once(ROOT_PATH . '/include/db-functions.php');
     if (!isset($_SESSION['user_id'])) {

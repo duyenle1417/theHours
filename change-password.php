@@ -1,10 +1,15 @@
 <?php
+session_start();
 include("path.php");
 require_once(ROOT_PATH . '/include/db-functions.php');
 require_once(ROOT_PATH . '/admin/include/users_functions.php');
 
+// model user
+require_once('./models/UserModel.php');
+$user_model = new User();
+
 if (isset($_SESSION['user_id'])) {
-    $user = getUserById($_GET['id']); ?>
+    $user = $user_model->getUserById($_GET['id']); ?>
 ?>
 
 <?php
@@ -26,7 +31,7 @@ include(ROOT_PATH . '/include/head.php'); ?>
         <!-- END header -->
 
         <!-- Begin MENU -->
-        <?php include(ROOT_PATH . '/include/menu.php'); ?>
+        <?php require_once("controllers/MenuController.php"); ?>
         <!-- End MENU -->
 
         <div class="admin-content">

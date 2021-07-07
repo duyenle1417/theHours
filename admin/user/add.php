@@ -1,5 +1,11 @@
 <?php
+session_start();
 include("../../path.php");
+
+// model user
+require_once(ROOT_PATH . '/models/UserModel.php');
+$user_model = new User();
+
 require_once(ROOT_PATH . '/include/db-functions.php');
 require_once(ROOT_PATH . '/admin/include/users_functions.php');
 
@@ -104,8 +110,8 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                     <option value="0" selected disabled>- Hãy chọn quyền tài khoản -</option>
                     
                     <?php
-                    $roles = GetAllRoles();
-                    foreach ($roles as $role) {  ?>
+                    $roles = $user_model->GetAllRoles();
+    foreach ($roles as $role) {  ?>
                             <option value="<?php echo $role['id'] ?>"><?php echo $role['role'] ?></option>
                         <?php
                     } ?>
@@ -115,8 +121,9 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
 
             <!-- Button Submit -->
             <div class="btn-group">
-                <input type="submit" value="Add" name="create-user">
+            <input type="submit" value="Add" name="create-user">
             </div>
+
         </form>
     </div>
 </div>
