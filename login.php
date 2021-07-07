@@ -40,7 +40,10 @@ if (!isset($_SESSION['user_id'])) { ?>
         </div>
         <!-- demo info -->
         <div style="text-align:center;">
-            <p>Tài khoản demo: admin - 123456</p>
+            <p>Tài khoản demo:</p>
+            <p>admin - 123456</p>
+            <p>hanhmy - 123456</p>
+            <p>guest - 123456</p>
         </div>
         
         <form action="login?error=true" method="POST">
