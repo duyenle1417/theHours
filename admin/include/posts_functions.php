@@ -7,7 +7,7 @@ if (isset($_GET['delete_id'])) {
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
-        header('Location: ' . BASE_URL . 'admin/article');
+        header('Location: ' . BASE_URL . 'manage-posts/');
         exit(0);
     }
 }
@@ -46,7 +46,7 @@ if (isset($_POST['add-post'])) {
         
         $result = mysqli_query($conn, $sql);
         if ($result) {
-            header("location: " . BASE_URL . "admin/article/");
+            header("location: " . BASE_URL . "manage-posts/");
             exit(0);
         }
     }
@@ -88,7 +88,7 @@ if (isset($_POST['update-post'])) {
         
         $result = mysqli_query($conn, $sql);
         if ($result) {
-            header("location: " . BASE_URL . "admin/article/");
+            header("location: " . BASE_URL . "manage-posts/");
             exit(0);
         }
     }
@@ -102,7 +102,7 @@ if (isset($_GET['PublishToggleId'])) {
     $result = mysqli_query($conn, $sql);
     echo $sql;
     if ($result) {
-        header("location: " . BASE_URL . "admin/article/index.php");
+        header("location: " . BASE_URL . "manage-posts/");
         exit(0);
     }
 }

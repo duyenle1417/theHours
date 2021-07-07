@@ -8,7 +8,7 @@
                 foreach ($parent_topics as $parent_topic) {
                     $sub_topics = $model->getSubTopics($parent_topic['id']); ?>
                     <li>
-                        <a href="category.php?id=<?php echo $parent_topic['id']; ?>">
+                        <a href="<?php echo BASE_URL . 'category/' . $parent_topic['id']; ?>">
                             <?php echo $parent_topic['name'] ?>
                             <?php
                             // if the parent topic has subtopic => arrow
@@ -22,7 +22,7 @@
                             <?php
                             foreach ($sub_topics as $sub_topic) { ?>
                                 <li>
-                                    <a href="category.php?id=<?php echo $sub_topic['id']; ?>">
+                                    <a href="<?php echo BASE_URL . 'category/' . $sub_topic['id']; ?>">
                                         <?php echo $sub_topic['name']; ?>
                                     </a>
                                 </li>
@@ -41,30 +41,30 @@
                 // if LOGGED IN
                 //login btn OR profile menu
                 if (isset($_SESSION['user_id'])) {?>
-                    <li><a href="<?php echo BASE_URL . "profile.php?id=" . $_SESSION['user_id'] ?>" style="text-transform: none;"><span><i class="fas fa-portrait"></i></span> <?php echo $_SESSION['user_username'] ?> <span><i class="fas fa-sort-down"></i></span></a>
+                    <li><a href="<?php echo BASE_URL . "profile/" . $_SESSION['user_id'] ?>" style="text-transform: none;"><span><i class="fas fa-portrait"></i></span> <?php echo $_SESSION['user_username'] ?> <span><i class="fas fa-sort-down"></i></span></a>
                     <div class="sub-menu">
                         <ul> 
                         <?php
                         // if role =  admin or = author => show dashboard
                         if ($_SESSION['user_role_id'] !== 3) { ?>
                             <li>
-                                <a href="<?php echo BASE_URL . "admin/dashboard.php" ?>">
+                                <a href="<?php echo BASE_URL . "dashboard" ?>">
                                     Dashborad
                                 </a>
                             </li>
                         <?php }?>
                             <li>
-                                <a href="<?php echo BASE_URL . "profile.php?id=" . $_SESSION['user_id'] ?>">
+                                <a href="<?php echo BASE_URL . "profile/" . $_SESSION['user_id'] ?>">
                                 My Profile
                                 </a>
                             </li>
                             <li>
-                                <a href="<?php echo BASE_URL . "change-password.php?id=" . $_SESSION['user_id'] ?>">
+                                <a href="<?php echo BASE_URL . "change-password/" . $_SESSION['user_id'] ?>">
                                 Change password
                                 </a>
                             </li>
                             <li>
-                                <a href="<?php echo BASE_URL . "logout.php" ?>">
+                                <a href="<?php echo BASE_URL . "logout" ?>">
                                 <span><i class="fas fa-sign-out-alt"></i></span>Logout
                                 </a>
                             </li>
@@ -74,11 +74,11 @@
                     <?php
                 } else {?>
                     <li>
-                        <a href="<?php echo BASE_URL . "login.php" ?>" style="text-transform: none;"><span><i class="fas fa-sign-in-alt"></i></span> Login <span><i class="fas fa-sort-down"></i></span></a>
+                        <a href="<?php echo BASE_URL . "login" ?>" style="text-transform: none;"><span><i class="fas fa-sign-in-alt"></i></span> Login <span><i class="fas fa-sort-down"></i></span></a>
                         <div class="sub-menu">
                             <ul> 
                                 <li>
-                                    <a href="<?php echo BASE_URL . "signup.php" ?>">
+                                    <a href="<?php echo BASE_URL . "signup" ?>">
                                     <span><i class="fas fa-user-plus"></i></span> Signup
                                     </a>
                                 </li>

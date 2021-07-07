@@ -21,7 +21,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_role_id'] !== 3) {
     ?>
 
 <?php
-include(ROOT_PATH . '/admin/include/head.php'); ?>
+    include(ROOT_PATH . '/admin/include/head.php'); ?>
     <title>Quản lý bài viết | Admin TheHours</title>
     
 </head>
@@ -30,7 +30,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
     <!-- BEGIN HEADER -->
     <div class="admin-header">
         <div class="logo">
-            <a href="<?php echo BASE_URL . "admin/dashboard.php"; ?>">ADMIN DASHBOARD</a>
+            <a href="<?php echo BASE_URL . "dashboard/"; ?>">ADMIN DASHBOARD</a>
         </div>
     
         <?php include(ROOT_PATH . '/admin/include/menu.php'); ?>
@@ -48,7 +48,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
             <h2 class="page-title">Post's Dashboard</h2>
             
 
-            <div class="btn"><a href="add.php" class="add-btn">Add</a></div>
+            <div class="btn"><a href="<?php echo BASE_URL . 'add-post/'?>" class="add-btn">Add</a></div>
 
             <div class="content">
                 <div class="post-table">
@@ -97,11 +97,11 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                                 <!-- thao tác -->
                                 <td class="thaotac">
                                     <div class="btn-group">
-                                        <a href="edit.php?id=<?php echo $post['id']; ?>" class="edit-btn">Edit</a>
-                                        <a href="index.php?delete_id=<?php echo $post['id']; ?>"
+                                        <a href="<?php echo BASE_URL . 'edit-post/' . $post['id']; ?>" class="edit-btn">Edit</a>
+                                        <a href="<?php echo BASE_URL . 'delete-post/'. $post['id']; ?>"
                                             class="delete-btn">Delete</a>
-                                        <a href="index.php?PublishToggleId=<?php echo $post['id']; ?>&IsPublished=<?php echo($post['IsPublished'] ? 0 : 1) ?>" class="publish-btn">
-                                            <?php echo(!$post['IsPublished'] ? 'published' : 'unpublished') ?>
+                                        <a href="<?php echo BASE_URL . 'publish-toggle/' . $post['id'] . '/' . ($post['IsPublished'] ? 0 : 1) ?>" class="publish-btn">
+                                            <?php echo(!$post['IsPublished'] ? 'Published' : 'Unpublished') ?>
                                         </a>
                                     </div>
                                 </td>

@@ -20,7 +20,7 @@ if (isset($_GET['id'])) {
     <div class="app">
         <!-- BEGIN header -->
         <div class="header">
-            <a href="<?php echo BASE_URL . 'category.php?id=' . $topic['id']; ?>" class="thehours-logo">
+            <a href="<?php echo BASE_URL . 'category?id=' . $topic['id']; ?>" class="thehours-logo">
                 <span class="main-title"><?php echo $topic['name'] ?></span>
                 <span class="sub-title">TheHours</span>
             </a>
@@ -41,11 +41,11 @@ if (isset($_GET['id'])) {
                 if ($topic['parent_topic_id'] !== null) {
                     echo '<span>/</span>';
                     $parent = $topic_model->getTopicById($topic['parent_topic_id']); ?>
-                <a href="<?php echo BASE_URL . 'category.php?id=' . $parent['id']; ?>"><?php echo $parent['name'] ?></a>
+                <a href="<?php echo BASE_URL . 'category/' . $parent['id']; ?>"><?php echo $parent['name'] ?></a>
                 <?php
                 } ?>
                 <span>/</span>
-                <a href="<?php echo BASE_URL . 'category.php?id=' . $topic['id']; ?>"><?php echo $topic['name'] ?></a>
+                <a href="<?php echo BASE_URL . 'category/' . $topic['id']; ?>"><?php echo $topic['name'] ?></a>
             </div>
             <!-- PATH end -->
             

@@ -24,12 +24,12 @@ if ($number_of_result_this_page >=1) { ?>
         <!-- main new -->
         <div class="main-category">
             <div class="main-news__picture">
-                <a href="<?php echo BASE_URL . 'article.php?id=' . $posts[0]['id'] . "&slug=" . $posts[0]['slug']?>">
-                    <img src="<?php echo $posts[0]['image_path'] ?>" alt="" class="main-news__picture--img">
+                <a href="<?php echo BASE_URL . 'article/' . $posts[0]['id'] . "/" . $posts[0]['slug']?>">
+                    <img src="<?php echo '.' . $posts[0]['image_path'] ?>" alt="" class="main-news__picture--img">
                 </a>
             </div>
             <div class="main-news__label">
-                <a href="<?php echo BASE_URL . 'article.php?id=' . $posts[0]['id'] . "&slug=" . $posts[0]['slug']?>">
+                <a href="<?php echo BASE_URL . 'article/' . $posts[0]['id'] . "/" . $posts[0]['slug']?>">
                     <?php echo $posts[0]['title'] ?>
                 </a>
             </div>
@@ -38,11 +38,7 @@ if ($number_of_result_this_page >=1) { ?>
                     <i class="far fa-eye"></i>
                     <span class="main-news__view-label"><?php echo $posts[0]['views'] ?></span>
                 </div>
-                <div class="main-news__comment">
-                    <i class="far fa-comment"></i>
-                    <span
-                        class="main-news__comment-label"><?php echo $post_model->getCommentsNumberOfPost($posts[0]['id']); ?></span>
-                </div>
+                
             </div>
         </div>
         <!-- main new end -->
@@ -54,14 +50,14 @@ if ($number_of_result_this_page >=1) { ?>
     ?>
             <div class="sub-category__item">
                 <div class="sub-news__picture">
-                    <a href="<?php echo BASE_URL . 'article.php?id=' . $posts[$i]['id'] . "&slug=" . $posts[$i]['slug']; ?>">
-                        <img src="<?php echo $posts[$i]['image_path'] ?>" alt="" class="sub-news__picture--img">
+                    <a href="<?php echo BASE_URL . 'article/' . $posts[$i]['id'] . "/" . $posts[$i]['slug']; ?>">
+                        <img src="<?php echo '.' . $posts[$i]['image_path'] ?>" alt="" class="sub-news__picture--img">
                     </a>
                     
                 </div>
                 <div class="sub-news__info">
                     <div class="sub-news__label">
-                        <a href="<?php echo BASE_URL . 'article.php?id=' . $posts[$i]['id'] . "&slug=" . $posts[$i]['slug']; ?>">
+                        <a href="<?php echo BASE_URL . 'article/' . $posts[$i]['id'] . "/" . $posts[$i]['slug']; ?>">
                             <?php echo $posts[$i]['title']; ?>
                         </a>
                     </div>
@@ -70,11 +66,7 @@ if ($number_of_result_this_page >=1) { ?>
                             <i class="far fa-eye"></i>
                             <span class="sub-news__view-label"><?php echo $posts[$i]['views']; ?></span>
                         </div>
-                        <div class="sub-news__comment">
-                            <i class="far fa-comment"></i>
-                            <span
-                                class="sub-news__comment-label"><?php echo $post_model->getCommentsNumberOfPost($posts[$i]['id']); ?></span>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -96,7 +88,7 @@ if ($number_of_result_this_page >=1) { ?>
     <!-- Prev btn -->
     <?php if ($page >= 2) { ?>
     <a
-        href="<?php echo BASE_URL . "category.php?id=" . $topic['id'] . "&page=" . ($page-1);?>">Prev</a>
+        href="<?php echo BASE_URL . "category/" . $topic['id'] . "&page=" . ($page-1);?>">Prev</a>
     <?php } ?>
 
     <!-- Number btn & Next btn -->
@@ -105,25 +97,25 @@ if ($number_of_result_this_page >=1) { ?>
         for ($i=(($page-1)===0 ? $page : $page-1); $i <= $temp; $i++) {
             if ($i === $page) {?>
             <a class="active"
-                href="<?php echo BASE_URL . "category.php?id=" . $topic['id'] . "&page=" . ($i);?>"><?php echo $i; ?></a>
+                href="<?php echo BASE_URL . "category/" . $topic['id'] . "&page=" . ($i);?>"><?php echo $i; ?></a>
             <?php } else { ?>
             <a
-                href="<?php echo BASE_URL . "category.php?id=" . $topic['id'] . "&page=" . ($i);?>"><?php echo $i; ?></a>
+                href="<?php echo BASE_URL . "category/" . $topic['id'] . "&page=" . ($i);?>"><?php echo $i; ?></a>
             <?php } ?>
             <?php
         } ?>
             <a
-                href="<?php echo BASE_URL . "category.php?id=" . $topic['id'] . "&page=" . ($page+1); ?>">Next</a>
+                href="<?php echo BASE_URL . "category/" . $topic['id'] . "&page=" . ($page+1); ?>">Next</a>
             <?php
     } else {
         $temp = $page;
         for ($i=(($page-1)===0 ? $page : $page-1); $i <= $temp; $i++) {
             if ($i === $page) {?>
             <a class="active"
-                href="<?php echo BASE_URL . "category.php?id=" . $topic['id'] . "&page=" . ($i);?>"><?php echo $i; ?></a>
+                href="<?php echo BASE_URL . "category/" . $topic['id'] . "&page=" . ($i);?>"><?php echo $i; ?></a>
             <?php } else { ?>
             <a
-                href="<?php echo BASE_URL . "category.php?id=" . $topic['id'] . "&page=" . ($i);?>"><?php echo $i; ?></a>
+                href="<?php echo BASE_URL . "category/" . $topic['id'] . "&page=" . ($i);?>"><?php echo $i; ?></a>
             <?php } ?>
             <?php
         } ?>

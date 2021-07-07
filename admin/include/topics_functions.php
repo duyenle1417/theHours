@@ -16,7 +16,7 @@ if (isset($_POST['add-topic'])) {
 
         $result = mysqli_query($conn, $sql);
         if ($result) {
-            header('Location: ' . BASE_URL . 'admin/topic/');
+            header('Location: ' . BASE_URL . 'manage-categories/');
             exit(0);
         }
     }
@@ -39,7 +39,7 @@ if (isset($_POST['update-topic'])) {
 
         $result = mysqli_query($conn, $sql);
         if ($result) {
-            header('Location: ' . BASE_URL . 'admin/topic/');
+            header('Location: ' . BASE_URL . 'manage-categories/');
             exit(0);
         }
     }
@@ -54,7 +54,7 @@ if (isset($_GET['delete_id'])) {
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
-        header('Location: ' . BASE_URL . 'admin/topic/');
+        header('Location: ' . BASE_URL . 'manage-categories/');
         exit(0);
     }
 }

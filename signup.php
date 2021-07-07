@@ -4,9 +4,23 @@
     require_once(ROOT_PATH . '/include/db-functions.php');
     if (!isset($_SESSION['user_id'])) {
 ?>
-<?php
-include(ROOT_PATH . '/include/head.php');
-?>
+
+<!DOCTYPE html>
+
+<head>
+    <!-- khai báo các meta link script ở đây -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/news.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/form.css">
+    <script src="./assets/scripts/script.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!-- FONT AWSOME CDN -->
+    <script src="https://kit.fontawesome.com/0f79449357.js" crossorigin="anonymous"></script>
     <title>Signup -TheHours</title>
 </head>
 
@@ -25,7 +39,7 @@ include(ROOT_PATH . '/include/head.php');
         <div class="form-title">
             <p>Đăng ký</p>
         </div>
-        <form action="signup.php" method="POST">
+        <form action="signup?error=true" method="POST">
             <div class="row">
                 <div class="form-label">
                     <label for="username">Username:</label>
@@ -79,7 +93,7 @@ include(ROOT_PATH . '/include/head.php');
 
             <?php include(ROOT_PATH . './include/message.php'); ?>
         </form>
-        <p style="text-align: center; margin-top: 80px; font-size: 14px;">Hoặc <a href="<?php echo BASE_URL . 'login.php' ?>">đăng nhập!</a></p>
+        <p style="text-align: center; margin-top: 80px; font-size: 14px;">Hoặc <a href="<?php echo BASE_URL . 'login' ?>">đăng nhập!</a></p>
     </div>
 </body>
 

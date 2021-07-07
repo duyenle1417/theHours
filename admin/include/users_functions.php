@@ -12,7 +12,7 @@ if (isset($_POST['update-user'])) {
         
         $result = mysqli_query($conn, $sql);
         if ($result) {
-            header('Location: ' . BASE_URL . 'admin/user/');
+            header('Location: ' . BASE_URL . 'manage-users/');
             exit(0);
         }
     }
@@ -80,7 +80,7 @@ if (isset($_GET['delete_id'])) {
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
-        header('Location: ' . BASE_URL . 'admin/user/');
+        header('Location: ' . BASE_URL . 'manage-users/');
         exit(0);
     }
 }

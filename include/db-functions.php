@@ -173,7 +173,7 @@ if (isset($_POST['register-btn']) || isset($_POST['create-user'])) {
         
             $result = mysqli_query($conn, $sql);
             if ($result) {
-                header('location: ' . BASE_URL . 'admin/user/index.php');
+                header('location: ' . BASE_URL . 'manage-users/');
                 exit();
             }
         }
@@ -206,56 +206,7 @@ if (isset($_POST['register-btn']) || isset($_POST['create-user'])) {
     }
 }
 
-// *************
-// COMMENT'S functions
-// ************
-function getCommentsByPostId($id)
-{
-    global $conn;
-    $sql = "SELECT * FROM comments WHERE post_id = $id";
-    $result = mysqli_query($conn, $sql);
-    
-    $final = mysqli_fetch_array($result);
-    return $final;
-}
-
-function getCommentsNumberOfPost($id)
-{
-    global $conn;
-    $sql = "SELECT * FROM comments WHERE post_id = $id";
-    $result = mysqli_query($conn, $sql);
-    return mysqli_num_rows($result);
-}
-
-
 /* Select custom */
-function GetAll($table, $condition = [])//condition [key => value]
-{
-    global $conn;
-    $sql = "SELECT * FROM $table";
-    if (empty($conditions)) {
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        return $records;
-    } else {
-        $i = 0;
-        foreach ($conditions as $key => $value) {
-            if ($i === 0) {
-                $sql = $sql . " WHERE $key=?";
-            } else {
-                $sql = $sql . " AND $key=?";
-            }
-            $i++;
-        }
-        
-        $stmt = executeQuery($sql, $conditions);
-        $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        return $records;
-    }
-    return $final;
-}
-
 function selectOne($table, $conditions)
 {
     global $conn;

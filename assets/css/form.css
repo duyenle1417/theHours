@@ -58,6 +58,22 @@
     outline: none;
 }
 
+.login-form form input[type="submit"],
+.signup-form form input[type="submit"]{
+    background-color: #2B54C1;
+    color: white;
+    border: none;
+    padding: 10px 0;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.login-form form input[type="submit"]:hover,
+.signup-form form input[type="submit"]:hover{
+    transition: 0.5s;
+    background-color: #1c3780;
+}
+
 .login-form form .form-input i,
 .signup-form form .form-input i{
     position: absolute;

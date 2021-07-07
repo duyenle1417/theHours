@@ -13,7 +13,7 @@
         <div class="tab-content__item">
             <span
                 class="tab-content__time"><?php echo $mysqldate = date('H:i d/m/y', strtotime($post['create_date'])); ?></span>
-            <a href="<?php echo BASE_URL . "article.php?id=" . $post['id'] . "&slug=" . $post['slug']; ?>"
+            <a href="<?php echo BASE_URL . "article/" . $post['id'] . "/" . $post['slug']; ?>"
                 class="tab-content__link"><?php echo $post['title'] ?></a>
         </div>
         <?php } ?>
@@ -23,7 +23,7 @@
         <div class="tab-content__item">
             <span
                 class="tab-content__time"><?php echo $mysqldate = date('H:i d/m/y', strtotime($post['create_date'])); ?></span>
-            <a href="<?php echo BASE_URL . "article.php?id=" . $post['id'] . "&slug=" . $post['slug']; ?>"
+            <a href="<?php echo BASE_URL . "article/" . $post['id'] . "/" . $post['slug']; ?>"
                 class="tab-content__link"><?php echo $post['title'] ?></a>
         </div>
         <?php } ?>

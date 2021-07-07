@@ -10,7 +10,6 @@ $user_model = new User();
 
 if (isset($_SESSION['user_id'])) {
     $user = $user_model->getUserById($_GET['id']); ?>
-?>
 
 <?php
 include(ROOT_PATH . '/include/head.php'); ?>
@@ -105,7 +104,7 @@ include(ROOT_PATH . '/include/head.php'); ?>
                     </div>
                 </form>
                 <div>
-                <a href="change-password.php?id=<?php echo $_SESSION['user_id'] ?>" style="font-size: 16px; margin-top: 5px;">Đổi mật khẩu?</a>
+                <a href="change-password?id=<?php echo $_SESSION['user_id'] ?>" style="font-size: 16px; margin-top: 5px;">Đổi mật khẩu?</a>
             </div>
             </div>
             

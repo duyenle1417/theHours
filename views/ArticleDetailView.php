@@ -12,8 +12,22 @@ if (isset($_GET['id'])) {
         $views = $post['views'] + 1;
         $post_model->UpdateView($post['id'], $views); ?>
 
-<?php
-include(ROOT_PATH . '/include/head.php'); ?>
+<!DOCTYPE html>
+
+<head>
+    <!-- khai báo các meta link script ở đây -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/news.css">
+    <link rel="stylesheet" href="../../assets/css/base.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/form.css">
+    <script src="./assets/scripts/script.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!-- FONT AWSOME CDN -->
+    <script src="https://kit.fontawesome.com/0f79449357.js" crossorigin="anonymous"></script>
 <title><?php echo $post['title']; ?> | TheHours</title>
 </head>
 
@@ -21,7 +35,7 @@ include(ROOT_PATH . '/include/head.php'); ?>
     <div class="app">
         <!-- BEGIN header -->
         <div class="header">
-            <a href="<?php echo BASE_URL . 'category.php?id=' . $topic['id']; ?>" class="thehours-logo">
+            <a href="<?php echo BASE_URL . 'category?id=' . $topic['id']; ?>" class="thehours-logo">
                 <span class="main-title"><?php echo $topic['name'] ?></span>
                 <span class="sub-title">TheHours</span>
             </a>
@@ -39,11 +53,11 @@ include(ROOT_PATH . '/include/head.php'); ?>
                 <?php if ($topic['parent_topic_id'] !== null) {
             echo '<span>/</span>';
             $parent = $topic_model->getTopicById($topic['parent_topic_id']); ?>
-                <a href="<?php echo BASE_URL . 'category.php?id=' . $parent['id']; ?>"><?php echo $parent['name'] ?></a>
+                <a href="<?php echo BASE_URL . 'category/' . $parent['id']; ?>"><?php echo $parent['name'] ?></a>
                 <?php
         } ?>
                 <span>/</span>
-                <a href="<?php echo BASE_URL . 'category.php?id=' . $topic['id']; ?>"><?php echo $topic['name'] ?></a>
+                <a href="<?php echo BASE_URL . 'category/' . $topic['id']; ?>"><?php echo $topic['name'] ?></a>
                 <!-- post path <= title -->
                 <span>/ <?php echo $post['title'] ?></span>
             </div>
@@ -62,11 +76,6 @@ include(ROOT_PATH . '/include/head.php'); ?>
                             <span><i class="fas fa-user"></i></span>
                             <?php echo $user['fullname']; ?>
                         </div>
-
-                        <div class="content__comment">
-                        <span><i class="far fa-comment"></i></span>
-                        <?php echo $post_model->getCommentsNumberOfPost($post['id']); ?>
-                    </div>
                     </div>
                     
                     <div class="content__view-date">
@@ -82,11 +91,6 @@ include(ROOT_PATH . '/include/head.php'); ?>
                     </div>
                 </div>
 
-                <!-- image_path -->
-                <!-- <div class="content__illustration">
-                    <img src="<?php echo $post['image_path'] ?>" alt="">
-                </div> -->
-
                 <!-- content -->
                 <div class="content__main">
                     <?php echo html_entity_decode($post['content']) ?>
@@ -101,11 +105,11 @@ include(ROOT_PATH . '/include/head.php'); ?>
                     $recents = $post_model->GetPostsByTopicTab($post['topic_id'], 3, 'id');
         foreach ($recents as $recent) { ?>
                         <div class="grid__column-4">
-                        <a href="<?php echo BASE_URL . 'article.php?id=' . $recent['id'] . "&slug=" . $recent['slug']?>">
-                            <img src="<?php echo $recent['image_path'] ?>" alt="" class="recent__img">
+                        <a href="<?php echo BASE_URL . 'article/' . $recent['id'] . "/" . $recent['slug']?>">
+                            <img src="<?php echo '../.' . $recent['image_path'] ?>" alt="" class="recent__img">
                         </a>
                         <div class="recent__label">
-                            <a href="<?php echo BASE_URL . 'article.php?id=' . $recent['id'] . "&slug=" . $recent['slug']?>">
+                            <a href="<?php echo BASE_URL . 'article/' . $recent['id'] . "/" . $recent['slug']?>">
                                 <?php echo $recent['title'] ?>
                             </a>
                         </div>
@@ -114,28 +118,13 @@ include(ROOT_PATH . '/include/head.php'); ?>
                                 <i class="far fa-eye"></i>
                                 <span class="recent__view-label"><?php echo $recent['views'] ?></span>
                             </div>
-                            <div class="recent__comment">
-                                <i class="far fa-comment"></i>
-                                <span class="recent__comment-label"><?php echo $post_model->getCommentsNumberOfPost($recent['id']); ?></span>
-                            </div>
+                            
                         </div>
                     </div>
                     <?php
                     } ?>
                 </div>
             </div>
-
-            <!-- <div class="comment">
-                <div class="grid__row">
-                    <div class="grid__column-12">
-                        <div class="comment__title">Bình luận</div>
-                        <div class="comment__area">
-                            <i class="fas fa-user comment__avt"></i>
-                            <input type="text" placeholder="Bình luận của bạn..." class="comment__input">
-                        </div>
-                    </div>
-                </div>
-            </div> -->
 
         </div>
 

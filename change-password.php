@@ -10,7 +10,6 @@ $user_model = new User();
 
 if (isset($_SESSION['user_id'])) {
     $user = $user_model->getUserById($_GET['id']); ?>
-?>
 
 <?php
 include(ROOT_PATH . '/include/head.php'); ?>

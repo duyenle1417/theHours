@@ -22,7 +22,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
 <!-- BEGIN HEADER -->
 <div class="admin-header">
     <div class="logo">
-        <a href="<?php echo BASE_URL . "admin/dashboard.php"; ?>">ADMIN DASHBOARD</a>
+        <a href="<?php echo BASE_URL . "dashboard/"; ?>">ADMIN DASHBOARD</a>
     </div>
 
     <?php include(ROOT_PATH . '/admin/include/menu.php'); ?>

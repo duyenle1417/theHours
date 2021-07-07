@@ -22,7 +22,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
     <!-- BEGIN HEADER -->
     <div class="admin-header">
         <div class="logo">
-            <a href="<?php echo BASE_URL . "admin/dashboard.php"; ?>">ADMIN DASHBOARD</a>
+            <a href="<?php echo BASE_URL . "dashboard/"; ?>">ADMIN DASHBOARD</a>
         </div>
 
         <?php include(ROOT_PATH . '/admin/include/menu.php'); ?>
@@ -42,7 +42,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
             <h2 class="page-title">Topic's Dashboard</h2>
             
 
-            <div class="btn"><a href="add.php" class="add-btn">Add</a></div>
+            <div class="btn"><a href="<?php echo BASE_URL . 'add-category/'?>" class="add-btn">Add</a></div>
 
             <div class="content">
                 <div class="topic-table">
@@ -75,8 +75,8 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                                 </td>
                                 <td class="thaotac">
                                     <div class="btn-group">
-                                        <a href="edit.php?id=<?php echo $topic['id']; ?>" class="edit-btn">Edit</a>
-                                        <a href="index.php?delete_id=<?php echo $topic['id']; ?>"
+                                        <a href="<?php echo BASE_URL . 'edit-category/' . $topic['id']; ?>" class="edit-btn">Edit</a>
+                                        <a href="<?php echo BASE_URL . 'delete-category/'. $topic['id']; ?>"
                                             class="delete-btn">Delete</a>
                                     </div>
                                 </td>
