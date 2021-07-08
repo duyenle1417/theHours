@@ -185,13 +185,27 @@
 
 .comment-list ul li{
     margin-bottom: 10px;
+    border-top: 1px solid #eeeeeece;
+    padding-left: 10px;
 }
 
 .comment-list ul li .comment-content{
     display: flex;
-    font-size: 16px;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+
+.comment-list ul li .comment-info{
+    display: flex;
+    justify-content: space-between;
     padding: 10px 0;
-    border-top: 1px solid #eeeeeece;
+    color:#2B54C1;
+}
+
+.comment-list ul li .comment-info .author,
+.comment-list ul li .comment-info .date{
+    color:#2B54C1;
+    font-size: 14px;
 }
 
 .comment-list ul li .comment-content .logo{

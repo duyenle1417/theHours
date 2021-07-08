@@ -4,8 +4,6 @@
 
 // model comment
 require_once('./models/CommentModel.php');
-
-// khai báo model
 $model = new Comment();
 
 // view của comment

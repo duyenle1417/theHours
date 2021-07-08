@@ -13,22 +13,6 @@ class Comment
         return mysqli_num_rows($result);
     }
 
-    // get comments of post
-    public function getCommentsOfPost($post_id)
-    {
-        global $conn;
-        $sql = "SELECT * FROM comments WHERE post_id = $post_id";
-        $result = mysqli_query($conn, $sql);
-        $comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-        $final = array();
-        foreach ($comments as $comment) {
-            array_push($final, $comment);
-        }
-
-        return mysqli_num_rows($result);
-    }
-
     // get paretn comments
     public function getParentCommentsOfPost($post_id)
     {
@@ -61,6 +45,18 @@ class Comment
         return $final;
     }
 
+    // get a user by id
+    public function getUserById($id)
+    {
+        // use global $conn object in function
+        global $conn;
+        $sql = "SELECT * FROM users WHERE id = $id";
+        $result = mysqli_query($conn, $sql);
+        
+        $final = mysqli_fetch_array($result);
+        return $final;
+    }
+
     // get multi-level comment's list
     public function ShowReplies($comment_id, $replies, $post_id)
     {
@@ -69,11 +65,23 @@ class Comment
             <?php
             foreach ($replies as $reply) {?>
             <li>
-                <div class="comment-content">
-                <div class="logo">
-                    <span><i class="fas fa-comment-dots"></i></span> 
+                <div class="comment-info">
+                    <div class="author">
+                        <span><i class="fas fa-user"></i></span> 
+                        <?php
+                            $author = $this->getUserById($reply['user_id']);
+                            echo $author['fullname'];
+                        ?>
+                    </div>
+                    <div class="date">
+                    <?php echo $mysqldate = date('H:i:s d/m/Y', strtotime($reply['create_date'])); ?>
+                    </div>
                 </div>
-                <p><?php echo $reply['content']; ?></p>
+                <div class="comment-content">
+                    <div class="logo">
+                        <span><i class="fas fa-comment-dots"></i></span> 
+                    </div>
+                    <p><?php echo $reply['content']; ?></p>
                 </div>
                 
                 <?php
@@ -106,4 +114,7 @@ class Comment
         <?php
         }
     }
+
+
+
 }

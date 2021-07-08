@@ -19,6 +19,7 @@
 
             <?php
                 } else {
+                    // thông báo đăng nhập
                     echo '<p style="margin-bottom: 10px; font-size: 14px; color: red;">Đăng nhập để bình luận.</p>';
                 }
             ?>            
@@ -32,6 +33,20 @@
                 <ul>
                     <?php foreach ($parent_comments as $parent) { ?>
                         <li>
+                            <!-- comment info: date & author of comment -->
+                            <div class="comment-info">
+                                <div class="author">
+                                    <span><i class="fas fa-user"></i></span> 
+                                    <?php
+                                        $author = $user_model->getUserById($parent['user_id']);
+                                        echo $author['fullname'];
+                                    ?>
+                                </div>
+                                <div class="date">
+                                <?php echo $mysqldate = date('H:i:s d/m/Y', strtotime($parent['create_date'])); ?>
+                                </div>
+                            </div>
+                            <!-- comment content -->
                             <div class="comment-content">
                                 <div class="logo">
                                     <span><i class="fas fa-comment-dots"></i></span> 
@@ -42,7 +57,9 @@
                             <?php
                             if (isset($_SESSION['user_id'])) {
                                 ?>
+                                <!-- reply form link -->
                                 <a href="#" class="reply-btn">Trả lời</a>
+                                <!-- reply form -->
                                 <div class="reply_form" style="display: none;">
                                     <form action="#comment-list" method="POST">
                                         <input type="text" name="post_id" id="post_id" hidden value="<?php echo $post['id'] ?>">
@@ -55,11 +72,12 @@
                                 </div>
                             <?php
                             }?>
-
+                            <!-- reply begin -->
                             <?php
                                 $replies = $model->getRepliesOfComment($parent['id']);
                                 $model->ShowReplies($parent['id'], $replies, $post['id']);
                             ?>
+                            <!-- reply end -->
 
                                 
                         </li>

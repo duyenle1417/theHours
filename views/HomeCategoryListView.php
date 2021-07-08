@@ -34,7 +34,7 @@
                 <div class="main-news__comment">
                     <i class="far fa-comment"></i>
                     <span
-                        class="main-news__comment-label"><?php echo $post_model->getCommentsNumberOfPost($post_main[0]['id']); ?></span>
+                        class="main-news__comment-label"><?php echo $comment_model->getCommentsNumberOfPost($post_main[0]['id']); ?></span>
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@
                         <div class="sub-news__comment">
                             <i class="far fa-comment"></i>
                             <span
-                                class="sub-news__comment-label"><?php echo $post_model->getCommentsNumberOfPost($post['id']); ?></span>
+                                class="sub-news__comment-label"><?php echo $comment_model->getCommentsNumberOfPost($post['id']); ?></span>
                         </div>
                     </div>
                 </div>

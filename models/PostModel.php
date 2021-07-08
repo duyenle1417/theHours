@@ -160,16 +160,6 @@ class Post
         return $final;
     }
 
-    // get number of comment(s) of post
-    public function getCommentsNumberOfPost($id)
-    {
-        global $conn;
-        $sql = "SELECT * FROM comments WHERE post_id = $id";
-        $result = mysqli_query($conn, $sql);
-        return mysqli_num_rows($result);
-    }
-
-
     // Tạo slug cho bài viết
     public function createSlug($title)
     {

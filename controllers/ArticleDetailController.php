@@ -13,5 +13,9 @@ $topic_model = new Category();
 require_once(ROOT_PATH . '/models/UserModel.php');
 $user_model = new User();
 
+// model comment
+require_once('./models/CommentModel.php');
+$comment_model = new Comment();
+
 // view article detail
 require_once(ROOT_PATH . '/views/ArticleDetailView.php');

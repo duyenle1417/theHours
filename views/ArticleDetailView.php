@@ -81,7 +81,7 @@ if (isset($_GET['id'])) {
                         </div>
                         <div class="content__comment">
                             <span><i class="far fa-comment"></i></span>
-                            <?php echo $post_model->getCommentsNumberOfPost($post['id']); ?>
+                            <?php echo $comment_model->getCommentsNumberOfPost($post['id']); ?>
                         </div>
                     </div>
                     
@@ -128,7 +128,7 @@ if (isset($_GET['id'])) {
                             </div>
                             <div class="recent__comment">
                                 <i class="far fa-comment"></i>
-                                <span class="recent__comment-label"><?php echo $post_model->getCommentsNumberOfPost($recent['id']); ?></span>
+                                <span class="recent__comment-label"><?php echo $comment_model->getCommentsNumberOfPost($recent['id']); ?></span>
                             </div>
                         </div>
                     </div>

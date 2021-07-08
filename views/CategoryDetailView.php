@@ -41,7 +41,7 @@ if ($number_of_result_this_page >=1) { ?>
                 <div class="main-news__comment">
                     <i class="far fa-comment"></i>
                     <span
-                        class="main-news__comment-label"><?php echo $post_model->getCommentsNumberOfPost($posts[0]['id']); ?></span>
+                        class="main-news__comment-label"><?php echo $comment_model->getCommentsNumberOfPost($posts[0]['id']); ?></span>
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@ if ($number_of_result_this_page >=1) { ?>
                         <div class="sub-news__comment">
                             <i class="far fa-comment"></i>
                             <span
-                                class="sub-news__comment-label"><?php echo $post_model->getCommentsNumberOfPost($posts[$i]['id']); ?></span>
+                                class="sub-news__comment-label"><?php echo $comment_model->getCommentsNumberOfPost($posts[$i]['id']); ?></span>
                         </div>
                     </div>
                 </div>
