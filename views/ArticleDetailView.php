@@ -136,7 +136,7 @@ if (isset($_GET['id'])) {
             <!-- RECENT end -->
 
             <!-- COMMENT begin -->
-            <div class="comment">
+            <!-- <div class="comment">
                 <div class="grid__row">
                     <div class="grid__column-12">
                         <div class="comment__title">Bình luận</div>
@@ -146,7 +146,7 @@ if (isset($_GET['id'])) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- COMMENT end -->
 
         </div>

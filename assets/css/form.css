@@ -74,6 +74,7 @@
 .signup-form form input[type="submit"]:hover{
     transition: 0.5s;
     background-color: #1c3780;
+    cursor: pointer;
 }
 
 .login-form form .form-input i,
@@ -162,6 +163,7 @@ form .row:after {
     background-color: #2B54C1;
     color: white;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .add-post-form form select,
