@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="../assets/css/base.css">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/form.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./assets/scripts/script.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <!-- FONT AWSOME CDN -->

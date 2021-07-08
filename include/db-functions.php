@@ -258,3 +258,29 @@ function executeQuery($sql, $data)
     $stmt->execute();
     return $stmt;
 }
+
+
+// *************
+// COMMENT'S functions
+// ************
+
+if (isset($_POST['add-reply'])) {
+    global $conn;
+
+    if (!empty($_POST['content'])) {
+        $sql = "INSERT INTO comments (`content`,`post_id`, `user_id`, `parent_comment_id`) 
+        VALUES ('".$_POST['content']."', '".$_POST['post_id']."', '".$_POST['user_id']."', '".$_POST['parent_comment_id']."')";
+        $result = mysqli_query($conn, $sql);
+    }
+}
+
+
+if (isset($_POST['add-comment'])) {
+    global $conn;
+
+    if (!empty($_POST['content'])) {
+        $sql = "INSERT INTO comments (`content`,`post_id`, `user_id`) 
+        VALUES ('".$_POST['content']."', '".$_POST['post_id']."', '".$_POST['user_id']."')";
+        $result = mysqli_query($conn, $sql);
+    }
+}

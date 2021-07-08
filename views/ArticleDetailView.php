@@ -24,7 +24,10 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="../../assets/css/base.css">
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/form.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./assets/scripts/script.js"></script>
+    
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <!-- FONT AWSOME CDN -->
     <script src="https://kit.fontawesome.com/0f79449357.js" crossorigin="anonymous"></script>
@@ -136,17 +139,7 @@ if (isset($_GET['id'])) {
             <!-- RECENT end -->
 
             <!-- COMMENT begin -->
-            <!-- <div class="comment">
-                <div class="grid__row">
-                    <div class="grid__column-12">
-                        <div class="comment__title">Bình luận</div>
-                        <div class="comment__area">
-                            <i class="fas fa-user comment__avt"></i>
-                            <input type="text" placeholder="Bình luận của bạn..." class="comment__input">
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+            <?php require_once("controllers/CommentController.php"); ?>
             <!-- COMMENT end -->
 
         </div>
