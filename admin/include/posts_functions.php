@@ -3,7 +3,7 @@
 if (isset($_GET['delete_id'])) {
     global $conn;
     $id=$_GET['delete_id'];
-    $sql = "DELETE FROM posts WHERE id = '$id';";
+    $sql = "DELETE FROM posts WHERE id=$id";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
@@ -21,12 +21,12 @@ if (isset($_POST['add-post'])) {
     if (count($errors) == 0) {
         if (!empty($_FILES['image_path']['name'])) {
             $image_name = time() . '_' . $_FILES['image_path']['name'];
-            $destination = ROOT_PATH ."/uploads/images/" . $image_name;
+            $destination = ROOT_PATH. "/uploads/images/" . $image_name;
 
             $result = move_uploaded_file($_FILES['image_path']['tmp_name'], $destination);
 
             if ($result) {
-                $_POST['image_path'] = "/uploads/images/" . $image_name;//update path mới
+                $_POST['image_path'] = "./uploads/images/" . $image_name;//update path mới
             } else {
                 array_push($errors, "Không thể tải ảnh lên máy chủ");
             }
@@ -66,12 +66,12 @@ if (isset($_POST['update-post'])) {
     if (count($errors) == 0) {
         if (!empty($_FILES['image_path']['name'])) {
             $image_name = time() . '_' . $_FILES['image_path']['name'];
-            $destination = ROOT_PATH . "/uploads/images/" . $image_name;
+            $destination = ROOT_PATH ."/uploads/images/" . $image_name;
 
             $result = move_uploaded_file($_FILES['image_path']['tmp_name'], $destination);
 
             if ($result) {
-                $_POST['image_path'] = "/uploads/images/" . $image_name;//update path mới
+                $_POST['image_path'] = "./uploads/images/" . $image_name;//update path mới
                 $hasPicture = true;
             } else {
                 array_push($errors, "Không thể tải ảnh lên máy chủ");

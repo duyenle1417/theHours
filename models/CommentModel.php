@@ -119,7 +119,7 @@ class Comment
             <div class="comment_form">
                 <form action="#comment-list" method="POST">
                     <input type="text" name="id" id="id" hidden value="<?php echo $reply['id']; ?>">
-                    <input type="submit" name="delete-comment" id="delete-comment" value="Delete"
+                    <input type="submit" name="delete-comment" id="delete-comment" value="Xóa"
                         class="del_comment_btn">
                 </form>
             </div>

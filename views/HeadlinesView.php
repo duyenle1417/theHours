@@ -2,7 +2,7 @@
     <?php $post = $model->getPostHeadline(); ?>
     <div class="main-news__picture">
         <a href="<?php echo BASE_URL . 'article/' . $post['id'] . "/" . $post['slug'] ?>">
-            <img src="<?php echo '.' . $post['image_path'] ?>" alt="" class="main-news__picture--img">
+            <img src="<?php echo $post['image_path'] ?>" alt="" class="main-news__picture--img">
         </a>
     </div>
     <div class="main-news__label">
