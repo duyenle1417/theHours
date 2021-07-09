@@ -74,7 +74,7 @@
 
                                     <?php if (intval($parent['user_id']) === intval($_SESSION['user_id'])) { ?>
                                         <!-- edit comment -->
-                                        <a href="#" class="edit-comment-btn">Edit</a>
+                                        <a href="#" class="edit-comment-btn">Chỉnh sửa</a>
                                         <div class="reply_form" style="display: none;">
                                             <form action="#comment-list" method="POST">
                                                 <input type="text" name="id" id="id" hidden value="<?php echo $parent['id']; ?>">
@@ -88,7 +88,7 @@
                                         <div class="comment_form">
                                             <form action="#comment-list" method="POST">
                                                 <input type="text" name="id" id="id" hidden value="<?php echo $parent['id']; ?>">
-                                                <input type="submit" name="delete-comment" id="delete-comment" value="Delete" class="del_comment_btn">                                           
+                                                <input type="submit" name="delete-comment" id="delete-comment" value="Xóa" class="del_comment_btn">                                           
                                             </form>
                                         </div>
 
@@ -125,7 +125,7 @@
     $(document).ready(function () {
         var showText = "Trả lời";
         var hideText = "Đóng";
-        var editText = "Edit";
+        var editText = "Chỉnh sửa";
 
         $(".reply-btn").click(function (e) {
             e.preventDefault();

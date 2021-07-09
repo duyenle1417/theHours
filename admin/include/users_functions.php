@@ -68,12 +68,14 @@ if (isset($_POST['update-user-profile'])) {
     if (count($errors) === 0) {
         $id = $_POST['id'];
         unset($_POST['update-user']);
-        $sql = "UPDATE users SET `fullname`"."='".$_POST['fullname']."', email = '".$_POST['email']."', role_id = '".$_POST['role_id']."' WHERE id='".$_POST['id']. "'";
-        
+        if (isset($_POST['role_id'])) {
+            $sql = "UPDATE users SET `fullname`"."='".$_POST['fullname']."', email = '".$_POST['email']."', role_id = '".$_POST['role_id']."' WHERE id='".$_POST['id']. "'";
+        } else {
+            $sql = "UPDATE users SET `fullname`"."='".$_POST['fullname']."', email = '".$_POST['email']."' WHERE id='".$_POST['id']. "'";
+        }
         $result = mysqli_query($conn, $sql);
         if ($result) {
             array_push($errors, 'Chỉnh sửa thành công!');
-            // exit(0);
         }
     }
 }

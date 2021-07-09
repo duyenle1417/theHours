@@ -3,7 +3,7 @@
 if (isset($_GET['delete_id'])) {
     global $conn;
     $id=$_GET['delete_id'];
-    $sql = "DELETE FROM posts WHERE id=$id";
+    $sql = "DELETE FROM posts WHERE id = '$id';";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {

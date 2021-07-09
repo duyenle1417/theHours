@@ -74,31 +74,6 @@ include(ROOT_PATH . '/include/head.php'); ?>
                         </div>
                     </div>
 
-                    <!-- role_id -->
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="role_id">Quyền:</label>
-                        </div>
-                        <div class="col-75">
-                            <select name="role_id" id="role_id">
-                                <option value="0" selected disabled>- Hãy chọn quyền tài khoản -</option>
-
-                                <?php
-                    $roles = $user_model->GetAllRoles();
-    foreach ($roles as $role) {
-        if ($role['id'] === $user['role_id']) {
-            ?>
-                                <option value="<?php echo $role['id'] ?>" selected><?php echo $role['role'] ?></option>
-                                <?php
-        } else {?>
-                                <option value="<?php echo $role['id'] ?>"><?php echo $role['role'] ?></option>
-                                <?php
-                    }
-    } ?>
-                            </select>
-                        </div>
-                    </div>
-
                     <!-- Button Submit -->
                     <div class="btn-group">
                         <input type="submit" value="Update" name="update-user-profile">

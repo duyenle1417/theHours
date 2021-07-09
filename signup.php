@@ -39,7 +39,7 @@
         <div class="form-title">
             <p>Đăng ký</p>
         </div>
-        <form action="signup?error=true" method="POST">
+        <form action="signup" method="POST">
             <div class="row">
                 <div class="form-label">
                     <label for="username">Username:</label>
@@ -91,7 +91,7 @@
 
             <input type="submit" value="Register" name="register-btn">
 
-            <?php include(ROOT_PATH . './include/message.php'); ?>
+            <?php include(ROOT_PATH . '/include/message.php'); ?>
         </form>
         <p style="text-align: center; margin-top: 80px; font-size: 14px;">Hoặc <a href="<?php echo BASE_URL . 'login' ?>">đăng nhập!</a></p>
     </div>
