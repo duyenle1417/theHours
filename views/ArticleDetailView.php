@@ -78,6 +78,7 @@ if (isset($_GET['id'])) {
                         <div class="content__author">
                             <span><i class="fas fa-user"></i></span>
                             <?php echo $user['fullname']; ?>
+                            <a href="<?php echo BASE_URL . 'edit-post/' . $post['id']; ?>"></a>
                         </div>
                         <div class="content__comment">
                             <span><i class="far fa-comment"></i></span>
