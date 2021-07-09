@@ -163,6 +163,15 @@
     cursor: pointer;
 }
 
+.comment_form input[type="submit"].del_comment_btn{
+    padding: 2px;
+    text-decoration: underline;
+    background-color: white;
+    color: blue;
+    font-size: 14px;
+    width: fit-content;
+}
+
 .comment_form input[type="text"], .comment_form textarea,
 .reply_form  input[type="text"], .reply_form textarea{
     width: 100%;

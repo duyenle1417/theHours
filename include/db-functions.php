@@ -264,6 +264,7 @@ function executeQuery($sql, $data)
 // COMMENT'S functions
 // ************
 
+// add reply (có thêm trường parent comment id)
 if (isset($_POST['add-reply'])) {
     global $conn;
 
@@ -274,7 +275,7 @@ if (isset($_POST['add-reply'])) {
     }
 }
 
-
+// add comment (parent comment id = NULL)
 if (isset($_POST['add-comment'])) {
     global $conn;
 
@@ -283,4 +284,21 @@ if (isset($_POST['add-comment'])) {
         VALUES ('".$_POST['content']."', '".$_POST['post_id']."', '".$_POST['user_id']."')";
         $result = mysqli_query($conn, $sql);
     }
+}
+
+// update a comment
+if (isset($_POST['update-reply'])) {
+    global $conn;
+
+    if (!empty($_POST['content'])) {
+        $sql = "UPDATE comments SET `content`"."='".$_POST['content']."' WHERE id='".$_POST['id']. "'";
+        $result = mysqli_query($conn, $sql);
+    }
+}
+
+// delete a comment (update content and set IsDeleted = 0)
+if (isset($_POST['delete-comment'])) {
+    global $conn;
+    $sql = "UPDATE comments SET `content`"."='<p><i>Bình luận này đã bị xóa</i></p>', `IsDeleted` = '1' WHERE id='".$_POST['id']. "'";
+    $result = mysqli_query($conn, $sql);
 }

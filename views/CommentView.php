@@ -1,3 +1,4 @@
+<?php require_once(ROOT_PATH . "/include/db-functions.php"); ?>
 <!-- COMMENT begin -->
 <div class="comment">
     <div class="grid__row">
@@ -56,22 +57,48 @@
                             
                             <?php
                             if (isset($_SESSION['user_id'])) {
-                                ?>
-                                <!-- reply form link -->
-                                <a href="#" class="reply-btn">Trả lời</a>
-                                <!-- reply form -->
-                                <div class="reply_form" style="display: none;">
-                                    <form action="#comment-list" method="POST">
-                                        <input type="text" name="post_id" id="post_id" hidden value="<?php echo $post['id'] ?>">
-                                        <input type="text" name="user_id" id="user_id" hidden value="<?php echo $_SESSION['user_id']; ?>">
-                                        <input type="text" name="parent_comment_id" id="parent_comment_id" hidden value="<?php echo $parent['id'] ?>">
+                            ?>
+                                <div class="comment-action">
+                                <?php if (!$parent['IsDeleted']) { ?>
+                                    <a href="#" class="reply-btn">Trả lời</a>
+                                    <div class="reply_form" style="display: none;">
+                                        <form action="#comment-list" method="POST">
+                                            <input type="text" name="post_id" id="post_id" hidden value="<?php echo $post['id']; ?>">
+                                            <input type="text" name="user_id" id="user_id" hidden value="<?php echo $_SESSION['user_id']; ?>">
+                                            <input type="text" name="parent_comment_id" id="parent_comment_id" hidden value="<?php echo $parent['id'] ?>">
 
-                                        <textarea name="content" id="content" placeholder="Trả lời..."></textarea>
-                                        <input type="submit" name="add-reply" id="add-reply" value="Trả lời">
-                                    </form>
+                                            <textarea name="content" id="content" placeholder="Trả lời..."></textarea>
+                                            <input type="submit" name="add-reply" id="add-reply" value="Trả lời">
+                                        </form>
+                                    </div>
+
+                                    <?php if (intval($parent['user_id']) === intval($_SESSION['user_id'])) { ?>
+                                        <!-- edit comment -->
+                                        <a href="#" class="edit-comment-btn">Edit</a>
+                                        <div class="reply_form" style="display: none;">
+                                            <form action="#comment-list" method="POST">
+                                                <input type="text" name="id" id="id" hidden value="<?php echo $parent['id']; ?>">
+
+                                                <textarea name="content" id="content" placeholder="Trả lời..."><?php echo $parent['content']; ?></textarea>
+                                                <input type="submit" name="update-reply" id="update-reply" value="Update">
+                                            </form>
+                                        </div>
+
+                                        <!-- delete comment -->
+                                        <div class="comment_form">
+                                            <form action="#comment-list" method="POST">
+                                                <input type="text" name="id" id="id" hidden value="<?php echo $parent['id']; ?>">
+                                                <input type="submit" name="delete-comment" id="delete-comment" value="Delete" class="del_comment_btn">                                           
+                                            </form>
+                                        </div>
+
+                                    <?php } ?>
+                                <?php
+                                } ?>
                                 </div>
                             <?php
                             }?>
+
                             <!-- reply begin -->
                             <?php
                                 $replies = $model->getRepliesOfComment($parent['id']);
@@ -98,6 +125,8 @@
     $(document).ready(function () {
         var showText = "Trả lời";
         var hideText = "Đóng";
+        var editText = "Edit";
+
         $(".reply-btn").click(function (e) {
             e.preventDefault();
 
@@ -110,6 +139,20 @@
                 $(this).addClass("isShown");
             }
             $(this).next().toggle();
-        })
+        });
+
+        $(".edit-comment-btn").click(function (e) {
+            e.preventDefault();
+
+            if ($(this).hasClass("isShown")) {
+                $(this).html(editText);
+                $(this).removeClass("isShown");
+            }
+            else {
+                $(this).html(hideText);
+                $(this).addClass("isShown");
+            }
+            $(this).next().toggle();
+        });
     });
 </script>
