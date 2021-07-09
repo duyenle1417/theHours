@@ -60,8 +60,8 @@ Examples:
 
 ATTENTION: The trailing slash is required.
 */
-// $baseUrl = 'https://thehours-uit.herokuapp.com/uploads/';
-$baseUrl = '/thehours/uploads/';
+$baseUrl = 'https://thehours-uit.herokuapp.com/uploads/';
+// $baseUrl = '/thehours/uploads/';
 
 /*
 $baseDir : the path to the local directory (in the server) which points to the
