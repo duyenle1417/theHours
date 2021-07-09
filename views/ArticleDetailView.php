@@ -114,7 +114,7 @@ if (isset($_GET['id'])) {
         foreach ($recents as $recent) { ?>
                         <div class="recent-item">
                         <a href="<?php echo BASE_URL . 'article/' . $recent['id'] . "/" . $recent['slug']?>">
-                            <img src="<?php echo '../.' . $recent['image_path'] ?>" alt="" class="recent__img">
+                            <img src="<?php echo '../..' . $recent['image_path'] ?>" alt="" class="recent__img">
                         </a>
                         <div class="recent__label">
                             <a href="<?php echo BASE_URL . 'article/' . $recent['id'] . "/" . $recent['slug']?>">

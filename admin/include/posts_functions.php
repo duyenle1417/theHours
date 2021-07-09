@@ -26,7 +26,7 @@ if (isset($_POST['add-post'])) {
             $result = move_uploaded_file($_FILES['image_path']['tmp_name'], $destination);
 
             if ($result) {
-                $_POST['image_path'] = "./uploads/images/" . $image_name;//update path mới
+                $_POST['image_path'] = "/uploads/images/" . $image_name;//update path mới
             } else {
                 array_push($errors, "Không thể tải ảnh lên máy chủ");
             }
@@ -71,7 +71,7 @@ if (isset($_POST['update-post'])) {
             $result = move_uploaded_file($_FILES['image_path']['tmp_name'], $destination);
 
             if ($result) {
-                $_POST['image_path'] = "./uploads/images/" . $image_name;//update path mới
+                $_POST['image_path'] = "/uploads/images/" . $image_name;//update path mới
                 $hasPicture = true;
             } else {
                 array_push($errors, "Không thể tải ảnh lên máy chủ");

@@ -25,7 +25,7 @@ if ($number_of_result_this_page >=1) { ?>
         <div class="main-category">
             <div class="main-news__picture">
                 <a href="<?php echo BASE_URL . 'article/' . $posts[0]['id'] . "/" . $posts[0]['slug']?>">
-                    <img src="<?php echo '.' . $posts[0]['image_path'] ?>" alt="" class="main-news__picture--img">
+                    <img src="<?php echo '..' . $posts[0]['image_path'] ?>" alt="" class="main-news__picture--img">
                 </a>
             </div>
             <div class="main-news__label">
@@ -55,7 +55,7 @@ if ($number_of_result_this_page >=1) { ?>
             <div class="sub-category__item">
                 <div class="sub-news__picture">
                     <a href="<?php echo BASE_URL . 'article/' . $posts[$i]['id'] . "/" . $posts[$i]['slug']; ?>">
-                        <img src="<?php echo '.' . $posts[$i]['image_path'] ?>" alt="" class="sub-news__picture--img">
+                        <img src="<?php echo '..' . $posts[$i]['image_path'] ?>" alt="" class="sub-news__picture--img">
                     </a>
                     
                 </div>
