@@ -1,9 +1,9 @@
 <?php
     // connect to database
-    $host = 'localhost';
-    $user = 'root';
-    $pass = '';
-    $db_name = 'thehours';
+    $host = 'remotemysql.com';
+    $user = 'r92Nd5JzAL';
+    $pass = '3YScpMDSY0';
+    $db_name = 'r92Nd5JzAL';
 
     $conn = new MySQLi($host, $user, $pass, $db_name);
 
