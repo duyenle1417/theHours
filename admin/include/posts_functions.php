@@ -19,7 +19,7 @@ if (isset($_POST['add-post'])) {
 
     // không có lỗi thì sẽ tải ảnh lên
     if (count($errors) == 0) {
-        if (isset($_FILES['image_path'])) {
+        if (!empty($_FILES['image_path']['name'])) {
             $image_name = time() . '_' . $_FILES['image_path']['name'];
             $destination = ROOT_PATH ."/uploads/images/" . $image_name;
 
