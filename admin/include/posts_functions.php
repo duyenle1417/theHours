@@ -17,19 +17,22 @@ if (isset($_POST['add-post'])) {
     global $conn;
     $errors = validatePost($_POST);
 
-    if (isset($_FILES['image_path'])) {
-        $image_name = time() . '_' . $_FILES['image_path']['name'];
-        $destination = ROOT_PATH ."/uploads/images/" . $image_name;
+    // không có lỗi thì sẽ tải ảnh lên
+    if (count($errors) == 0) {
+        if (isset($_FILES['image_path'])) {
+            $image_name = time() . '_' . $_FILES['image_path']['name'];
+            $destination = ROOT_PATH ."/uploads/images/" . $image_name;
 
-        $result = move_uploaded_file($_FILES['image_path']['tmp_name'], $destination);
+            $result = move_uploaded_file($_FILES['image_path']['tmp_name'], $destination);
 
-        if ($result) {
-            $_POST['image_path'] = "./uploads/images/" . $image_name;//update path mới
+            if ($result) {
+                $_POST['image_path'] = "./uploads/images/" . $image_name;//update path mới
+            } else {
+                array_push($errors, "Không thể tải ảnh lên máy chủ");
+            }
         } else {
-            array_push($errors, "Không thể tải ảnh lên máy chủ");
+            array_push($errors, "Cần phải thêm ảnh cover cho bài viết");
         }
-    } else {
-        array_push($errors, "Cần phải thêm ảnh cover cho bài viết");
     }
 
     //no errors => add to db
@@ -59,17 +62,20 @@ if (isset($_POST['update-post'])) {
     $errors = validatePost($_POST);
     $hasPicture = false;
 
-    if (!empty($_FILES['image_path']['name'])) {
-        $image_name = time() . '_' . $_FILES['image_path']['name'];
-        $destination = ROOT_PATH . "/uploads/images/" . $image_name;
+    // không có lỗi thì sẽ tải ảnh lên
+    if (count($errors) == 0) {
+        if (!empty($_FILES['image_path']['name'])) {
+            $image_name = time() . '_' . $_FILES['image_path']['name'];
+            $destination = ROOT_PATH . "/uploads/images/" . $image_name;
 
-        $result = move_uploaded_file($_FILES['image_path']['tmp_name'], $destination);
+            $result = move_uploaded_file($_FILES['image_path']['tmp_name'], $destination);
 
-        if ($result) {
-            $_POST['image_path'] = "./uploads/images/" . $image_name;//update path mới
-            $hasPicture = true;
-        } else {
-            array_push($errors, "Không thể tải ảnh lên máy chủ");
+            if ($result) {
+                $_POST['image_path'] = "./uploads/images/" . $image_name;//update path mới
+                $hasPicture = true;
+            } else {
+                array_push($errors, "Không thể tải ảnh lên máy chủ");
+            }
         }
     }
 
