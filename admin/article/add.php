@@ -132,10 +132,10 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
     var editor = CKEDITOR.replace('content',
         {
             height: 450,
-            filebrowserBrowseUrl: '../../ckfinder/ckfinder.html',
-            filebrowserImageBrowseUrl : '../../ckfinder/ckfinder.html?type=Images',
-            filebrowserUploadUrl : '../../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-            filebrowserImageUploadUrl : '../../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+            filebrowserBrowseUrl: '../ckfinder/ckfinder.html',
+            filebrowserImageBrowseUrl : '../ckfinder/ckfinder.html?type=Images',
+            filebrowserUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+            filebrowserImageUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
             filebrowserWindowWidth: '1000',
             filebrowserWindowHeight: '800'
         });

@@ -105,9 +105,9 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                     <option value="0" disabled>- Hãy chọn danh mục -</option>
                     <?php
                         $parent_topics = $topic_model->getParentTopics();
-    foreach ($parent_topics as $parent_topic) {
-        $sub_topics = $topic_model->getSubTopics($parent_topic['id']);
-        if ($sub_topic['id'] === $post['topic_id']) { ?>
+                        foreach ($parent_topics as $parent_topic) {
+                            $sub_topics = $topic_model->getSubTopics($parent_topic['id']);
+                            if (intval($parent_topic['id']) === intval($post['topic_id'])) { ?>
                                     <option value="<?php echo $parent_topic['id'] ?>" selected><?php echo $parent_topic['name'] ?></option>
                                 <?php
                                 } else { ?>
@@ -119,7 +119,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                             // and list all subtopic
                             if (count($sub_topics)>0) {
                                 foreach ($sub_topics as $sub_topic) {
-                                    if ($sub_topic['id'] === $post['topic_id']) { ?>
+                                    if (intval($sub_topic['id']) === intval($post['topic_id'])) { ?>
                                         <option value="<?php echo $sub_topic['id'] ?>" selected>
                                         <?php echo $parent_topic['name'] . ' >> ' . $sub_topic['name'] ?>
                                     </option>
@@ -133,7 +133,7 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
                             <?php
                                 }
                             }
-    } ?>
+                        } ?>
                 </select>
                 </div>
             </div>
@@ -160,10 +160,10 @@ include(ROOT_PATH . '/admin/include/head.php'); ?>
     var editor = CKEDITOR.replace('content',
     {
         height: 450,
-        filebrowserBrowseUrl: '../../ckfinder/ckfinder.html',
-        filebrowserImageBrowseUrl : '../../ckfinder/ckfinder.html?type=Images',
-        filebrowserUploadUrl : '../../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-        filebrowserImageUploadUrl : '../../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+        filebrowserBrowseUrl: '../ckfinder/ckfinder.html',
+        filebrowserImageBrowseUrl : '../ckfinder/ckfinder.html?type=Images',
+        filebrowserUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+        filebrowserImageUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
         filebrowserWindowWidth: '1000',
         filebrowserWindowHeight: '800'
     });
