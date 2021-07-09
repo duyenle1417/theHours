@@ -17,7 +17,7 @@ class Comment
     public function getParentCommentsOfPost($post_id)
     {
         global $conn;
-        $sql = "SELECT * FROM comments WHERE post_id = $post_id AND parent_comment_id IS NULL";
+        $sql = "SELECT * FROM comments WHERE post_id = $post_id AND parent_comment_id IS NULL ORDER BY id DESC";
         $result = mysqli_query($conn, $sql);
         $comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
 

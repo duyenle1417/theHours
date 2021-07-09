@@ -186,6 +186,26 @@
 
 .comment-list{
     font-size: 14px;
+    overflow-y: auto;
+    max-height: 500px;
+}
+
+.comment-list::-webkit-scrollbar{
+    width: 6px;
+}
+
+.comment-list::-webkit-scrollbar-track{
+    background-color: #ebebeb;
+}
+
+.comment-list::-webkit-scrollbar-thumb{
+    background-color: #c2c2c2;
+    border-radius: 5px;
+}
+
+.comment-list::-webkit-scrollbar-thumb:hover{
+    background-color: #a8a6a6;
+    transition: 0.25s;
 }
 
 .comment-list ul{
@@ -195,7 +215,7 @@
 .comment-list ul li{
     margin-bottom: 10px;
     border-top: 1px solid #eeeeeece;
-    padding-left: 10px;
+    padding: 10px;
 }
 
 .comment-list ul li .comment-content{
