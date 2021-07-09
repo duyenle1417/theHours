@@ -78,7 +78,9 @@ if (isset($_GET['id'])) {
                         <div class="content__author">
                             <span><i class="fas fa-user"></i></span>
                             <?php echo $user['fullname']; ?>
+                            <?php if($post['user_id'] === $_SESSION['user_id']){ ?>
                             <a href="<?php echo BASE_URL . 'edit-post/' . $post['id']; ?>"></a>
+                            <?php }?>
                         </div>
                         <div class="content__comment">
                             <span><i class="far fa-comment"></i></span>
