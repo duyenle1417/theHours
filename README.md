@@ -1,4 +1,13 @@
 README.TXT
+NT109.L21
+Nhóm 3:
+Lê Ngọc Mỹ Duyên 18520680
+Nguyễn Hạnh My 18521114
+Phạm Khôi Nguyên 18520114
+
+LINK SOURCE CODE: https://github.com/duyenle1417/thehours 
+
+CÁCH BƯỚC CÀI ĐẶT:
 
 1. Tải thư mục về đặt vào folder /xampp/htdocs
 
@@ -15,3 +24,9 @@ Lưu ý: đối với email sử dụng nên bật chế độ  'allow less secu
 
 
 
+Link DEMO: 
+(không hỗ trợ lưu file)
+http://thehours-uit.herokuapp.com/ 
+
+(có file manager)
+https://thehours-nhom3.000webhostapp.com/
