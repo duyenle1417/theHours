@@ -1,6 +1,5 @@
-ĐẠI HỌC CÔNG NGHỆ THÔNG TIN
-Lớp NT109.L21
-
+README.TXT
+NT109.L21
 Nhóm 3:
 Lê Ngọc Mỹ Duyên 18520680
 Nguyễn Hạnh My 18521114
@@ -22,6 +21,7 @@ Nếu bạn có sẵn một remote mysql thì vào /include/config.php để ch�
 4. Cấu hình sendmail.ini
 Điền trường như hướng dẫn sau https://meetanshi.com/blog/send-mail-from-localhost-xampp-using-gmail/
 Lưu ý: đối với email sử dụng nên bật chế độ  'allow less secure apps to access your account' => https://myaccount.google.com/lesssecureapps
+
 
 
 Link DEMO: 
