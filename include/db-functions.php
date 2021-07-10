@@ -208,6 +208,8 @@ if (isset($_POST['register-btn']) || isset($_POST['create-user'])) {
             
             // nếu thêm dữ liệu thành công
             if ($result) {
+                SendMailRegister($_POST);
+
                 // lấy dũ liệu user
                 $user = selectOne('users', ['username' => $_POST['username']]);
                 $_SESSION['user_id'] = $user['id'];
@@ -222,6 +224,26 @@ if (isset($_POST['register-btn']) || isset($_POST['create-user'])) {
             }
         }
     }
+}
+
+// send mail
+function SendMailRegister($user)
+{
+    $to = $_POST['email'];
+    $subject = 'Signup Verification - TheHours';
+    $message = '
+  
+    Cảm ơn '.$user['fullname'].' đã đăng ký tài khoản trên TheHours!
+    Tài khoản của bạn đã được tạo, vui lòng truy cập đường link sau để xác thực tài khoản
+    
+    ------------------------
+    Username: '.$user['username'].'
+    Fullname: '.$user['fullname'].'
+    ------------------------
+  
+';
+    $headers = 'From:noreply@thehours.com' . "\r\n";
+    mail($to, $subject, $message, $headers);
 }
 
 /* Select custom */
